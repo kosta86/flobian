@@ -1,34 +1,47 @@
-let poljeOdgovora = document.getElementById('odgovori');
-const odgovori = [];
-prikaziPitanja();
+(function () {
+	let poljeOdgovora = document.getElementById('odgovori');
 
-//event handlers
-poljeOdgovora.addEventListener('click', function(event) {
-  const isButton = event.target.nodeName === 'BUTTON';
+	// on page load
+	if (upitnik.isEnded()) {
+		prikaziKraj();
+	} else {
+		prikaziPitanja();
+	}
 
-  //ako je kliknuto na odgovor(button element)
-  if (isButton) {
+	function handleKlik(event) {
+		const isButton = event.target.nodeName === 'BUTTON';
 
-    // popuni odgovori array sa pitanjem i odogvorom
-    odgovori.push({
-      pitanje: upitnik.getPitanje().tekst,
-      odgovor: event.target.innerText
-    })
+		//ako je kliknuto na odgovor(button element)
+		if (isButton) {
 
-    // inkrementuj redni broj pitanja
-    upitnik.RBPitanja++;
+			// popuni odgovori array sa pitanjem i odogvorom
+			model.odgovori.push({
+				pitanje: upitnik.getPitanje().tekst,
+				odgovor: event.target.innerText
+			})
+			console.log(model.odgovori);
 
-    // prikazi nova pitanja
-    prikaziPitanja();
+			// inkrementuj redni broj pitanja
+			upitnik.RBPitanja++;
 
-  }
+			// prikazi nova pitanja
+			prikaziPitanja();
 
-})
+		}
 
-let sendToDatabase() {
-  
-  // ako je zavrsen upitnik posalji u bazu
-  if (upitnik.isEnded) {
-    // neki ajax post request
-  }
-} 
+	}
+
+	view.prikaziPitanja();
+
+	//event handlers
+	poljeOdgovora.addEventListener('click', handleKlik)
+
+	function sendToDatabase() {
+
+		// ako je zavrsen upitnik posalji u bazu
+		if (upitnik.isEnded) {
+			// neki ajax post request
+		}
+	}
+})(model, view)
+

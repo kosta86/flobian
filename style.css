@@ -1,0 +1,66 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#upitnik-mob {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.card {
+  width: 100%;
+  overflow: hidden;
+}
+
+.card-slika {
+  width: 100%;
+  height: 55vh;
+  flex: 1 1 auto;
+  background-image: url("./img/card_slika.PNG");
+  background-size: cover;
+}
+
+.card-pitanje,
+.card-odgovori,
+.next-container {
+  margin: 1em 1em;
+}
+
+.card-pitanje {
+  text-align: left;
+}
+
+.card-odgovori {
+  display: flex;
+  height: 18vh;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.card-odgovori button {
+  height: 8.5vh;
+  border: none;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: rgb(112, 112, 112);
+}
+
+.next-container {
+  margin-top: 1.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.next-container button {
+  height: 8.5vh;
+  border: none;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: rgb(112, 112, 112);
+  background-color: rgb(197, 239, 215);
+}
