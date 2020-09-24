@@ -3,31 +3,73 @@ body {
   padding: 0px;
 }
 
-#upitnik-mob {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+/* samo touch ekrani */
+@media only screen and (hover: none) and (pointer: coarse) {
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    #upitnik-mob {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .next-container {
+      margin-top: 1.3em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .next-container button {
+      height: 8.5vh;
+      border: none;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: rgb(112, 112, 112);
+      background-color: rgb(197, 239, 215);
+    }
+
+    .card-pitanje,
+    .card-odgovori,
+    .next-container {
+      margin: 1em 1em;
+    }
+
+
+  }
 }
+
+/* @media only screen and (min-device-width: 481px) {
+  #upitnik-mob {
+    display: none;
+  }
+
+  #upitnik-desk {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+} */
 
 .card {
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .card-slika {
   width: 100%;
-  height: 55vh;
-  flex: 1 1 auto;
-  background-image: url("./img/card_slika.PNG");
-  background-size: cover;
+  height: auto;
+  display: block;
 }
 
-.card-pitanje,
-.card-odgovori,
-.next-container {
-  margin: 1em 1em;
+.card-slika img {
+  object-fit: cover;
+  width: 100%;
+  height: 55vh;
 }
+
+
 
 .card-pitanje {
   text-align: left;
@@ -49,18 +91,4 @@ body {
   color: rgb(112, 112, 112);
 }
 
-.next-container {
-  margin-top: 1.3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
-.next-container button {
-  height: 8.5vh;
-  border: none;
-  font-size: 1.3em;
-  font-weight: bold;
-  color: rgb(112, 112, 112);
-  background-color: rgb(197, 239, 215);
-}

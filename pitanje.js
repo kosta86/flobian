@@ -1,9 +1,10 @@
 var model = (function () {
 	const odgovori = [];
 
-	function Pitanje(tekst, ponudjeniOdgovori) {
+	function Pitanje(tekst, ponudjeniOdgovori, slika) {
 		this.tekst = tekst;
 		this.ponudjeniOdgovori = ponudjeniOdgovori;
+		this.slika = slika;
 	}
 
 	Pitanje.prototype.kliknutiOdgovori = function (kliknutiOdgovori) {
@@ -11,11 +12,11 @@ var model = (function () {
 	}
 
 	let pitanja = [
-		new Pitanje('Da li je vaša nadutost teško podnošljiva ili izuzetno bolna', ['DA', 'NE']),
-		new Pitanje('Da li se bavite sportom', ['da aktivno', 'ne', 'ponekad', 'profesionalni sportista']),
-		new Pitanje('Da li imate zdravstvenih problema', ['da', 'ne', 'ne znam']),
-		new Pitanje('Koliko tecnosti unosite dnevno', ['<0,5L', '0,5-1L', '1-2L', '>2L']),
-		new Pitanje('Koliko tecnosti unosite dnevno', ['<0,5L', '0,5-1L', '1-2L', '>2L'])
+		new Pitanje('Da li je vaša nadutost teško podnošljiva ili izuzetno bolna', ['DA', 'NE'], 'card_slika.png'),
+		new Pitanje('Da li se bavite sportom', ['DA', 'NE'], 'flobian-desk.png'),
+		new Pitanje('Da li imate zdravstvenih problema', ['DA', 'NE'], 'flobian-mob.png'),
+		new Pitanje('Da li ste dobro', ['DA', 'NE'], 'card_slika.png'),
+		new Pitanje('Koliko tecnosti unosite dnevno', ['DA', 'NE'], 'card_slika.png')
 	]
 
 
@@ -31,12 +32,12 @@ var model = (function () {
 		return this.RBPitanja === this.pitanja.length;
 	}
 
-	let upitnik = new Upitnik(pitanja);
+
 
 
 	return {
 		odgovori,
-		upitnik,
+		Upitnik,
 		pitanja
 	}
 })();
@@ -45,13 +46,18 @@ var model = (function () {
 
 var view = (function () {
 	function prikaziKraj() {
-		document.getElementById('upitnik').innerHTML = '<H1>Uspesno ste zavrsili upitnik<H1>';
+		document.getElementById('upitnik-mob').innerHTML = '<H1>Uspesno ste zavrsili upitnik<H1>';
 	}
 
 	function prikaziPitanja(upitnik) {
 
+		let poljeSlike = document.querySelector('.card-slika');
 		let poljeTekstPitanja = document.querySelector('.card-pitanje');
 		let poljeOdgovora = document.querySelector('.card-odgovori');
+
+		console.log(upitnik)
+		// popuni sliku pitanja
+		poljeSlike.innerHTML = `<img src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`
 
 		// popuni tekst pittanja
 		poljeTekstPitanja.innerHTML = `<H2>${upitnik.getPitanje().tekst}<H2>`;
@@ -78,51 +84,59 @@ var view = (function () {
 
 var controller = (function () {
 	let poljeOdgovora = document.querySelector('.card-odgovori');
+	let upitnik = new model.Upitnik(model.pitanja);
 
-	if (model.upitnik.isEnded()) {
-		view.prikaziKraj();
+	// event handlers
+	poljeOdgovora.addEventListener('click', handleKlik)
 
-		function sendToDatabase() {
-			// neki ajax post request
-		}
-	} else {
-
-		// on page load
-		view.prikaziPitanja(model.upitnik);
-
-		// event handlers
-		poljeOdgovora.addEventListener('click', handleKlik)
-	}
-
+	// on page load
+	view.prikaziPitanja(upitnik);
+	upitnik.RBPitanja++;
 
 	function handleKlik(event) {
-		
 		const isButton = event.target.nodeName === 'BUTTON';
 
 		//ako je kliknuto na odgovor(button element)
 		if (isButton) {
 
-			// popuni odgovori array sa pitanjem i odogvorom
-			model.odgovori.push({
-				pitanje: model.upitnik.getPitanje().tekst,
-				odgovor: event.target.innerText
-			})
+			if (upitnik.isEnded()) {
+				console.log((upitnik.isEnded()))
+				view.prikaziKraj();
 
-			// inkrementuj redni broj pitanja
-			model.upitnik.RBPitanja++;
+				function sendToDatabase() {
+					// neki ajax post request
+				}
+			} else {
+				// on click
+				view.prikaziPitanja(upitnik);
 
-			// prikazi nova pitanja
-			view.prikaziPitanja(model.upitnik);
-			
+				// popuni odgovori array sa pitanjem i odogvorom
+				model.odgovori.push({
+					pitanje: upitnik.getPitanje().tekst,
+					odgovor: event.target.innerText
+				})
+
+				// on click inkrementuj redni broj pitanja
+				upitnik.RBPitanja++;
+				console.log((upitnik.isEnded()))
+			}
+
+
+
+
+
+
+
 		}
 
-		console.log(model.upitnik.RBPitanja === model.pitanja.length);
+
+
 	}
 
-		
 
 
-	
+
+
 
 })(model, view);
 
