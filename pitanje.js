@@ -7,8 +7,8 @@ var model = (function () {
 		this.slika = slika;
 	}
 
-	Pitanje.prototype.kliknutiOdgovori = function (kliknutiOdgovori) {
-		return kliknutiOdgovori;
+	Pitanje.prototype.upisiOdgovor = function (buttonDataset) {
+		console.log(this);
 	}
 
 	let pitanja = [
@@ -31,7 +31,6 @@ var model = (function () {
 	Upitnik.prototype.isEnded = function () {
 		return this.RBPitanja === this.pitanja.length;
 	}
-
 
 
 
@@ -84,20 +83,22 @@ var view = (function () {
 
 var controller = (function () {
 	let poljeOdgovora = document.querySelector('.card-odgovori');
+	let poljeOdgovora = document.querySelector('.prev-next-container');
 	let upitnik = new model.Upitnik(model.pitanja);
 
 	// event handlers
-	poljeOdgovora.addEventListener('click', handleKlik)
+	poljePrevNext.addEventListener('click', handleNextKlik);
+	poljeOdgovora.addEventListener('click', handleAnswerKlik); // napravi ovu callback funkciju 
 
 	// on page load
 	view.prikaziPitanja(upitnik);
 	upitnik.RBPitanja++;
 
-	function handleKlik(event) {
-		const isButton = event.target.nodeName === 'BUTTON';
+	function handleNextKlik(event) {
+		const isNextButton = event.target.dataset.button === 'NEXT';
 
 		//ako je kliknuto na odgovor(button element)
-		if (isButton) {
+		if (isNextButton) {
 
 			if (upitnik.isEnded()) {
 				console.log((upitnik.isEnded()))
@@ -109,6 +110,7 @@ var controller = (function () {
 			} else {
 				// on click
 				view.prikaziPitanja(upitnik);
+				
 
 				// popuni odgovori array sa pitanjem i odogvorom
 				model.odgovori.push({
@@ -118,19 +120,8 @@ var controller = (function () {
 
 				// on click inkrementuj redni broj pitanja
 				upitnik.RBPitanja++;
-				console.log((upitnik.isEnded()))
 			}
-
-
-
-
-
-
-
 		}
-
-
-
 	}
 
 
