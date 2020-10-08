@@ -3,8 +3,11 @@ body {
   padding: 0px;
 }
 
-/* samo touch ekrani */
+                                      /* SAMO TOUCH EKRANI */
+
 @media only screen and (hover: none) and (pointer: coarse) {
+
+                                          /* MOBILNI */
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     #upitnik-mob {
       display: flex;
@@ -13,14 +16,18 @@ body {
       width: 100vw;
     }
 
-    .next-container {
+    .card-pitanje {
+      height: 8.5vh;
+    }
+
+    .prev-next-container {
       margin-top: 1.3em;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
-    .next-container button {
+    .prev-next-container button {
       height: 8.5vh;
       border: none;
       font-size: 1.3em;
@@ -31,64 +38,55 @@ body {
 
     .card-pitanje,
     .card-odgovori,
-    .next-container {
+    .prev-next-container {
       margin: 1em 1em;
     }
 
-
+    .card {
+      width: 100%;
+      /* overflow: hidden; */
+    }
+    
+    .card-slika {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .card-slika img {
+      object-fit: cover;
+      width: 100%;
+      height: 55vh;
+    }
+    
+    
+    
+    .card-pitanje {
+      text-align: left;
+    }
+    
+    .card-odgovori {
+      display: flex;
+      height: 18vh;
+      flex-direction: column;
+      justify-content: space-between;
+    
+    }
+    
+    .card-odgovori button {
+      height: 8.5vh;
+      border: none;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: rgb(112, 112, 112);
+    }
   }
 }
 
-/* @media only screen and (min-device-width: 481px) {
-  #upitnik-mob {
-    display: none;
-  }
-
-  #upitnik-desk {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-  }
-} */
-
-.card {
-  width: 100%;
-  /* overflow: hidden; */
+.checked {
+  background-color: black;
 }
+                                        /* DESKTOP VERZIJA */
 
-.card-slika {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.card-slika img {
-  object-fit: cover;
-  width: 100%;
-  height: 55vh;
-}
-
-
-
-.card-pitanje {
-  text-align: left;
-}
-
-.card-odgovori {
-  display: flex;
-  height: 18vh;
-  flex-direction: column;
-  justify-content: space-between;
-
-}
-
-.card-odgovori button {
-  height: 8.5vh;
-  border: none;
-  font-size: 1.3em;
-  font-weight: bold;
-  color: rgb(112, 112, 112);
-}
 
 

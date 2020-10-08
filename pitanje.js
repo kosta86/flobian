@@ -8,15 +8,15 @@ var model = (function () {
 	}
 
 	Pitanje.prototype.upisiOdgovor = function (buttonDataset) {
-		console.log(this);
+		
 	}
 
 	let pitanja = [
-		new Pitanje('Da li je vaša nadutost teško podnošljiva ili izuzetno bolna', ['DA', 'NE'], 'card_slika.png'),
-		new Pitanje('Da li se bavite sportom', ['DA', 'NE'], 'flobian-desk.png'),
-		new Pitanje('Da li imate zdravstvenih problema', ['DA', 'NE'], 'flobian-mob.png'),
-		new Pitanje('Da li ste dobro', ['DA', 'NE'], 'card_slika.png'),
-		new Pitanje('Koliko tecnosti unosite dnevno', ['DA', 'NE'], 'card_slika.png')
+		new Pitanje('Da li je vaša nadutost teško podnošljiva ili izuzetno bolna', ['DA', 'NE'], '1.png'),
+		new Pitanje('Da li se bavite sportom', ['DA', 'NE'], '2.png'),
+		new Pitanje('Da li imate zdravstvenih problema', ['DA', 'NE'], '3.png'),
+		new Pitanje('Da li ste dobro', ['DA', 'NE'], '4.png'),
+		new Pitanje('Koliko tecnosti unosite dnevno', ['DA', 'NE'], '5.png')
 	]
 
 
@@ -48,7 +48,7 @@ var view = (function () {
 		document.getElementById('upitnik-mob').innerHTML = '<H1>Uspesno ste zavrsili upitnik<H1>';
 	}
 
-	function prikaziPitanja(upitnik) {
+	function prikaziPitanje(upitnik) {
 
 		let poljeSlike = document.querySelector('.card-slika');
 		let poljeTekstPitanja = document.querySelector('.card-pitanje');
@@ -68,13 +68,14 @@ var view = (function () {
 		upitnik.getPitanje().ponudjeniOdgovori.forEach(element => {
 			var button = document.createElement("button");
 			button.innerHTML = `${element}`;
+			button.dataset.checked = false;
 			poljeOdgovora.appendChild(button);
 		});
 
 	}
 
 	return {
-		prikaziPitanja,
+		prikaziPitanje,
 		prikaziKraj
 	}
 })();
@@ -83,44 +84,69 @@ var view = (function () {
 
 var controller = (function () {
 	let poljeOdgovora = document.querySelector('.card-odgovori');
-	let poljeOdgovora = document.querySelector('.prev-next-container');
+	let poljePrevNext = document.querySelector('.prev-next-container');
 	let upitnik = new model.Upitnik(model.pitanja);
 
 	// event handlers
-	poljePrevNext.addEventListener('click', handleNextKlik);
-	poljeOdgovora.addEventListener('click', handleAnswerKlik); // napravi ovu callback funkciju 
+	poljePrevNext.addEventListener('click', handlePrevNextKlik.bind(this, poljeOdgovora, poljePrevNext));
+	poljeOdgovora.addEventListener('click', handleAnswerKlik.bind(this, poljeOdgovora ,poljePrevNext)); // napravi ovu callback funkciju 
 
 	// on page load
-	view.prikaziPitanja(upitnik);
+	view.prikaziPitanje(upitnik);
 	upitnik.RBPitanja++;
 
-	function handleNextKlik(event) {
+	function handlePrevNextKlik(poljeOdgovora, poljePrevNext) {
 		const isNextButton = event.target.dataset.button === 'NEXT';
+		const isPrevButton = event.target.dataset.button === 'PREV';
+		/* const kliknutiOdgovor = (function() {
+			let odgovor = Array.from(poljeOdgovora.childNodes).filter(el=> el.dataset.checked === "true");
+			return odgovor[0].innerText;
+		})() */
+		
 
-		//ako je kliknuto na odgovor(button element)
+
+		//ako je kliknuto na next dugme
 		if (isNextButton) {
-
 			if (upitnik.isEnded()) {
-				console.log((upitnik.isEnded()))
 				view.prikaziKraj();
-
+				console.log(model.odgovori)
+				// funkcija za slanje odgovora u bazu
 				function sendToDatabase() {
 					// neki ajax post request
 				}
 			} else {
-				// on click
-				view.prikaziPitanja(upitnik);
-				
-
-				// popuni odgovori array sa pitanjem i odogvorom
+				// on click prikazi pitanja
+				view.prikaziPitanje(upitnik);
+				// on click dopuni odgovori array sa pitanjem i odogvorom
 				model.odgovori.push({
 					pitanje: upitnik.getPitanje().tekst,
-					odgovor: event.target.innerText
+					odgovor: kliknutiOdgovor
 				})
-
 				// on click inkrementuj redni broj pitanja
 				upitnik.RBPitanja++;
 			}
+		}
+	}
+
+	function handleAnswerKlik(poljeOdgovora, poljePrevNext) {
+		let clickedButton = event.target;
+
+		function toggleChecked() {
+			let ponudjeniOdgovori = poljeOdgovora.childNodes;
+			ponudjeniOdgovori.forEach(el => {
+				if (clickedButton === el && el.dataset.checked === "false") {
+					el.classList.add("checked");
+					el.dataset.checked = "true";
+					
+				} else {
+					el.classList.remove("checked");
+					el.dataset.checked = "false";
+				}
+			})
+		}
+
+		if (event.target.nodeName === "BUTTON") {
+			toggleChecked(poljeOdgovora);
 		}
 	}
 
