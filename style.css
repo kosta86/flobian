@@ -20,14 +20,14 @@ body {
       height: 8.5vh;
     }
 
-    .prev-next-container {
+    .progress-container {
       margin-top: 1.3em;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
-    .prev-next-container button {
+    .progress-container button {
       height: 8.5vh;
       border: none;
       font-size: 1.3em;
@@ -38,7 +38,7 @@ body {
 
     .card-pitanje,
     .card-odgovori,
-    .prev-next-container {
+    .progress-container {
       margin: 1em 1em;
     }
 

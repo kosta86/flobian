@@ -16,7 +16,12 @@ var model = (function () {
 		new Pitanje('Da li se bavite sportom', ['DA', 'NE'], '2.png'),
 		new Pitanje('Da li imate zdravstvenih problema', ['DA', 'NE'], '3.png'),
 		new Pitanje('Da li ste dobro', ['DA', 'NE'], '4.png'),
-		new Pitanje('Koliko tecnosti unosite dnevno', ['DA', 'NE'], '5.png')
+		new Pitanje('Koliko tecnosti unosite dnevno', ['DA', 'NE'], '5.png'),
+		new Pitanje('Da li je vaša nadutost teško podnošljiva ili izuzetno bolna', ['DA', 'NE'], '6.png'),
+		new Pitanje('Da li se bavite sportom', ['DA', 'NE'], '7.png'),
+		new Pitanje('Da li imate zdravstvenih problema', ['DA', 'NE'], '8.png'),
+		new Pitanje('Da li ste dobro', ['DA', 'NE'], '9.png'),
+		new Pitanje('Koliko tecnosti unosite dnevno', ['DA', 'NE'], '10.png')
 	]
 
 
@@ -44,7 +49,7 @@ var model = (function () {
 
 
 var view = (function () {
-	function prikaziKraj() {
+	function prikaziRezultat() {
 		document.getElementById('upitnik-mob').innerHTML = '<H1>Uspesno ste zavrsili upitnik<H1>';
 	}
 
@@ -66,17 +71,19 @@ var view = (function () {
 
 		// popuni ponudjene odgovore
 		upitnik.getPitanje().ponudjeniOdgovori.forEach(element => {
-			var button = document.createElement("button");
+			var odgovorButton = document.createElement("button");
 			button.innerHTML = `${element}`;
-			button.dataset.checked = false;
-			poljeOdgovora.appendChild(button);
+			button.dataset.button = 'odgovor';
+			button.dataset.odgovor = `${element}`;
+			/* button.dataset.checked = false; */
+			poljeOdgovora.appendChild(odgovorButton);
 		});
 
 	}
 
 	return {
 		prikaziPitanje,
-		prikaziKraj
+		prikaziRezultat
 	}
 })();
 
@@ -84,36 +91,25 @@ var view = (function () {
 
 var controller = (function () {
 	let poljeOdgovora = document.querySelector('.card-odgovori');
-	let poljePrevNext = document.querySelector('.prev-next-container');
+	let poljeProgresa = document.querySelector('.progress-container');
 	let upitnik = new model.Upitnik(model.pitanja);
 
 	// event handlers
-	poljePrevNext.addEventListener('click', handlePrevNextKlik.bind(this, poljeOdgovora, poljePrevNext));
-	poljeOdgovora.addEventListener('click', handleAnswerKlik.bind(this, poljeOdgovora ,poljePrevNext)); // napravi ovu callback funkciju 
+	poljeOdgovora.addEventListener('click', handleAnswerKlik); // napravi ovu callback funkciju 
 
 	// on page load
 	view.prikaziPitanje(upitnik);
 	upitnik.RBPitanja++;
 
-	function handlePrevNextKlik(poljeOdgovora, poljePrevNext) {
-		const isNextButton = event.target.dataset.button === 'NEXT';
-		const isPrevButton = event.target.dataset.button === 'PREV';
-		/* const kliknutiOdgovor = (function() {
-			let odgovor = Array.from(poljeOdgovora.childNodes).filter(el=> el.dataset.checked === "true");
-			return odgovor[0].innerText;
-		})() */
+	function handleAnswerKlik() {
+		const isAnswerButton = event.target.dataset.button === 'odgovor';
+		const kliknutiOdgovor = event.target.dataset.odgovor;
 		
-
-
-		//ako je kliknuto na next dugme
-		if (isNextButton) {
+		//ako je kliknuto na odgovor
+		if (isAnswerButton) {
+			console.log(model.odgovori)
 			if (upitnik.isEnded()) {
-				view.prikaziKraj();
-				console.log(model.odgovori)
-				// funkcija za slanje odgovora u bazu
-				function sendToDatabase() {
-					// neki ajax post request
-				}
+				view.prikaziRezultat(); // prikazi stranu sa savetima za korisnika
 			} else {
 				// on click prikazi pitanja
 				view.prikaziPitanje(upitnik);
@@ -127,33 +123,6 @@ var controller = (function () {
 			}
 		}
 	}
-
-	function handleAnswerKlik(poljeOdgovora, poljePrevNext) {
-		let clickedButton = event.target;
-
-		function toggleChecked() {
-			let ponudjeniOdgovori = poljeOdgovora.childNodes;
-			ponudjeniOdgovori.forEach(el => {
-				if (clickedButton === el && el.dataset.checked === "false") {
-					el.classList.add("checked");
-					el.dataset.checked = "true";
-					
-				} else {
-					el.classList.remove("checked");
-					el.dataset.checked = "false";
-				}
-			})
-		}
-
-		if (event.target.nodeName === "BUTTON") {
-			toggleChecked(poljeOdgovora);
-		}
-	}
-
-
-
-
-
 
 })(model, view);
 
