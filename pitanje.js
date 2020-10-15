@@ -12,16 +12,16 @@ var model = (function () {
 	}
 
 	let pitanja = [
-		new Pitanje('Da li je vaša nadutost teško podnošljiva ili izuzetno bolna', ['DA', 'NE'], '1.png'),
-		new Pitanje('Da li se bavite sportom', ['DA', 'NE'], '2.png'),
-		new Pitanje('Da li imate zdravstvenih problema', ['DA', 'NE'], '3.png'),
-		new Pitanje('Da li ste dobro', ['DA', 'NE'], '4.png'),
-		new Pitanje('Koliko tecnosti unosite dnevno', ['DA', 'NE'], '5.png'),
-		new Pitanje('Da li je vaša nadutost teško podnošljiva ili izuzetno bolna', ['DA', 'NE'], '6.png'),
-		new Pitanje('Da li se bavite sportom', ['DA', 'NE'], '7.png'),
-		new Pitanje('Da li imate zdravstvenih problema', ['DA', 'NE'], '8.png'),
-		new Pitanje('Da li ste dobro', ['DA', 'NE'], '9.png'),
-		new Pitanje('Koliko tecnosti unosite dnevno', ['DA', 'NE'], '10.png')
+		new Pitanje('Da li se osećate naduto nakon jela?', ['DA', 'NE'], '1.png'),
+		new Pitanje('Da je vaša nadutost teško podnošljiva ili izuzetno bolna?', ['DA', 'NE'], '2.png'),
+		new Pitanje('Imate li često osećaj „kamena“ u stomaku?', ['DA', 'NE'], '3.png'),
+		new Pitanje('Da li obavezno morati otkopčati dugne ili popustiti kaiš nakon jela?', ['DA', 'NE'], '4.png'),
+		new Pitanje('Da li često imate gasove?', ['DA', 'NE'], '5.png'),
+		new Pitanje('Da li postoje promene u učestalosti pražnjenja stolice- dijareja i/ili opstipacija?', ['DA', 'NE'], '6.png'),
+		new Pitanje('Da li imate ponavljajući bol u stomaku, u proseku, najmanje 1 dan/nedeljno u poslednja 3 meseca?', ['DA', 'NE'], '7.png'),
+		new Pitanje('Da li je bol povezan sa pražnjenjem?', ['DA', 'NE'], '8.png'),
+		new Pitanje('Da li Vas neprijatnost u stomaku obavezuje da prestanete sa svojim normalnim aktivnostima?', ['DA', 'NE'], '9.png'),
+		new Pitanje('Da li inače u toku dana osećate nervozu i to utiče i na Vaš stomak?', ['DA', 'NE'], '10.png')
 	]
 
 
@@ -72,9 +72,9 @@ var view = (function () {
 		// popuni ponudjene odgovore
 		upitnik.getPitanje().ponudjeniOdgovori.forEach(element => {
 			var odgovorButton = document.createElement("button");
-			button.innerHTML = `${element}`;
-			button.dataset.button = 'odgovor';
-			button.dataset.odgovor = `${element}`;
+			odgovorButton.innerHTML = `${element}`;
+			odgovorButton.dataset.button = 'odgovor';
+			odgovorButton.dataset.odgovor = `${element}`;
 			/* button.dataset.checked = false; */
 			poljeOdgovora.appendChild(odgovorButton);
 		});
