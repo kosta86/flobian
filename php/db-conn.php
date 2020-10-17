@@ -1,10 +1,10 @@
 <?php
 
 $host = 'localhost';
-$dbname = 'flobianDB';
+$dbname = 'flobian_db';
 $charset = 'utf8mb4';
 
-$username = 'root';
+$username = 'kosta86';
 $password = 'kosta1986';
 $options = [
 			PDO::ATTR_ERRMODE 			 => PDO::ERRMODE_EXCEPTION,

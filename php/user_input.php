@@ -3,9 +3,8 @@ include_once('db-conn.php');
 $requestPayload = file_get_contents("php://input");
 
 $recived_array = json_decode($requestPayload, true);
-print_r($recived_array[0]['pitanje']);
 
-$test = 'radi test';
+
 /* $pol = $recived_array[0];
 $godine = $recived_array[1];
 $fizicka_aktivnost = $recived_array[2];
@@ -39,17 +38,57 @@ $data = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . ge
 $lokacija = $data['geoplugin_city'] . ',' . $data['geoplugin_countryName']; */
 
 //PDO prepared statement to send to database
-$pitanje1 = 'Da je vaša nadutost teško podnošljiva ili izuzetno bolna';
-try {
+/* $pitanje1 = 'Da_li_se_osećate_naduto_nakon_jela';
+$odgovor1 = $recived_array[0]['odgovor']; */
 
-    $pdo = new PDO($dsn, $username, $password, $options);
 
-    $query = "INSERT INTO user_input(Pitanje1) VALUES(:test)";
 
-    $statement = $pdo->prepare($query);
+    /* $pitanje = $recived_array[$key]['qId'];
+    $odgovor = $recived_array[$key]['odgovor']; */
 
-    $statement->bindParam(':test', $test, PDO::PARAM_STR);
-    /* $statement->bindParam(':godine', $godine, PDO::PARAM_STR);
+    try {
+       
+        $pdo = new PDO($dsn, $username, $password, $options);
+
+        $query = "INSERT INTO user_input(
+                    Da_li_se_osećate_naduto_nakon_jela, 
+                    Da_je_vaša_nadutost_teško_podnošljiva_ili_izuzetno_bolna, 
+                    Imate_li_često_osećaj_kamena_u_stomaku,
+                    Da_li_obavezno_morati_otkopčati_dugme_ili_popustiti_kaiš_nakon_j,
+                    Da_li_često_imate_gasove,
+                    Da_li_postoje_promene_u_učestalosti_pražnjenja_stolice_dijareja_,
+                    Da_li_imate_ponavljajući_bol_u_stomaku_u_proseku_najmanje_1_dann,
+                    Da_li_je_bol_povezan_sa_pražnjenjem,
+                    Da_li_Vas_neprijatnost_u_stomaku_obavezuje_da_prestanete_sa_svoj,
+                    Da_li_inače_u_toku_dana_osećate_nervozu_i_to_utiče_i_na_Vaš_stom
+                ) 
+                VALUES(
+                    :odgovor1, 
+                    :odgovor2, 
+                    :odgovor3, 
+                    :odgovor4, 
+                    :odgovor5, 
+                    :odgovor6, 
+                    :odgovor7, 
+                    :odgovor8, 
+                    :odgovor9, 
+                    :odgovor10
+                )";
+
+        $statement = $pdo->prepare($query);
+
+        $statement->bindParam(':odgovor1', $recived_array[0]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor2', $recived_array[1]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor3', $recived_array[2]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor4', $recived_array[3]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor5', $recived_array[4]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor6', $recived_array[5]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor7', $recived_array[6]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor8', $recived_array[7]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor9', $recived_array[8]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor10', $recived_array[9]['odgovor'], PDO::PARAM_STR);
+
+        /* $statement->bindParam(':godine', $godine, PDO::PARAM_STR);
     $statement->bindParam(':fizicka_aktivnost', $fizicka_aktivnost, PDO::PARAM_STR);
     $statement->bindParam(':san', $san, PDO::PARAM_STR);
     $statement->bindParam(':pritisak', $pritisak, PDO::PARAM_STR);
@@ -57,10 +96,12 @@ try {
     $statement->bindParam(':vreme_unosa', $vreme_unosa, PDO::PARAM_STR);
     $statement->bindParam(':lokacija', $lokacija, PDO::PARAM_STR); */
 
-    $statement->execute();
+        $statement->execute();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    } 
 
 
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-} 
+
+
 ?>
