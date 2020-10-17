@@ -83,7 +83,7 @@ const kviz = (function () {
 		
 	}
 
-	/* function formInputToArray(formId, array) {
+	function formInputToArray(formId, array) {
 		let form = document.getElementById(`${formId}`);
 
 		function Input(polje, inputValue) {
@@ -97,11 +97,11 @@ const kviz = (function () {
 				array.push(new Input(form.elements[i].id, form.elements[i].value));
 			}	
 		}
-	} */
+	}
 
 	function submitBtnHandler(postData, odgovoriZaSlanje) {
 		if (event.target.id === 'postDataButton') {
-			/* formInputToArray('formular-prijava', odgovoriZaSlanje); */
+			formInputToArray('formular-prijava', odgovoriZaSlanje);
 			postData(odgovoriZaSlanje);
 			console.log(odgovoriZaSlanje);
 		}
@@ -163,13 +163,13 @@ const kvizView = (function () {
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="email-input" placeholder="Email">
+      <input type="email" class="form-control" id="email_input" placeholder="Email">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+    <label for="inputName" class="col-sm-2 col-form-label">Ime</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="ime-input" placeholder="Password">
+      <input type="text" class="form-control" id="ime_input" placeholder="Ime">
     </div>
   </div>
   <div class="form-group row">

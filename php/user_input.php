@@ -47,10 +47,12 @@ $odgovor1 = $recived_array[0]['odgovor']; */
     $odgovor = $recived_array[$key]['odgovor']; */
 
     try {
-       
+       print_r($recived_array[11]['inputValue']);
         $pdo = new PDO($dsn, $username, $password, $options);
 
         $query = "INSERT INTO user_input(
+                    ime_input,
+                    email_input,
                     Da_li_se_osećate_naduto_nakon_jela, 
                     Da_je_vaša_nadutost_teško_podnošljiva_ili_izuzetno_bolna, 
                     Imate_li_često_osećaj_kamena_u_stomaku,
@@ -63,8 +65,8 @@ $odgovor1 = $recived_array[0]['odgovor']; */
                     Da_li_inače_u_toku_dana_osećate_nervozu_i_to_utiče_i_na_Vaš_stom
                 ) 
                 VALUES(
-                    :odgovor1, 
-                    :odgovor2, 
+                    :ime, 
+                    :email, 
                     :odgovor3, 
                     :odgovor4, 
                     :odgovor5, 
@@ -72,29 +74,25 @@ $odgovor1 = $recived_array[0]['odgovor']; */
                     :odgovor7, 
                     :odgovor8, 
                     :odgovor9, 
-                    :odgovor10
+                    :odgovor10,
+                    :odgovor11,
+                    :odgovor12
                 )";
 
         $statement = $pdo->prepare($query);
 
-        $statement->bindParam(':odgovor1', $recived_array[0]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor2', $recived_array[1]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor3', $recived_array[2]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor4', $recived_array[3]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor5', $recived_array[4]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor6', $recived_array[5]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor7', $recived_array[6]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor8', $recived_array[7]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor9', $recived_array[8]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor10', $recived_array[9]['odgovor'], PDO::PARAM_STR);
-
-        /* $statement->bindParam(':godine', $godine, PDO::PARAM_STR);
-    $statement->bindParam(':fizicka_aktivnost', $fizicka_aktivnost, PDO::PARAM_STR);
-    $statement->bindParam(':san', $san, PDO::PARAM_STR);
-    $statement->bindParam(':pritisak', $pritisak, PDO::PARAM_STR);
-    $statement->bindParam(':checked_answers', $checked_answers, PDO::PARAM_STR);
-    $statement->bindParam(':vreme_unosa', $vreme_unosa, PDO::PARAM_STR);
-    $statement->bindParam(':lokacija', $lokacija, PDO::PARAM_STR); */
+    $statement->bindParam(':odgovor3', $recived_array[0]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor4', $recived_array[1]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor5', $recived_array[2]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor6', $recived_array[3]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor7', $recived_array[4]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor8', $recived_array[5]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor9', $recived_array[6]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor10', $recived_array[7]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor11', $recived_array[8]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor12', $recived_array[9]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':email', $recived_array[10]['inputValue'], PDO::PARAM_STR);
+    $statement->bindParam(':ime', $recived_array[11]['inputValue'], PDO::PARAM_STR);
 
         $statement->execute();
     } catch (PDOException $e) {
