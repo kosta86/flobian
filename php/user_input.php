@@ -31,26 +31,19 @@ function getRealIpAddr()
     }
     return $ip;
 }
-/* echo ('getrealipaddr ' . getRealIpAddr());
+
 
 $data = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . getRealIpAddr()));
 
-$lokacija = $data['geoplugin_city'] . ',' . $data['geoplugin_countryName']; */
+$lokacija = $data['geoplugin_city'] . ',' . $data['geoplugin_countryName'];
+
 
 //PDO prepared statement to send to database
-/* $pitanje1 = 'Da_li_se_osećate_naduto_nakon_jela';
-$odgovor1 = $recived_array[0]['odgovor']; */
+try {
 
+    $pdo = new PDO($dsn, $username, $password, $options);
 
-
-    /* $pitanje = $recived_array[$key]['qId'];
-    $odgovor = $recived_array[$key]['odgovor']; */
-
-    try {
-       print_r($recived_array[11]['inputValue']);
-        $pdo = new PDO($dsn, $username, $password, $options);
-
-        $query = "INSERT INTO user_input(
+    $query = "INSERT INTO user_input(
                     ime_input,
                     email_input,
                     Da_li_se_osećate_naduto_nakon_jela, 
@@ -79,7 +72,7 @@ $odgovor1 = $recived_array[0]['odgovor']; */
                     :odgovor12
                 )";
 
-        $statement = $pdo->prepare($query);
+    $statement = $pdo->prepare($query);
 
     $statement->bindParam(':odgovor3', $recived_array[0]['odgovor'], PDO::PARAM_STR);
     $statement->bindParam(':odgovor4', $recived_array[1]['odgovor'], PDO::PARAM_STR);
@@ -94,12 +87,7 @@ $odgovor1 = $recived_array[0]['odgovor']; */
     $statement->bindParam(':email', $recived_array[10]['inputValue'], PDO::PARAM_STR);
     $statement->bindParam(':ime', $recived_array[11]['inputValue'], PDO::PARAM_STR);
 
-        $statement->execute();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    } 
-
-
-
-
-?>
+    $statement->execute();
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
