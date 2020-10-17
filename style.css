@@ -23,14 +23,13 @@ body {
       width: 100vw;
     }
 
-    .card-pitanje,
-    .card-odgovori,
-    #progress-container {
+/*     .card-pitanje,
+    .card-odgovori {
       margin: 1em 1em;
-    }
+    } */
 
     #progress-container {
-      margin-top: 1.3em;
+      margin-top: 1em;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -45,13 +44,15 @@ body {
       background-color: rgb(197, 239, 215);
     }
 
-    .card-pitanje {
-      height: 8.5vh;
-    }
-
     .card {
       width: 100%;
       /* overflow: hidden; */
+    }
+
+    .card-pitanje {
+      height: 8.5vh;
+      margin: 1em 1em 0 1em;
+      text-align: left;
     }
 
     .card-slika {
@@ -66,15 +67,10 @@ body {
       height: 55vh;
     }
 
-
-
-    .card-pitanje {
-      text-align: left;
-    }
-
     .card-odgovori {
       display: flex;
       height: 18vh;
+      margin: 0 1em 0 1em;
       flex-direction: column;
       justify-content: space-between;
 
@@ -107,13 +103,12 @@ body {
 }
 
 .card-pitanje,
-.card-odgovori,
-#progress-container {
-  margin: 1em 1em;
+.card-odgovori {
+  margin: 1em 1em 5em 1em;
 }
 
 #progress-container {
-  margin-top: 1.3em;
+  margin: 1.1em 1em 0 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -156,6 +151,7 @@ body {
 }
 
 .card-odgovori {
+  margin: 0;
   display: flex;
   height: 18vh;
   flex-direction: column;

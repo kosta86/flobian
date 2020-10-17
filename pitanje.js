@@ -98,16 +98,16 @@ const kvizView = (function () {
 		function prikaziSavet(ponudjeniSaveti) {
 			let HTMLRezultat = '';
 
-			if (savetiZaPrikazArr.length > 0 && savetiZaPrikazArr .length < 3) {
-				HTMLRezultat += "<H1>"+ponudjeniSaveti['1-2'].text+"</H1>"
+			if (savetiZaPrikazArr.length >= 0 && savetiZaPrikazArr .length < 3) {
+				HTMLRezultat += "<H1>"+ponudjeniSaveti['1-2'].text+"</H1>";
 			}
 
 			if (savetiZaPrikazArr.length > 2 && savetiZaPrikazArr .length < 8) {
-				HTMLRezultat += "<H1>"+ponudjeniSaveti['3-7'].text+"</H1>"
+				HTMLRezultat += "<H1>"+ponudjeniSaveti['3-7'].text+"</H1>";
 			}
 
-			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr .length < 10) {
-				HTMLRezultat += "<H1>"+ponudjeniSaveti['8-10'].text+"</H1>"
+			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr .length <= 10) {
+				HTMLRezultat += "<H1>"+ponudjeniSaveti['8-10'].text+"</H1>";
 			}
 
 
