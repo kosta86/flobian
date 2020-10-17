@@ -64,22 +64,52 @@ const kviz = (function () {
 	};
 
 	function postData(odgovoriZaSlanje) {
-		var answersObj = { ...odgovoriZaSlanje };
+		var JSONAnswers = JSON.stringify(odgovoriZaSlanje);
 		event.preventDefault();
-		if (event.target.id === 'postDataButton') {
+		
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", "./php/user_input.php", true);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 
 			xhr.onreadystatechange = function () {
 				if (xhr.readyState == 4 && xhr.status == 200) {
-					var responce = xhr.responseText;
-					console.log(responce);
+					var response = xhr.responseText;
+					console.log(response);
 				}
 			}
-			xhr.send(odgovoriZaSlanje);
+			xhr.send(JSONAnswers);
+		
+	}
+
+	function formInputToArray(formId, array) {
+		let form = document.getElementById(`${formId}`);
+
+		/* form.elements.forEach(el => {
+			console.log(el)
+		}) */
+		function Input(polje, input) {
+			this.polje = polje;
+			this.input = input
 		}
 		
+		for (let i = 0; i < form.elements.length; i++) {
+			if (form.elements[i].value !== null || form.elements[i].value !== '') {
+				
+				array.push(new Input(form.elements[i].id, form.elements[i].value));
+
+			}
+			console.log(array);
+			
+		}
+
+		
+	}
+
+	function submitBtnHandler(postData, odgovoriZaSlanje) {
+		if (event.target.id === 'postDataButton') {
+			formInputToArray('formular-prijava', odgovoriZaSlanje);
+			postData(odgovoriZaSlanje);
+		}
 	}
 	
 
@@ -88,6 +118,7 @@ const kviz = (function () {
 		Upitnik,
 		pitanja,
 		ponudjeniSaveti,
+		submitBtnHandler,
 		postData
 	};
 })();
@@ -121,12 +152,8 @@ const kvizView = (function () {
 			let HTMLFormular = '';
 
 			if (savetiZaPrikazArr.length >= 0 && savetiZaPrikazArr .length < 3) {
-<<<<<<< HEAD
-				HTMLRezultat += "<H1>"+ponudjeniSaveti['1-2'].text+"</H1>";
-=======
 				HTMLRezultat += "<H1>"+ponudjeniSaveti['1-2'].text+"</H1>"
 
->>>>>>> 641e0b94e5f9e602b86811b708b71f6c99a9bc1a
 			}
 
 			if (savetiZaPrikazArr.length > 2 && savetiZaPrikazArr .length < 8) {
@@ -134,24 +161,20 @@ const kvizView = (function () {
 			}
 
 			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr .length <= 10) {
-<<<<<<< HEAD
-				HTMLRezultat += "<H1>"+ponudjeniSaveti['8-10'].text+"</H1>";
-=======
 				HTMLRezultat += "<H1>"+ponudjeniSaveti['8-10'].text+"</H1>"
->>>>>>> 641e0b94e5f9e602b86811b708b71f6c99a9bc1a
 			}
 
 			HTMLFormular += `<form id="formular-prijava">
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+      <input type="email" class="form-control" id="email-input" placeholder="Email">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+      <input type="password" class="form-control" id="ime-input" placeholder="Password">
     </div>
   </div>
   <fieldset class="form-group">
@@ -247,7 +270,9 @@ const kvizController = (function () {
 	let poljeProgresa = document.querySelector('.progress-container');
 	let upitnik = new kviz.Upitnik(kviz.pitanja);
 	let postData = kviz.postData;
+	let submitBtnHandler = kviz.submitBtnHandler;
 	let poslednjiKorak = document.getElementById('rezultat');
+	
 	
 
 
@@ -284,7 +309,7 @@ const kvizController = (function () {
 
 	// event handlers
 	poljeOdgovora.addEventListener('click', handleAnswerKlik); // hendler za klik na odogovor
-	poslednjiKorak.addEventListener('click', postData.bind(this, kviz.odgovori)); // hendler za klik na dugme za prijavu
+	poslednjiKorak.addEventListener('click', submitBtnHandler.bind(this, postData, kviz.odgovori)); // hendler za klik na dugme za prijavu
 
 	return {
 		upitnik

@@ -1,7 +1,7 @@
 <?php
 
-$host = '157.230.121.178';
-$dbname = 'MagnalKviz';
+$host = 'localhost';
+$dbname = 'flobianDB';
 $charset = 'utf8mb4';
 
 $username = 'root';
