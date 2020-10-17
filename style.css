@@ -3,11 +3,10 @@ body {
   padding: 0px;
 }
 
-/* SAMO TOUCH EKRANI */
 
-@media only screen and (hover: none) and (pointer: coarse) {
 
-  /* MOBILNI */
+ /* @media only screen and (hover: none) and (pointer: coarse) {
+
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     #upitnik {
       display: flex;
@@ -23,10 +22,10 @@ body {
       width: 100vw;
     }
 
-/*     .card-pitanje,
+     .card-pitanje,
     .card-odgovori {
       margin: 1em 1em;
-    } */
+    } 
 
     #progress-container {
       margin-top: 1em;
@@ -46,7 +45,6 @@ body {
 
     .card {
       width: 100%;
-      /* overflow: hidden; */
     }
 
     .card-pitanje {
@@ -84,8 +82,8 @@ body {
       color: rgb(112, 112, 112);
     }
   }
-}
-
+} */
+ 
 
 /* DESKTOP VERZIJA */
 #upitnik {
@@ -102,13 +100,8 @@ body {
   width: 100vw;
 }
 
-.card-pitanje,
-.card-odgovori {
-  margin: 1em 1em 5em 1em;
-}
-
 #progress-container {
-  margin: 1.1em 1em 0 1em;
+  margin-top: -4em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -125,11 +118,12 @@ body {
 
 .card-pitanje {
   height: 8.5vh;
+  margin: 1em 1em 0em 1em;
+  text-align: left;
 }
 
 .card {
   width: 100%;
-  /* overflow: hidden; */
 }
 
 .card-slika {
@@ -144,19 +138,13 @@ body {
   height: 55vh;
 }
 
-
-
-.card-pitanje {
-  text-align: left;
-}
-
 .card-odgovori {
   margin: 0;
   display: flex;
   height: 18vh;
   flex-direction: column;
   justify-content: space-between;
-
+  margin: 1em 1em 0em 1em;
 }
 
 .card-odgovori button {

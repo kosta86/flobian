@@ -20,34 +20,15 @@ const kviz = (function () {
 		new Pitanje('Da li je bol povezan sa pražnjenjem?', ['DA', 'NE'], '8.png', 'flobian4'),
 		new Pitanje('Da li Vas neprijatnost u stomaku obavezuje da prestanete sa svojim normalnim aktivnostima?', ['DA', 'NE'], '9.png', 'flobian4'),
 		new Pitanje('Da li inače u toku dana osećate nervozu i to utiče i na Vaš stomak?', ['DA', 'NE'], '10.png', 'flobian1')
-	]
-
-	function Upitnik(pitanja) {
-		this.pitanja = pitanja;
-		this.RBPitanja = 0;
-	}
-
-	Upitnik.prototype.getPitanje = function () {
-		return this.pitanja[this.RBPitanja];
-	}
-	Upitnik.prototype.isEnded = function () {
-		return this.RBPitanja ===  this.pitanja.length;
-	}
-
-	function RezultatUpitnika(text, slika, video, link) {
-		this.text = text;
-		this.slika = slika;
-		this.video = video;
-		this.link = link;
-	}
+	];
 
 	ponudjeniSaveti = {
-		'1-2':	new RezultatUpitnika(`Stanje vaših creva nije alarmantno ,što ne znači da treba da trpite tegobe. Ma koliko bezazleno
+		'1-2': new RezultatUpitnika(`Stanje vaših creva nije alarmantno ,što ne znači da treba da trpite tegobe. Ma koliko bezazleno
 		izgledaju,nadutost i gasovi jesu pojava koju treba lečiti. Povremeno ispoljavanje simptoma koje
 		se vezuje sa određenom hranom itd. može dovesti do maskiranja pravog uzorka. Ako budete
 		strpljivi i tretirate uzrok minimalno mesec dana, na putu ste ka dugoročno mirnom stomaku.
 		Najčešće stomačne tegobe su upravo nadutost, gasovi, abodominalan bol i loše varenje.`, 'bolovi.png', 'flobian1'),
-		
+
 		'3-7': new RezultatUpitnika(`Krajnje je vreme da se pozabavite svojim stomakom. Vaše stanje je ozbiljno ali ne i nerešivo.
 		Vaši odgovori ukazuju na veliku razdražljivost creva a tegobe koje osećate kazuju da se vaš
 		stomak uporno žali. Ovde je sem prisutnosti simptoma nervoznog creva primećena intezivna
@@ -55,20 +36,60 @@ const kviz = (function () {
 		higijensko dijetetski režim uvedite dodatni izvor energije ćelijama Vaših creva. Najčešći simptomi
 		nervoznog creva jesu nadutost, pojačana produkcija gasova i osećaj „težine“ u stomaku.
 		Pogldeajte koji su okidači koji pogoršavaju simptome`, 'grcevi.png', 'flobian2'),
-		
+
 		'8-10': new RezultatUpitnika(`Ako bismo stadijume nervoze creva opisivali bojama, Vi biste bili u crvenoj zoni. Vaši odgovori
 		ukazuju na ozbiljan stepen zapuštenosti creva. Važno je da znate da za osobe sa veoma
 		izraženim i upornim dugotrajnim tegobama nema opuštanja. Pred Vama je proces koji zahteva
 		strpljenje, smirenost i istrajnost. Neophodno je uvesti upotrebu preparata namenjenih za
 		otklanjanje uzroka nervoze creva, promeniti životne navike i kloniti se stresnih situacija. Srećno!`, 'gasovi.png', 'flobian3'),
+	};
+
+	function Upitnik(pitanja) {
+		this.pitanja = pitanja;
+		this.RBPitanja = 0;
+	};
+
+	Upitnik.prototype.getPitanje = function () {
+		return this.pitanja[this.RBPitanja];
+	};
+	Upitnik.prototype.isEnded = function () {
+		return this.RBPitanja ===  this.pitanja.length;
+	};
+
+	function RezultatUpitnika(text, slika, video, link) {
+		this.text = text;
+		this.slika = slika;
+		this.video = video;
+		this.link = link;
+	};
+
+	function postData(odgovoriZaSlanje) {
+		var answersObj = { ...odgovoriZaSlanje };
+		event.preventDefault();
+		if (event.target.id === 'postDataButton') {
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "./php/user_input.php", true);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var responce = xhr.responseText;
+					console.log(responce);
+				}
+			}
+			xhr.send(odgovoriZaSlanje);
+		}
+		
 	}
+	
 
 	return {
 		odgovori,
 		Upitnik,
 		pitanja,
-		ponudjeniSaveti
-	}
+		ponudjeniSaveti,
+		postData
+	};
 })();
 
 
@@ -97,9 +118,15 @@ const kvizView = (function () {
 		// prikazi savet za taj problem 
 		function prikaziSavet(ponudjeniSaveti) {
 			let HTMLRezultat = '';
+			let HTMLFormular = '';
 
 			if (savetiZaPrikazArr.length >= 0 && savetiZaPrikazArr .length < 3) {
+<<<<<<< HEAD
 				HTMLRezultat += "<H1>"+ponudjeniSaveti['1-2'].text+"</H1>";
+=======
+				HTMLRezultat += "<H1>"+ponudjeniSaveti['1-2'].text+"</H1>"
+
+>>>>>>> 641e0b94e5f9e602b86811b708b71f6c99a9bc1a
 			}
 
 			if (savetiZaPrikazArr.length > 2 && savetiZaPrikazArr .length < 8) {
@@ -107,12 +134,72 @@ const kvizView = (function () {
 			}
 
 			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr .length <= 10) {
+<<<<<<< HEAD
 				HTMLRezultat += "<H1>"+ponudjeniSaveti['8-10'].text+"</H1>";
+=======
+				HTMLRezultat += "<H1>"+ponudjeniSaveti['8-10'].text+"</H1>"
+>>>>>>> 641e0b94e5f9e602b86811b708b71f6c99a9bc1a
 			}
 
+			HTMLFormular += `<form id="formular-prijava">
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+    </div>
+  </div>
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+          <label class="form-check-label" for="gridRadios1">
+            First radio
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+          <label class="form-check-label" for="gridRadios2">
+            Second radio
+          </label>
+        </div>
+        <div class="form-check disabled">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+          <label class="form-check-label" for="gridRadios3">
+            Third disabled radio
+          </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-group row">
+    <div class="col-sm-2">Checkbox</div>
+    <div class="col-sm-10">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          Example checkbox
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" id="postDataButton" class="btn btn-primary">Sign in</button>
+    </div>
+  </div>
+</form>`;
 
 
-			return HTMLRezultat;
+
+			return HTMLRezultat + HTMLFormular;
 		}
 
 		poljeUpitnika.style = "display: none";
@@ -159,15 +246,15 @@ const kvizController = (function () {
 	let poljeOdgovora = document.querySelector('.card-odgovori');
 	let poljeProgresa = document.querySelector('.progress-container');
 	let upitnik = new kviz.Upitnik(kviz.pitanja);
-	/* let ponudjeniSaveti = kviz.ponudjeniSaveti; */
+	let postData = kviz.postData;
+	let poslednjiKorak = document.getElementById('rezultat');
+	
 
-	// event handlers
-	poljeOdgovora.addEventListener('click', handleAnswerKlik); // napravi ovu callback funkciju 
 
 	// on page load
 	kvizView.prikaziPitanje(upitnik);
 	
-
+	// premestiti u view
 	function handleAnswerKlik() {
 		
 		const isAnswerButton = event.target.dataset.button === 'odgovor';
@@ -194,6 +281,11 @@ const kvizController = (function () {
 				}	
 		}
 	}
+
+	// event handlers
+	poljeOdgovora.addEventListener('click', handleAnswerKlik); // hendler za klik na odogovor
+	poslednjiKorak.addEventListener('click', postData.bind(this, kviz.odgovori)); // hendler za klik na dugme za prijavu
+
 	return {
 		upitnik
 	}
