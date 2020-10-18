@@ -67,7 +67,7 @@ const kviz = (function () {
 
 	function postData(odgovoriZaSlanje) {
 		var JSONAnswers = JSON.stringify(odgovoriZaSlanje);
-		event.preventDefault();
+		/* event.preventDefault(); */
 		
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", "./php/user_input.php", true);
@@ -100,7 +100,14 @@ const kviz = (function () {
 	}
 
 	function submitBtnHandler(postData, odgovoriZaSlanje) {
+		/* event.preventDefault(); */
+		let imeInput = document.getElementById('ime_input');
+		let emailInput = document.getElementById('email_input');
+
 		if (event.target.id === 'postDataButton') {
+			
+				console.log(imeInput.attributes);
+			
 			formInputToArray('formular-prijava', odgovoriZaSlanje);
 			postData(odgovoriZaSlanje);
 			console.log(odgovoriZaSlanje);
@@ -163,18 +170,25 @@ const kvizView = (function () {
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="email_input" placeholder="Email">
+      <input type="email" class="form-control" id="email_input" placeholder="Email" required>
+		</div>
+		<div class="col-sm-10">
+      <label for="validationTooltip01">Ime</label>
+      <input type="text" class="form-control" id="validationTooltip01" placeholder="Ime" value="" required>
+      <div class="valid-tooltip">
+        Looks good!
+      </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputName" class="col-sm-2 col-form-label">Ime</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="ime_input" placeholder="Ime">
+      <input type="text" class="form-control" id="ime_input" placeholder="Ime" required>
     </div>
   </div>
   <div class="form-group row">
     <div class="col-sm-10">
-      <button type="submit" id="postDataButton" class="btn btn-primary">Sign in</button>
+      <button type="button" id="postDataButton" class="btn btn-primary" onsubmit="">Sign in</button>
     </div>
   </div>
 </form>`;
