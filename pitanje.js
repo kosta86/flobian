@@ -91,12 +91,17 @@ const kviz = (function () {
 			this.inputValue = inputValue
 		}
 		
+		let mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+
 		for (let i = 0; i < form.elements.length; i++) {
 
 			if (form.elements[i].value !== null || form.elements[i].value !== '') {
+				console.log(form.elements['email_input'].value);
 				array.push(new Input(form.elements[i].id, form.elements[i].value));
-			}	
+			}
 		}
+		
+		
 	}
 
 	function submitBtnHandler(postData, odgovoriZaSlanje) {
@@ -188,7 +193,7 @@ const kvizView = (function () {
   </div>
   <div class="form-group row">
     <div class="col-sm-10">
-      <button type="button" id="postDataButton" class="btn btn-primary" onsubmit="">Sign in</button>
+      <button type="button" id="postDataButton" class="btn btn-primary">Sign in</button>
     </div>
   </div>
 </form>`;
@@ -282,7 +287,10 @@ const kvizController = (function () {
 
 	// event handlers
 	poljeOdgovora.addEventListener('click', handleAnswerKlik); // hendler za klik na odogovor
-	poslednjiKorak.addEventListener('click', submitBtnHandler.bind(this, postData, kviz.odgovori)); // hendler za klik na dugme za prijavu
+	poslednjiKorak.addEventListener('click', function() {
+		event.preventDefault();
+		submitBtnHandler.bind(this, postData, kviz.odgovori)
+	}); // hendler za klik na dugme za submit
 
 	return {
 		upitnik
