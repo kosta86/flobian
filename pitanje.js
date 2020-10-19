@@ -2,24 +2,26 @@ const kviz = (function () {
 	let odgovori = [];
 	let rezultatiUpitnika = {};
 
-	function Pitanje(tekst, ponudjeniOdgovori, slika, proizvod) {
+	function Pitanje(tekst, ponudjeniOdgovori, slika) {
 		this.tekst = tekst;
 		this.ponudjeniOdgovori = ponudjeniOdgovori;
 		this.slika = slika;
-		this.proizvod = proizvod;
+		this.qId = this.tekst.replace(/[^a-zA-ZšŠđĐžŽčČćĆ0-9 ]/g, "").split(' ').join('_').substring(0, 64);
+
+	/* this.tekst.split(' ').join('_').slice(0, -1); */
 	}
 
 	let pitanja = [
-		new Pitanje('Da li se osećate naduto nakon jela?', ['DA', 'NE'], '1.png', 'flobian1'),
-		new Pitanje('Da je vaša nadutost teško podnošljiva ili izuzetno bolna?', ['DA', 'NE'], '2.png', 'flobian2'),
-		new Pitanje('Imate li često osećaj „kamena“ u stomaku?', ['DA', 'NE'], '3.png', 'flobian1'),
-		new Pitanje('Da li obavezno morati otkopčati dugne ili popustiti kaiš nakon jela?', ['DA', 'NE'], '4.png', 'flobian2'),
-		new Pitanje('Da li često imate gasove?', ['DA', 'NE'], '5.png', 'flobian3'),
-		new Pitanje('Da li postoje promene u učestalosti pražnjenja stolice- dijareja i/ili opstipacija?', ['DA', 'NE'], '6.png', 'flobian3'),
-		new Pitanje('Da li imate ponavljajući bol u stomaku, u proseku, najmanje 1 dan/nedeljno u poslednja 3 meseca?', ['DA', 'NE'], '7.png', 'flobian1'),
-		new Pitanje('Da li je bol povezan sa pražnjenjem?', ['DA', 'NE'], '8.png', 'flobian4'),
-		new Pitanje('Da li Vas neprijatnost u stomaku obavezuje da prestanete sa svojim normalnim aktivnostima?', ['DA', 'NE'], '9.png', 'flobian4'),
-		new Pitanje('Da li inače u toku dana osećate nervozu i to utiče i na Vaš stomak?', ['DA', 'NE'], '10.png', 'flobian1')
+		new Pitanje('Da li se osećate naduto nakon jela?', ['DA', 'NE'], '1.png'),
+		new Pitanje('Da je vaša nadutost teško podnošljiva ili izuzetno bolna?', ['DA', 'NE'], '2.png'),
+		new Pitanje('Imate li često osećaj „kamena“ u stomaku?', ['DA', 'NE'], '3.png'),
+		new Pitanje('Da li obavezno morati otkopčati dugme ili popustiti kaiš nakon jela?', ['DA', 'NE'], '4.png'),
+		new Pitanje('Da li često imate gasove?', ['DA', 'NE'], '5.png'),
+		new Pitanje('Da li postoje promene u učestalosti pražnjenja stolice- dijareja i/ili opstipacija?', ['DA', 'NE'], '6.png'),
+		new Pitanje('Da li imate ponavljajući bol u stomaku, u proseku, najmanje 1 dan/nedeljno u poslednja 3 meseca?', ['DA', 'NE'], '7.png'),
+		new Pitanje('Da li je bol povezan sa pražnjenjem?', ['DA', 'NE'], '8.png'),
+		new Pitanje('Da li Vas neprijatnost u stomaku obavezuje da prestanete sa svojim normalnim aktivnostima?', ['DA', 'NE'], '9.png'),
+		new Pitanje('Da li inače u toku dana osećate nervozu i to utiče i na Vaš stomak?', ['DA', 'NE'], '10.png')
 	];
 
 	ponudjeniSaveti = {
@@ -65,7 +67,7 @@ const kviz = (function () {
 
 	function postData(odgovoriZaSlanje) {
 		var JSONAnswers = JSON.stringify(odgovoriZaSlanje);
-		event.preventDefault();
+		/* event.preventDefault(); */
 		
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", "./php/user_input.php", true);
@@ -74,7 +76,7 @@ const kviz = (function () {
 			xhr.onreadystatechange = function () {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var response = xhr.responseText;
-					console.log(response);
+					console.log(odgovoriZaSlanje);
 				}
 			}
 			xhr.send(JSONAnswers);
@@ -84,33 +86,42 @@ const kviz = (function () {
 	function formInputToArray(formId, array) {
 		let form = document.getElementById(`${formId}`);
 
-		/* form.elements.forEach(el => {
-			console.log(el)
-		}) */
-		function Input(polje, input) {
+		function Input(polje, inputValue) {
 			this.polje = polje;
+<<<<<<< HEAD
 			this.input = input;
 			
 			
+=======
+			this.inputValue = inputValue
+>>>>>>> 3fcae9b6c6d5d72ce8948cb87074273bdb9db8c1
 		}
 		
+		let mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+
 		for (let i = 0; i < form.elements.length; i++) {
+
 			if (form.elements[i].value !== null || form.elements[i].value !== '') {
-				
+				console.log(form.elements['email_input'].value);
 				array.push(new Input(form.elements[i].id, form.elements[i].value));
-
 			}
-			console.log(array);
-			
 		}
-
+		
 		
 	}
 
 	function submitBtnHandler(postData, odgovoriZaSlanje) {
+		/* event.preventDefault(); */
+		let imeInput = document.getElementById('ime_input');
+		let emailInput = document.getElementById('email_input');
+
 		if (event.target.id === 'postDataButton') {
+			
+				console.log(imeInput.attributes);
+			
 			formInputToArray('formular-prijava', odgovoriZaSlanje);
 			postData(odgovoriZaSlanje);
+			console.log(odgovoriZaSlanje);
 		}
 	}
 	
@@ -141,7 +152,7 @@ const kvizView = (function () {
 		// iteracija odgovora korisnika i popunjavanje array-a pozitivnim odgovorima
 		for (const obj of userOdgovori) {
 			if (obj.odgovor === "DA") {		
-				savetiZaPrikazArr.push(obj.proizvod);	
+				savetiZaPrikazArr.push(obj.qId);	
 			}
 		}
 
@@ -170,54 +181,25 @@ const kvizView = (function () {
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="email-input" placeholder="Email">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="ime-input" placeholder="Password">
-    </div>
-  </div>
-  <fieldset class="form-group">
-    <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-      <div class="col-sm-10">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-          <label class="form-check-label" for="gridRadios1">
-            First radio
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-          <label class="form-check-label" for="gridRadios2">
-            Second radio
-          </label>
-        </div>
-        <div class="form-check disabled">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-          <label class="form-check-label" for="gridRadios3">
-            Third disabled radio
-          </label>
-        </div>
-      </div>
-    </div>
-  </fieldset>
-  <div class="form-group row">
-    <div class="col-sm-2">Checkbox</div>
-    <div class="col-sm-10">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck1">
-        <label class="form-check-label" for="gridCheck1">
-          Example checkbox
-        </label>
+      <input type="email" class="form-control" id="email_input" placeholder="Email" required>
+		</div>
+		<div class="col-sm-10">
+      <label for="validationTooltip01">Ime</label>
+      <input type="text" class="form-control" id="validationTooltip01" placeholder="Ime" value="" required>
+      <div class="valid-tooltip">
+        Looks good!
       </div>
     </div>
   </div>
   <div class="form-group row">
+    <label for="inputName" class="col-sm-2 col-form-label">Ime</label>
     <div class="col-sm-10">
-      <button type="submit" id="postDataButton" class="btn btn-primary">Sign in</button>
+      <input type="text" class="form-control" id="ime_input" placeholder="Ime" required>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="button" id="postDataButton" class="btn btn-primary">Sign in</button>
     </div>
   </div>
 </form>`;
@@ -283,7 +265,7 @@ const kvizController = (function () {
 	
 	// premestiti u view
 	function handleAnswerKlik() {
-		
+		console.log(upitnik.getPitanje().qId)
 		const isAnswerButton = event.target.dataset.button === 'odgovor';
 		const kliknutiOdgovor = event.target.dataset.odgovor;
 
@@ -292,7 +274,7 @@ const kvizController = (function () {
 			kviz.odgovori.push({
 				pitanje: upitnik.getPitanje().tekst,
 				odgovor: kliknutiOdgovor,
-				proizvod: upitnik.getPitanje().proizvod
+				qId: upitnik.getPitanje().qId
 			})
 		}
 
@@ -311,7 +293,10 @@ const kvizController = (function () {
 
 	// event handlers
 	poljeOdgovora.addEventListener('click', handleAnswerKlik); // hendler za klik na odogovor
-	poslednjiKorak.addEventListener('click', submitBtnHandler.bind(this, postData, kviz.odgovori)); // hendler za klik na dugme za prijavu
+	poslednjiKorak.addEventListener('click', function() {
+		event.preventDefault();
+		submitBtnHandler.bind(this, postData, kviz.odgovori)
+	}); // hendler za klik na dugme za submit
 
 	return {
 		upitnik
