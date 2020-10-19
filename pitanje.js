@@ -89,7 +89,9 @@ const kviz = (function () {
 		}) */
 		function Input(polje, input) {
 			this.polje = polje;
-			this.input = input
+			this.input = input;
+			
+			
 		}
 		
 		for (let i = 0; i < form.elements.length; i++) {
