@@ -110,13 +110,14 @@ const kviz = (function () {
 
 		function checkInputs() {
 			// trim to remove the whitespaces
+			const imeValue = imeInput.value;
 			const emailValue = emailInput.value.trim();
-			const nameValue = imeInput.value;
+			
 			
 
-			if (nameValue === '') {
+			if (imeValue === '') {
 				setErrorFor(imeInput, 'Polje ne može biti prazno');
-			} else if (!isName(nameValue)) {
+			} else if (!isName(imeValue)) {
 				setErrorFor(imeInput, 'Email adresa nije validna');
 			}	else {
 				setSuccessFor(imeInput);
@@ -150,12 +151,13 @@ const kviz = (function () {
 		function isName(name) {
 			return /^[A-Za-z\s]+$/.test(name);
 		}
-		console.log(imeInput.classList.contains('success'));
-		console.log(emailInput.classList.contains('success'));
+		checkInputs();
+		console.log(imeInput.parentElement.classList.contains('success'));
+		console.log(emailInput.parentElement.classList.contains('success'));
 
 		/* if (event.target.id === 'postDataButton') { */
 
-			if (imeInput.classList.contains('success') && emailInput.classList.contains('success')) {
+			if (imeInput.parentElement.classList.contains('success') && emailInput.parentElement.classList.contains('success')) {
 				formInputToArray('formular-prijava', odgovoriZaSlanje);
 				postData(odgovoriZaSlanje);
 				console.log(odgovoriZaSlanje);
@@ -216,37 +218,25 @@ const kvizView = (function () {
 				HTMLRezultat += "<H1>"+ponudjeniSaveti['8-10'].text+"</H1>"
 			}
 
-			HTMLFormular += `<form id="form" class="form">
+			HTMLFormular += `<div class="form-container">
+			<form id="formular-prijava" class="form">
 		<div class="form-control">
 			<label for="username">Username</label>
-			<input type="text" placeholder="florinpop17" id="username" />
+			<input type="text" placeholder="florinpop17" id="ime_input" />
 			<i class="fas fa-check-circle"></i>
 			<i class="fas fa-exclamation-circle"></i>
 			<small>Error message</small>
 		</div>
 		<div class="form-control">
 			<label for="username">Email</label>
-			<input type="email" placeholder="a@florin-pop.com" id="email" />
+			<input type="email" placeholder="a@florin-pop.com" id="email_input" />
 			<i class="fas fa-check-circle"></i>
 			<i class="fas fa-exclamation-circle"></i>
 			<small>Error message</small>
 		</div>
-		<div class="form-control">
-			<label for="username">Password</label>
-			<input type="password" placeholder="Password" id="password"/>
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-		<div class="form-control">
-			<label for="username">Password check</label>
-			<input type="password" placeholder="Password two" id="password2"/>
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-		<button>Submit</button>
-	</form>`;
+		<button id="postDataButton">Submit</button>
+	</form>
+	</div>`;
 
 
 
@@ -342,9 +332,9 @@ const kvizController = (function () {
 		event.preventDefault();
 		submitBtnHandler.bind(this, postData, kviz.odgovori)
 	}); // hendler za klik na dugme za submit */
-	poslednjikorak.addEventListener(event => {
+	poslednjiKorak.addEventListener('submit', event => {
 		event.preventDefault();
-		submitBtnHandler(postData, kviz.odgovori)
+		submitBtnHandler(postData, kviz.odgovori);
 	})
 
 	return {
