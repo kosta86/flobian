@@ -8,7 +8,7 @@ const kviz = (function () {
 		this.slika = slika;
 		this.qId = this.tekst.replace(/[^a-zA-ZšŠđĐžŽčČćĆ0-9 ]/g, "").split(' ').join('_').substring(0, 64);
 
-	/* this.tekst.split(' ').join('_').slice(0, -1); */
+		/* this.tekst.split(' ').join('_').slice(0, -1); */
 	}
 
 	let pitanja = [
@@ -55,7 +55,7 @@ const kviz = (function () {
 		return this.pitanja[this.RBPitanja];
 	};
 	Upitnik.prototype.isEnded = function () {
-		return this.RBPitanja ===  this.pitanja.length;
+		return this.RBPitanja === this.pitanja.length;
 	};
 
 	function RezultatUpitnika(text, slika, video, link) {
@@ -68,19 +68,19 @@ const kviz = (function () {
 	function postData(odgovoriZaSlanje) {
 		var JSONAnswers = JSON.stringify(odgovoriZaSlanje);
 		/* event.preventDefault(); */
-		
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "./php/user_input.php", true);
-			xhr.setRequestHeader('Content-Type', 'application/json');
 
-			xhr.onreadystatechange = function () {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					var response = xhr.responseText;
-					console.log(odgovoriZaSlanje);
-				}
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "./php/user_input.php", true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var response = xhr.responseText;
+				console.log(odgovoriZaSlanje);
 			}
-			xhr.send(JSONAnswers);
-		
+		}
+		xhr.send(JSONAnswers);
+
 	}
 
 	function formInputToArray(formId, array) {
@@ -90,7 +90,7 @@ const kviz = (function () {
 			this.polje = polje;
 			this.inputValue = inputValue
 		}
-		
+
 		let mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
 
 		for (let i = 0; i < form.elements.length; i++) {
@@ -100,8 +100,8 @@ const kviz = (function () {
 				array.push(new Input(form.elements[i].id, form.elements[i].value));
 			}
 		}
-		
-		
+
+
 	}
 
 	function submitBtnHandler(postData, odgovoriZaSlanje) {
@@ -112,14 +112,14 @@ const kviz = (function () {
 			// trim to remove the whitespaces
 			const imeValue = imeInput.value;
 			const emailValue = emailInput.value.trim();
-			
-			
+
+
 
 			if (imeValue === '') {
 				setErrorFor(imeInput, 'Polje ne može biti prazno');
 			} else if (!isName(imeValue)) {
 				setErrorFor(imeInput, 'Email adresa nije validna');
-			}	else {
+			} else {
 				setSuccessFor(imeInput);
 			}
 
@@ -157,15 +157,15 @@ const kviz = (function () {
 
 		/* if (event.target.id === 'postDataButton') { */
 
-			if (imeInput.parentElement.classList.contains('success') && emailInput.parentElement.classList.contains('success')) {
-				formInputToArray('formular-prijava', odgovoriZaSlanje);
-				postData(odgovoriZaSlanje);
-				console.log(odgovoriZaSlanje);
-			}
-			
+		if (imeInput.parentElement.classList.contains('success') && emailInput.parentElement.classList.contains('success')) {
+			formInputToArray('formular-prijava', odgovoriZaSlanje);
+			postData(odgovoriZaSlanje);
+			console.log(odgovoriZaSlanje);
+		}
+
 		/* } */
 	}
-	
+
 
 	return {
 		odgovori,
@@ -192,8 +192,8 @@ const kvizView = (function () {
 
 		// iteracija odgovora korisnika i popunjavanje array-a pozitivnim odgovorima
 		for (const obj of userOdgovori) {
-			if (obj.odgovor === "DA") {		
-				savetiZaPrikazArr.push(obj.qId);	
+			if (obj.odgovor === "DA") {
+				savetiZaPrikazArr.push(obj.qId);
 			}
 		}
 
@@ -205,17 +205,17 @@ const kvizView = (function () {
 			let HTMLRezultat = '';
 			let HTMLFormular = '';
 
-			if (savetiZaPrikazArr.length >= 0 && savetiZaPrikazArr .length < 3) {
-				HTMLRezultat += "<H1>"+ponudjeniSaveti['1-2'].text+"</H1>"
+			if (savetiZaPrikazArr.length >= 0 && savetiZaPrikazArr.length < 3) {
+				HTMLRezultat += "<H1>" + ponudjeniSaveti['1-2'].text + "</H1>"
 
 			}
 
-			if (savetiZaPrikazArr.length > 2 && savetiZaPrikazArr .length < 8) {
-				HTMLRezultat += "<H1>"+ponudjeniSaveti['3-7'].text+"</H1>";
+			if (savetiZaPrikazArr.length > 2 && savetiZaPrikazArr.length < 8) {
+				HTMLRezultat += "<H1>" + ponudjeniSaveti['3-7'].text + "</H1>";
 			}
 
-			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr .length <= 10) {
-				HTMLRezultat += "<H1>"+ponudjeniSaveti['8-10'].text+"</H1>"
+			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr.length <= 10) {
+				HTMLRezultat += "<H1>" + ponudjeniSaveti['8-10'].text + "</H1>"
 			}
 
 			HTMLFormular += `<div class="form-container">
@@ -239,27 +239,29 @@ const kvizView = (function () {
 	</div>`;
 
 
-
 			return HTMLRezultat + HTMLFormular;
 		}
 
 		poljeUpitnika.style = "display: none";
 		poljeRezultata.style = "display: block";
 		poljeRezultata.innerHTML = prikaziSavet(ponudjeniSaveti);
-	
+
 	}
 
 	function prikaziPitanje(upitnik) {
 		let poljeSlike = document.querySelector('.card-slika');
 		let poljeTekstPitanja = document.querySelector('.card-pitanje');
 		let poljeOdgovora = document.querySelector('.card-odgovori');
-		
+		let progressContainer = document.getElementById('progress-container');
+
+		// progress span
+		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;
 
 		// popuni sliku pitanja
 		poljeSlike.innerHTML = `<img src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`
 
 		// popuni tekst pitanja
-		poljeTekstPitanja.innerHTML = `<H2>${upitnik.getPitanje().tekst}<H2>`;
+		poljeTekstPitanja.innerHTML = `<p>${upitnik.getPitanje().tekst}</p>`;
 
 		//prvo obrisi vec prikazane ponudjene odgovore
 		poljeOdgovora.innerHTML = "";
@@ -275,9 +277,10 @@ const kvizView = (function () {
 		});
 	}
 
+
 	return {
 		prikaziPitanje,
-		prikaziRezultat
+		prikaziRezultat,
 	}
 })();
 
@@ -291,13 +294,13 @@ const kvizController = (function () {
 	let submitBtnHandler = kviz.submitBtnHandler;
 	let poslednjiKorak = document.getElementById('rezultat');
 	let form = document.getElementById('formular-prijava');
-	
-	
+
+
 
 
 	// on page load
 	kvizView.prikaziPitanje(upitnik);
-	
+
 	// premestiti u view
 	function handleAnswerKlik() {
 		console.log(upitnik.getPitanje().qId)
@@ -315,14 +318,14 @@ const kvizController = (function () {
 
 		//ako je kliknuto na odgovor
 		if (isAnswerButton) {
-				pushAnswers();
-				// on click inkrementuj redni broj pitanja
-				upitnik.RBPitanja++
-				if (upitnik.isEnded()) {
-					kvizView.prikaziRezultat(kviz.odgovori, kviz.ponudjeniSaveti); // prikazi stranu sa savetima za korisnika
-				} else {
-					kvizView.prikaziPitanje(upitnik);
-				}	
+			pushAnswers();
+			// on click inkrementuj redni broj pitanja
+			upitnik.RBPitanja++
+			if (upitnik.isEnded()) {
+				kvizView.prikaziRezultat(kviz.odgovori, kviz.ponudjeniSaveti); // prikazi stranu sa savetima za korisnika
+			} else {
+				kvizView.prikaziPitanje(upitnik);
+			}
 		}
 	}
 
