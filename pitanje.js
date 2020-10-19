@@ -182,10 +182,13 @@ const kviz = (function () {
 const kvizView = (function () {
 
 	function prikaziRezultat(userOdgovori, ponudjeniSaveti) {
-		let poljeRezultata = document.querySelector('#rezultat');
-		let poljeUpitnika = document.querySelector('#upitnik');
+		let rezultatWrapper = document.getElementById('rezultat-wrapper');
+		let tekstRezultata = document.getElementById('tvoj-rezultat-tekst');
+		let poljeFormulara = document.getElementById('prikljuci-se-form');
+		let poljeUpitnika = document.getElementById('upitnik');
 		let savetiZaPrikazArr = [];
-		console.log(ponudjeniSaveti)
+		let rezultatTekst = '';
+		let rezultatVideo;
 
 		// obrisi polje upitnika posto je zavrsen
 		poljeUpitnika.innerHTML = '';
@@ -198,27 +201,70 @@ const kvizView = (function () {
 		}
 
 		let uniqueSavetiZaPrikazArr = [... new Set(savetiZaPrikazArr)];
-		console.log(ponudjeniSaveti)
 
 		// prikazi savet za taj problem 
 		function prikaziSavet(ponudjeniSaveti) {
-			let HTMLRezultat = '';
-			let HTMLFormular = '';
-
 			if (savetiZaPrikazArr.length >= 0 && savetiZaPrikazArr.length < 3) {
-				HTMLRezultat += "<H1>" + ponudjeniSaveti['1-2'].text + "</H1>"
-
+				/* HTMLRezultat += "<p>" + ponudjeniSaveti['1-2'].text + "</p>" */
+				rezultatTekst = `<p>${ponudjeniSaveti['1-2'].text}</p>`;
 			}
 
 			if (savetiZaPrikazArr.length > 2 && savetiZaPrikazArr.length < 8) {
-				HTMLRezultat += "<H1>" + ponudjeniSaveti['3-7'].text + "</H1>";
+				/* HTMLRezultat += "<p>" + ponudjeniSaveti['3-7'].text + "</p>"; */
+				rezultatTekst = `<p>${ponudjeniSaveti['3-7'].text}</p>`;
 			}
 
 			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr.length <= 10) {
-				HTMLRezultat += "<H1>" + ponudjeniSaveti['8-10'].text + "</H1>"
+				/* HTMLRezultat += "<p>" + ponudjeniSaveti['8-10'].text + "</p>" */
+				rezultatTekst = `<p>${ponudjeniSaveti['8-10'].text}</p>`;
 			}
 
-			HTMLFormular += `<div class="form-container">
+			let HTMLRezultat = `<div class="container">
+			<div class="tvoj-rezultat">
+				<div class="row">
+					<div id="tvoj-rezultat-tekst" class="col-xs-12 col-sm-6">${rezultatTekst}</div>
+					<div id="tvoj-rezultat-video" class="col-xs-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="auto" height="auto" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
+				</div>
+			</div>
+			<div class="saznaj-vise">
+				<div class="row">
+					<div id="saznaj-vise-ikonice" class="col-xs-12"></div>
+				</div>
+			</div>
+			<div class="izazov">
+				<div class="row">
+					<div id="izazov-tekst" class="col-xs-12 col-sm-6"></div>
+					<div id="izazov-slika" class="col-xs-12 col-sm-6"></div>
+				</div>
+			</div>
+			<div class="prikljuci-se">
+				<div id="prikljuci-se-form" class="col-xs-12">
+					<div class="form-container">
+						<form id="formular-prijava" class="form">
+					<div class="form-controller">
+						<label for="username">Username</label>
+						<input type="text" placeholder="florinpop17" id="ime_input" />
+						<i class="fas fa-check-circle"></i>
+						<i class="fas fa-exclamation-circle"></i>
+						<small>Error message</small>
+					</div>
+					<div class="form-controller">
+						<label for="username">Email</label>
+						<input type="email" placeholder="a@florin-pop.com" id="email_input" />
+						<i class="fas fa-check-circle"></i>
+						<i class="fas fa-exclamation-circle"></i>
+						<small>Error message</small>
+					</div>
+					<button id="postDataButton">Submit</button>
+				</form>
+				</div>
+				</div>
+			</div>
+		</div>`;
+
+
+
+			/* HTMLFormular += `<div class="form-container">
 			<form id="formular-prijava" class="form">
 		<div class="form-control">
 			<label for="username">Username</label>
@@ -236,15 +282,17 @@ const kvizView = (function () {
 		</div>
 		<button id="postDataButton">Submit</button>
 	</form>
-	</div>`;
+	</div>`; */
 
 
-			return HTMLRezultat + HTMLFormular;
+			/* return HTMLRezultat + HTMLFormular; */
+			console.log(HTMLRezultat)
+			return HTMLRezultat;
 		}
 
 		poljeUpitnika.style = "display: none";
-		poljeRezultata.style = "display: block";
-		poljeRezultata.innerHTML = prikaziSavet(ponudjeniSaveti);
+		rezultatWrapper.style = "display: block";
+		rezultatWrapper.innerHTML = prikaziSavet(ponudjeniSaveti);
 
 	}
 
@@ -292,7 +340,7 @@ const kvizController = (function () {
 	let upitnik = new kviz.Upitnik(kviz.pitanja);
 	let postData = kviz.postData;
 	let submitBtnHandler = kviz.submitBtnHandler;
-	let poslednjiKorak = document.getElementById('rezultat');
+	let poslednjiKorak = document.getElementById('rezultat-wrapper');
 	let form = document.getElementById('formular-prijava');
 
 
