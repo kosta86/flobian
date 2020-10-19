@@ -88,13 +88,7 @@ const kviz = (function () {
 
 		function Input(polje, inputValue) {
 			this.polje = polje;
-<<<<<<< HEAD
-			this.input = input;
-			
-			
-=======
 			this.inputValue = inputValue
->>>>>>> 3fcae9b6c6d5d72ce8948cb87074273bdb9db8c1
 		}
 		
 		let mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
@@ -111,18 +105,63 @@ const kviz = (function () {
 	}
 
 	function submitBtnHandler(postData, odgovoriZaSlanje) {
-		/* event.preventDefault(); */
-		let imeInput = document.getElementById('ime_input');
-		let emailInput = document.getElementById('email_input');
+		const imeInput = document.getElementById('ime_input');
+		const emailInput = document.getElementById('email_input');
 
-		if (event.target.id === 'postDataButton') {
+		function checkInputs() {
+			// trim to remove the whitespaces
+			const emailValue = emailInput.value.trim();
+			const nameValue = imeInput.value;
 			
-				console.log(imeInput.attributes);
-			
-			formInputToArray('formular-prijava', odgovoriZaSlanje);
-			postData(odgovoriZaSlanje);
-			console.log(odgovoriZaSlanje);
+
+			if (nameValue === '') {
+				setErrorFor(imeInput, 'Polje ne može biti prazno');
+			} else if (!isName(nameValue)) {
+				setErrorFor(imeInput, 'Email adresa nije validna');
+			}	else {
+				setSuccessFor(imeInput);
+			}
+
+			if (emailValue === '') {
+				setErrorFor(emailInput, 'Polje ne može biti prazno');
+			} else if (!isEmail(emailValue)) {
+				setErrorFor(emailInput, 'Email adresa nije validna');
+			} else {
+				setSuccessFor(emailInput);
+			}
 		}
+
+		function setErrorFor(input, message) {
+			const formControl = input.parentElement;
+			const small = formControl.querySelector('small');
+			formControl.className = 'form-control error';
+			small.innerText = message;
+		}
+
+		function setSuccessFor(input) {
+			const formControl = input.parentElement;
+			formControl.className = 'form-control success';
+		}
+
+		function isEmail(email) {
+			return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+		}
+
+		function isName(name) {
+			return /^[A-Za-z\s]+$/.test(name);
+		}
+		console.log(imeInput.classList.contains('success'));
+		console.log(emailInput.classList.contains('success'));
+
+		/* if (event.target.id === 'postDataButton') { */
+
+			if (imeInput.classList.contains('success') && emailInput.classList.contains('success')) {
+				formInputToArray('formular-prijava', odgovoriZaSlanje);
+				postData(odgovoriZaSlanje);
+				console.log(odgovoriZaSlanje);
+			}
+			
+		/* } */
 	}
 	
 
@@ -177,32 +216,37 @@ const kvizView = (function () {
 				HTMLRezultat += "<H1>"+ponudjeniSaveti['8-10'].text+"</H1>"
 			}
 
-			HTMLFormular += `<form id="formular-prijava">
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="email_input" placeholder="Email" required>
+			HTMLFormular += `<form id="form" class="form">
+		<div class="form-control">
+			<label for="username">Username</label>
+			<input type="text" placeholder="florinpop17" id="username" />
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
 		</div>
-		<div class="col-sm-10">
-      <label for="validationTooltip01">Ime</label>
-      <input type="text" class="form-control" id="validationTooltip01" placeholder="Ime" value="" required>
-      <div class="valid-tooltip">
-        Looks good!
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputName" class="col-sm-2 col-form-label">Ime</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="ime_input" placeholder="Ime" required>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="button" id="postDataButton" class="btn btn-primary">Sign in</button>
-    </div>
-  </div>
-</form>`;
+		<div class="form-control">
+			<label for="username">Email</label>
+			<input type="email" placeholder="a@florin-pop.com" id="email" />
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
+		</div>
+		<div class="form-control">
+			<label for="username">Password</label>
+			<input type="password" placeholder="Password" id="password"/>
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
+		</div>
+		<div class="form-control">
+			<label for="username">Password check</label>
+			<input type="password" placeholder="Password two" id="password2"/>
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
+		</div>
+		<button>Submit</button>
+	</form>`;
 
 
 
@@ -256,6 +300,7 @@ const kvizController = (function () {
 	let postData = kviz.postData;
 	let submitBtnHandler = kviz.submitBtnHandler;
 	let poslednjiKorak = document.getElementById('rezultat');
+	let form = document.getElementById('formular-prijava');
 	
 	
 
@@ -293,10 +338,14 @@ const kvizController = (function () {
 
 	// event handlers
 	poljeOdgovora.addEventListener('click', handleAnswerKlik); // hendler za klik na odogovor
-	poslednjiKorak.addEventListener('click', function() {
+	/* poslednjiKorak.addEventListener('click', function() {
 		event.preventDefault();
 		submitBtnHandler.bind(this, postData, kviz.odgovori)
-	}); // hendler za klik na dugme za submit
+	}); // hendler za klik na dugme za submit */
+	poslednjikorak.addEventListener(event => {
+		event.preventDefault();
+		submitBtnHandler(postData, kviz.odgovori)
+	})
 
 	return {
 		upitnik
