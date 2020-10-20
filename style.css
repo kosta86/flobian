@@ -129,12 +129,25 @@ body {
   width: 100vw;
 }
 
+#tvoj-rezultat-polje h5 {
+  color: #047235;
+  font-weight: 900;
+}
+
+#tvoj-rezultat-polje p {
+  color: #222222;
+}
+
 .saznaj-vise-ikonice,
 #izazov-slika {
   grid-area: photo;
 }
 
 #izazov {
+  background-color: #D1F0DE;
+}
+
+#izazov>.row {
   background-color: #D1F0DE;
 }
 
@@ -237,18 +250,17 @@ body {
 
 /* form control */
 .form-container {
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  background-color: #fafafa;
   overflow: hidden;
   width: 100vw;
   max-width: 100%;
   padding: 2em;
   text-align: center;
 }
-.form-container span {
-  font-size: 1.2em;
-  font-weight: bold;
+
+.form-container p {
+  font-size: 1.3em;
+  font-weight: 900;
   color: #047235;
 }
 
@@ -263,7 +275,7 @@ body {
 }
 
 .flobian-form {
-  padding: 30px 20px;
+  padding: 30px 0px;
   text-align: center;
   text-align: -webkit-center;
   text-align: -moz-center;

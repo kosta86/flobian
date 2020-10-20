@@ -115,9 +115,9 @@ const kviz = (function () {
 			const emailValue = emailInput.value.trim();
 			const telefonValue = telefonInput.value.trim();
 
-/* 			imeValue.className = '';
-			emailValue.className = '';
- */
+			/* 			imeValue.className = '';
+						emailValue.className = '';
+			 */
 			if (imeValue === '') {
 				setErrorFor(imeInput, 'Polje ne može biti prazno');
 			} else if (!isName(imeValue)) {
@@ -133,7 +133,7 @@ const kviz = (function () {
 			} else {
 				setSuccessFor(emailInput);
 			}
-			
+
 			if (telefonValue === '') {
 				setErrorFor(telefonInput, 'Polje ne može biti prazno');
 			} else if (!isTelephone(telefonValue)) {
@@ -188,16 +188,40 @@ const kviz = (function () {
 
 
 const kvizView = (function () {
+	let rezultatWrapper = document.getElementById('rezultat-wrapper');
+	let tekstRezultata = document.getElementById('tvoj-rezultat-polje');
+	let poljeFormulara = document.getElementById('prikljuci-se-form');
+	let poljeUpitnika = document.getElementById('upitnik');
+	let savetiZaPrikazArr = [];
+	let rezultatTekst = '';
+	let rezultatVideo;
+
+	/* function smoothScroll(target) {
+		var scrollContainer = target;
+		
+		do { //find scroll container
+			scrollContainer = scrollContainer.parentNode;
+			if (!scrollContainer) return;
+			scrollContainer.scrollTop += 1;
+		} while (scrollContainer.scrollTop == 0);
+
+		var targetY = 0;
+		do { //find the top of target relatively to the container
+			if (target == scrollContainer) break;
+			targetY += target.offsetTop;
+		} while (target = target.offsetParent);
+
+		scroll = function (c, a, b, i) {
+			i++; if (i > 30) return;
+			c.scrollTop = a + (b - a) / 30 * i;
+			setTimeout(function () { scroll(c, a, b, i); }, 20);
+		}
+		// start scrolling
+			scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+	} */
+	
 
 	function prikaziRezultat(userOdgovori, ponudjeniSaveti) {
-		let rezultatWrapper = document.getElementById('rezultat-wrapper');
-		let tekstRezultata = document.getElementById('tvoj-rezultat-tekst');
-		let poljeFormulara = document.getElementById('prikljuci-se-form');
-		let poljeUpitnika = document.getElementById('upitnik');
-		let savetiZaPrikazArr = [];
-		let rezultatTekst = '';
-		let rezultatVideo;
-
 		// obrisi polje upitnika posto je zavrsen
 		poljeUpitnika.innerHTML = '';
 
@@ -231,8 +255,10 @@ const kvizView = (function () {
 			<div class="container">
 				<div id="tvoj-rezultat">
 					<div class="row">
-						<div id="tvoj-rezultat-tekst" class="col-12 col-sm-6">
+						<div id="tvoj-rezultat-polje" class="col-12 col-sm-6">
 							<h5>TVOJ REZULTAT</h5>
+							<p id="">${rezultatTekst}</p>
+							<button id="scroll-btn" type="button" onclick="${smoothScroll()}">UCESTVUJ U IZAZOVU</button>
 						</div>
 						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
 					</div>
@@ -268,7 +294,7 @@ const kvizView = (function () {
 					<div class="row">
 						<div id="prikljuci-se-form" class="col-12">
 							<div class="form-container">
-								<span>PRIKLJUČI SE</span>
+								<p>PRIKLJUČI SE</p>
 								<form id="formular-prijava" class="flobian-form">
 									<div class="form-controller">
 										<input type="text" placeholder="Ime i prezime" id="ime_input" />
@@ -321,7 +347,7 @@ const kvizView = (function () {
 
 
 			/* return HTMLRezultat + HTMLFormular; */
-			console.log(HTMLRezultat)
+			
 			return HTMLRezultat;
 		}
 
@@ -360,10 +386,11 @@ const kvizView = (function () {
 		});
 	}
 
-
 	return {
 		prikaziPitanje,
 		prikaziRezultat,
+		smoothScroll,
+		poljeFormulara
 	}
 })();
 
