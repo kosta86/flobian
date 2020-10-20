@@ -107,18 +107,21 @@ const kviz = (function () {
 	function submitBtnHandler(postData, odgovoriZaSlanje) {
 		const imeInput = document.getElementById('ime_input');
 		const emailInput = document.getElementById('email_input');
+		const telefonInput = document.getElementById('telefon_input');
+
 
 		function checkInputs() {
-			// trim to remove the whitespaces
 			const imeValue = imeInput.value;
 			const emailValue = emailInput.value.trim();
+			const telefonValue = telefonInput.value.trim();
 
-
-
+/* 			imeValue.className = '';
+			emailValue.className = '';
+ */
 			if (imeValue === '') {
 				setErrorFor(imeInput, 'Polje ne može biti prazno');
 			} else if (!isName(imeValue)) {
-				setErrorFor(imeInput, 'Email adresa nije validna');
+				setErrorFor(imeInput, 'Ime moze sadrzati samo slova');
 			} else {
 				setSuccessFor(imeInput);
 			}
@@ -130,18 +133,26 @@ const kviz = (function () {
 			} else {
 				setSuccessFor(emailInput);
 			}
+			
+			if (telefonValue === '') {
+				setErrorFor(telefonInput, 'Polje ne može biti prazno');
+			} else if (!isTelephone(telefonValue)) {
+				setErrorFor(telefonInput, 'Proverite broj telefona koji ste uneli');
+			} else {
+				setSuccessFor(telefonInput);
+			}
 		}
 
 		function setErrorFor(input, message) {
 			const formControl = input.parentElement;
 			const small = formControl.querySelector('small');
-			formControl.className = 'form-control error';
+			formControl.className = 'form-controller error';
 			small.innerText = message;
 		}
 
 		function setSuccessFor(input) {
 			const formControl = input.parentElement;
-			formControl.className = 'form-control success';
+			formControl.className = 'form-controller success';
 		}
 
 		function isEmail(email) {
@@ -151,19 +162,16 @@ const kviz = (function () {
 		function isName(name) {
 			return /^[A-Za-z\s]+$/.test(name);
 		}
+
+		function isTelephone(telephone) {
+			return /^[- +()]*[0-9][- +()0-9]*/.test(telephone)
+		}
 		checkInputs();
-		console.log(imeInput.parentElement.classList.contains('success'));
-		console.log(emailInput.parentElement.classList.contains('success'));
 
-		/* if (event.target.id === 'postDataButton') { */
-
-		if (imeInput.parentElement.classList.contains('success') && emailInput.parentElement.classList.contains('success')) {
+		if (imeInput.parentElement.classList.contains('success') && emailInput.parentElement.classList.contains('success') && telefonInput.parentElement.classList.contains('success')) {
 			formInputToArray('formular-prijava', odgovoriZaSlanje);
 			postData(odgovoriZaSlanje);
-			console.log(odgovoriZaSlanje);
 		}
-
-		/* } */
 	}
 
 
@@ -206,61 +214,88 @@ const kvizView = (function () {
 		function prikaziSavet(ponudjeniSaveti) {
 			if (savetiZaPrikazArr.length >= 0 && savetiZaPrikazArr.length < 3) {
 				/* HTMLRezultat += "<p>" + ponudjeniSaveti['1-2'].text + "</p>" */
-				rezultatTekst = `<p>${ponudjeniSaveti['1-2'].text}</p>`;
+				rezultatTekst = `${ponudjeniSaveti['1-2'].text}`;
 			}
 
 			if (savetiZaPrikazArr.length > 2 && savetiZaPrikazArr.length < 8) {
 				/* HTMLRezultat += "<p>" + ponudjeniSaveti['3-7'].text + "</p>"; */
-				rezultatTekst = `<p>${ponudjeniSaveti['3-7'].text}</p>`;
+				rezultatTekst = `${ponudjeniSaveti['3-7'].text}`;
 			}
 
 			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr.length <= 10) {
 				/* HTMLRezultat += "<p>" + ponudjeniSaveti['8-10'].text + "</p>" */
-				rezultatTekst = `<p>${ponudjeniSaveti['8-10'].text}</p>`;
+				rezultatTekst = `${ponudjeniSaveti['8-10'].text}`;
 			}
 
-			let HTMLRezultat = `<div class="container">
-			<div class="tvoj-rezultat">
-				<div class="row">
-					<div id="tvoj-rezultat-tekst" class="col-xs-12 col-sm-6">${rezultatTekst}</div>
-					<div id="tvoj-rezultat-video" class="col-xs-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="auto" height="auto" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
-				</div>
-			</div>
-			<div class="saznaj-vise">
-				<div class="row">
-					<div id="saznaj-vise-ikonice" class="col-xs-12"></div>
-				</div>
-			</div>
-			<div class="izazov">
-				<div class="row">
-					<div id="izazov-tekst" class="col-xs-12 col-sm-6"></div>
-					<div id="izazov-slika" class="col-xs-12 col-sm-6"></div>
-				</div>
-			</div>
-			<div class="prikljuci-se">
-				<div id="prikljuci-se-form" class="col-xs-12">
-					<div class="form-container">
-						<form id="formular-prijava" class="form">
-					<div class="form-controller">
-						<label for="username">Username</label>
-						<input type="text" placeholder="florinpop17" id="ime_input" />
-						<i class="fas fa-check-circle"></i>
-						<i class="fas fa-exclamation-circle"></i>
-						<small>Error message</small>
+			let HTMLRezultat = `
+			<div class="container">
+				<div id="tvoj-rezultat">
+					<div class="row">
+						<div id="tvoj-rezultat-tekst" class="col-12 col-sm-6">
+							<h5>TVOJ REZULTAT</h5>
+						</div>
+						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
 					</div>
-					<div class="form-controller">
-						<label for="username">Email</label>
-						<input type="email" placeholder="a@florin-pop.com" id="email_input" />
-						<i class="fas fa-check-circle"></i>
-						<i class="fas fa-exclamation-circle"></i>
-						<small>Error message</small>
+				
+				<div id="saznaj-vise">
+					<h5>Saznaj više</h5>
+					<div class="row pl-2 pr-2">
+						<div class="col-3 p-1 saznaj-vise-ikonice">
+							<img id="saznaj-vise-1" src="img/gasovi.jpg" alt="Girl in a jacket ">
+						</div>
+						<div class="col-3 p-1 saznaj-vise-ikonice">
+							<img id="saznaj-vise-2" src="img/grcevi.jpg" alt="Girl in a jacket ">
+						</div>
+						<div class="col-3 p-1 saznaj-vise-ikonice">
+							<img id="saznaj-vise-3" src="img/nadutost.jpg" alt="Girl in a jacket ">
+						</div>
+						<div class="col-3 p-1 saznaj-vise-ikonice">
+							<img id="saznaj-vise-4" src="img/tezina.jpg" alt="Girl in a jacket ">
+						</div>
 					</div>
-					<button id="postDataButton">Submit</button>
-				</form>
 				</div>
+				<div id="izazov">
+					<div class="row">
+						<div id="izazov-tekst" class="col-12 col-sm-6">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in vestibulum risus. Mauris quis pretium dui. Maecenas sagittis tortor nec sapien maximus, at facilisis justo finibus. Sed laoreet varius erat, sed fringilla nisl tristique quis. Morbi eget pulvinar augue. Vivamus at massa at quam aliquet dapibus. Praesent vel augue cursus, suscipit mi in, tempor dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque tincidunt ligula sed urna ornare, ac laoreet justo aliquam. </p>
+						</div>
+						<div id="izazov-slika" class="col-12 col-sm-6">
+							<img src="img/tezina.jpg" alt="tezina">
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>`;
+				<div id="prikljuci-se">
+					<div class="row">
+						<div id="prikljuci-se-form" class="col-12">
+							<div class="form-container">
+								<span>PRIKLJUČI SE</span>
+								<form id="formular-prijava" class="flobian-form">
+									<div class="form-controller">
+										<input type="text" placeholder="Ime i prezime" id="ime_input" />
+										<i class="fas fa-check-circle"></i>
+										<i class="fas fa-exclamation-circle"></i>
+										<small>Error message</small>
+									</div>
+									<div class="form-controller">
+										<input type="text" placeholder="E-mail" id="email_input" />
+										<i class="fas fa-check-circle"></i>
+										<i class="fas fa-exclamation-circle"></i>
+										<small>Error message</small>
+									</div>
+									<div class="form-controller">
+										<input type="text" placeholder="Broj telefona" id="telefon_input" />
+										<i class="fas fa-check-circle"></i>
+										<i class="fas fa-exclamation-circle"></i>
+										<small>Error message</small>
+									</div>
+									<button id="postDataButton">PRIJAVI SE</button>
+								</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>`;
 
 
 

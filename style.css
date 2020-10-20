@@ -1,9 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
+@font-face {
+  font-family: "Segoe UI";
+  src: local("Segoe UI"),
+    url("http://db.onlinewebfonts.com/t/623c7118249e082fe87a78e08506cb4b.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */
+    url("http://db.onlinewebfonts.com/t/623c7118249e082fe87a78e08506cb4b.woff2") format("woff2"),
+    /* chrome firefox */
+    url("http://db.onlinewebfonts.com/t/623c7118249e082fe87a78e08506cb4b.woff") format("woff"),
+    /* chrome firefox */
+    url("http://db.onlinewebfonts.com/t/623c7118249e082fe87a78e08506cb4b.ttf") format("truetype"),
+    /* chrome firefox opera Safari, Android, iOS 4.2+*/
+    url("http://db.onlinewebfonts.com/t/623c7118249e082fe87a78e08506cb4b.svg#Segoe UI") format("svg");
+  /* iOS 4.1- */
+}
+
 
 body {
   background-color: #fafafa;
-  font-family: Roboto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
   padding: 0px;
   -webkit-box-sizing: content-box !important;
@@ -114,12 +129,31 @@ body {
   width: 100vw;
 }
 
+.saznaj-vise-ikonice,
+#izazov-slika {
+  grid-area: photo;
+}
+
+#izazov {
+  background-color: #D1F0DE;
+}
+
+#izazov-slika {
+  padding: 8em;
+}
+
+.saznaj-vise-ikonice img, #izazov-slika img {
+  object-fit: cover;
+  width: 100%;
+  max-width: 100%;
+}
+
 #progress-container {
   height: 0;
   text-align: center;
 }
 
-#progress-container span{
+#progress-container span {
   position: absolute;
   left: 82vw;
   top: 3vh;
@@ -190,7 +224,8 @@ body {
   border: rgba(1, 1, 1, 0) solid;
 }
 
-.card-odgovori button:hover, .card-odgovori button:active {
+.card-odgovori button:hover,
+.card-odgovori button:active {
   background-color: #047235;
 }
 
@@ -208,6 +243,13 @@ body {
   overflow: hidden;
   width: 100vw;
   max-width: 100%;
+  padding: 2em;
+  text-align: center;
+}
+.form-container span {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #047235;
 }
 
 .header {
@@ -220,29 +262,36 @@ body {
   margin: 0;
 }
 
-.form {
-  padding: 30px 40px;
+.flobian-form {
+  padding: 30px 20px;
+  text-align: center;
+  text-align: -webkit-center;
+  text-align: -moz-center;
+  text-align: -o-center;
+  text-align: -ms-center;
 }
 
 .form-controller {
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   padding-bottom: 20px;
   position: relative;
 }
 
-.form-controller label {
+/* .form-controller label {
   display: inline-block;
   margin-bottom: 20px;
-}
+} */
 
 .form-controller input {
-  border: 2px solid #f0f0f0;
-  border-radius: 4px;
+  border: 0px solid #f0f0f0;
+  border-radius: 30px;
   display: block;
+  text-align: center;
   font-family: inherit;
-  font-size: 14px;
-  padding: 20px;
+  font-size: 1em;
+  padding: 0.6em;
   width: 100%;
+  background-color: #E9E5E4;
 }
 
 .form-controller input:focus {
@@ -261,7 +310,7 @@ body {
 .form-controller i {
   visibility: hidden;
   position: absolute;
-  top: 40px;
+  top: 9px;
   right: 10px;
 }
 
@@ -278,8 +327,8 @@ body {
 .form-controller small {
   color: #e74c3c;
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 4px;
+  left: 10px;
   visibility: hidden;
 }
 
@@ -287,15 +336,16 @@ body {
   visibility: visible;
 }
 
-.form button {
-  background-color: #8e44ad;
-  border: 2px solid #8e44ad;
-  border-radius: 4px;
+.flobian-form button {
+  background-color: #047235;
+  border: 0px solid;
+  border-radius: 30px;
   color: #fff;
   display: block;
-  font-family: inherit;
-  font-size: 16px;
-  padding: 10px;
+  font-family: roboto;
+  font-weight: bold;
+  font-size: 1em;
+  padding: 0.8em;
   margin-top: 20px;
-  width: 100%;
+  width: 12em;
 }

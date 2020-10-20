@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost';
-$dbname = 'flobiandb';
+$dbname = 'flobian_db';
 $charset = 'utf8mb4';
 
 $username = 'kosta86';
