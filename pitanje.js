@@ -196,6 +196,10 @@ const kvizView = (function () {
 	let rezultatTekst = '';
 	let rezultatVideo;
 
+	 let scrolldiv = function() {  
+		poljeFormulara.scrollIntoView(); 
+	} 
+
 	/* function smoothScroll(target) {
 		var scrollContainer = target;
 		
@@ -255,16 +259,16 @@ const kvizView = (function () {
 			<div class="container">
 				<div id="tvoj-rezultat">
 					<div class="row">
-						<div id="tvoj-rezultat-polje" class="col-12 col-sm-6">
+						<div id="tvoj-rezultat-polje" class="col-12 col-sm-6 py-3">
 							<h5>TVOJ REZULTAT</h5>
-							<p id="">${rezultatTekst}</p>
-							<button id="scroll-btn" type="button" onclick="${smoothScroll()}">UCESTVUJ U IZAZOVU</button>
+							<p>${rezultatTekst}</p>
+							<button id="scroll-btn" type="button" onclick="">UCESTVUJ U IZAZOVU</button>
 						</div>
 						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
 					</div>
 				
-				<div id="saznaj-vise">
-					<h5>Saznaj više</h5>
+				<div id="saznaj-vise" class="mt-1 mt-md-0 pb-3">
+					<h3 class="my-3">Saznaj više</h3>
 					<div class="row pl-2 pr-2">
 						<div class="col-3 p-1 saznaj-vise-ikonice">
 							<img id="saznaj-vise-1" src="img/gasovi.jpg" alt="Girl in a jacket ">
@@ -282,7 +286,7 @@ const kvizView = (function () {
 				</div>
 				<div id="izazov">
 					<div class="row">
-						<div id="izazov-tekst" class="col-12 col-sm-6">
+						<div id="izazov-tekst" class="col-12 col-sm-6 py-5">
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in vestibulum risus. Mauris quis pretium dui. Maecenas sagittis tortor nec sapien maximus, at facilisis justo finibus. Sed laoreet varius erat, sed fringilla nisl tristique quis. Morbi eget pulvinar augue. Vivamus at massa at quam aliquet dapibus. Praesent vel augue cursus, suscipit mi in, tempor dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque tincidunt ligula sed urna ornare, ac laoreet justo aliquam. </p>
 						</div>
 						<div id="izazov-slika" class="col-12 col-sm-6">
@@ -357,6 +361,7 @@ const kvizView = (function () {
 
 	}
 
+
 	function prikaziPitanje(upitnik) {
 		let poljeSlike = document.querySelector('.card-slika');
 		let poljeTekstPitanja = document.querySelector('.card-pitanje');
@@ -386,11 +391,13 @@ const kvizView = (function () {
 		});
 	}
 
+	
+
 	return {
 		prikaziPitanje,
 		prikaziRezultat,
-		smoothScroll,
-		poljeFormulara
+		poljeFormulara,
+		scrolldiv
 	}
 })();
 

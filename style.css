@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
+
 @font-face {
   font-family: "Segoe UI";
   src: local("Segoe UI"),
@@ -138,9 +139,43 @@ body {
   color: #222222;
 }
 
+#tvoj-rezultat-polje button {
+  background-color: #047235;
+  border: 0px solid;
+  border-radius: 30px;
+  color: #fff;
+  display: block;
+  font-family: roboto;
+  font-weight: bold;
+  font-size: 0.8em;
+  padding: 0.8em;
+  margin-top: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 13em;
+}
+
+#tvoj-rezultat-video iframe {
+  border: 0px solid;
+  border-radius: 10px;
+}
+
+#saznaj-vise h3 {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: #707070;
+}
+
 .saznaj-vise-ikonice,
 #izazov-slika {
   grid-area: photo;
+}
+
+.saznaj-vise-ikonice img,
+#izazov-slika img {
+  object-fit: cover;
+  width: 100%;
+  max-width: 100%;
 }
 
 #izazov {
@@ -155,11 +190,7 @@ body {
   padding: 8em;
 }
 
-.saznaj-vise-ikonice img, #izazov-slika img {
-  object-fit: cover;
-  width: 100%;
-  max-width: 100%;
-}
+
 
 #progress-container {
   height: 0;
