@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
 
+@viewport {
+  width: device-width ;
+  zoom: 1.0 ;
+} 
+
 @font-face {
   font-family: "Segoe UI";
   src: local("Segoe UI"),
@@ -132,27 +137,30 @@ body {
 
 /* DESKTOP VERZIJA */
 .mob-container {
-  max-height: 100%;
-  height: 100%;
-  position: absolute;
+  width: 100vw;
 }
 
 #upitnik {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
+  /* height: 100%;
+  width: 100%; */
+}
+
+.card-wrapper {
+  height: calc(100vh - 80px);
+  width: 100vw;
 }
 
 #rezultat-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
 }
 
 #tvoj-rezultat-polje h2 {
-  font-family: 'Segoe UI Bold', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI Bold', Segoe UI, Geneva, Verdana, sans-serif;
   color: #047235;
   font-size: 1.2em;
   /* font-weight: 900; */
@@ -260,24 +268,22 @@ body {
   color: #047235;
 }
 
-
-
 #progress-container {
   height: 0;
-  text-align: center;
+  text-align: right;
 }
 
 #progress-container span {
   position: absolute;
-  left: 82vw;
-  top: 3vh;
+  left: -4%;
+  top: 3%;
   color: #585858;
   font-family: Arial;
   letter-spacing: 1px;
   font-size: 1.3em;
   font-weight: 501;
   text-align: right;
-  width: 50px;
+  width: 100vw;
 
 }
 
@@ -295,11 +301,7 @@ body {
   /* font-weight: bold; */
 }
 
-.card-wrapper {
-  /* position: relative; */
-  height: 100%;
-  width: 100%;
-}
+
 
 /* stari style */
 /* .card-slika {
@@ -340,6 +342,10 @@ body {
   color: #fafafa;
   border-radius: 18px;
   border: rgba(1, 1, 1, 0) solid;
+}
+
+.card-odgovori button:first-child {
+  margin-bottom: 0.2em!important;
 }
 
 .card-odgovori button:hover,
