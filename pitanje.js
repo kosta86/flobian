@@ -259,46 +259,52 @@ const kvizView = (function () {
 			<div class="container">
 				<div id="tvoj-rezultat">
 					<div class="row">
-						<div id="tvoj-rezultat-polje" class="col-12 col-sm-6 py-3">
-							<h5>TVOJ REZULTAT</h5>
+						<div id="tvoj-rezultat-polje" class="col-12 col-sm-6 py-3 px-4">
+							<h2 class="mb-3">TVOJ REZULTAT</h2>
 							<p>${rezultatTekst}</p>
 							<button id="scroll-btn" type="button" onclick="">UCESTVUJ U IZAZOVU</button>
 						</div>
-						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
+						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="220px" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
 					</div>
 				
 				<div id="saznaj-vise" class="mt-1 mt-md-0 pb-3">
 					<h3 class="my-3">Saznaj više</h3>
-					<div class="row pl-2 pr-2">
-						<div class="col-3 p-1 saznaj-vise-ikonice">
-							<img id="saznaj-vise-1" src="img/gasovi.jpg" alt="Girl in a jacket ">
+					<div class="row px-2">
+						<div class="col-3 saznaj-vise-ikonice">
+							<img id="saznaj-vise-1" src="img/gasovi.jpg" alt="ikonica gasovi">
 						</div>
-						<div class="col-3 p-1 saznaj-vise-ikonice">
-							<img id="saznaj-vise-2" src="img/grcevi.jpg" alt="Girl in a jacket ">
+						<div class="col-3 saznaj-vise-ikonice">
+							<img id="saznaj-vise-2" src="img/grcevi.jpg" alt="ikonica grcevi">
 						</div>
-						<div class="col-3 p-1 saznaj-vise-ikonice">
-							<img id="saznaj-vise-3" src="img/nadutost.jpg" alt="Girl in a jacket ">
+						<div class="col-3 saznaj-vise-ikonice">
+							<img id="saznaj-vise-3" src="img/nadutost.jpg" alt="ikonica nadutost">
 						</div>
-						<div class="col-3 p-1 saznaj-vise-ikonice">
-							<img id="saznaj-vise-4" src="img/tezina.jpg" alt="Girl in a jacket ">
+						<div class="col-3 saznaj-vise-ikonice">
+							<img id="saznaj-vise-4" src="img/tezina.jpg" alt="ikonica tezina">
 						</div>
 					</div>
 				</div>
 				<div id="izazov">
 					<div class="row">
-						<div id="izazov-tekst" class="col-12 col-sm-6 py-5">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in vestibulum risus. Mauris quis pretium dui. Maecenas sagittis tortor nec sapien maximus, at facilisis justo finibus. Sed laoreet varius erat, sed fringilla nisl tristique quis. Morbi eget pulvinar augue. Vivamus at massa at quam aliquet dapibus. Praesent vel augue cursus, suscipit mi in, tempor dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque tincidunt ligula sed urna ornare, ac laoreet justo aliquam. </p>
+						<div id="izazov-tekst" class="col-12 col-sm-6 py-4 py-md-5 px-4">
+							<h1 class="mb-3">UČESTVUJ U IZAZOVU</h1>
+							<p>Priključi se <span>FLOBIAN izazovu</span>, poruči kutiju, isprati sve instrukcije i za <span>40 DANA</span> tvoji rezultati su tu. U sklopu izazova dobijaš:</p>
+							<ul>
+								<li>KONSULTACIJE SA STRUČNJAKOM</li>
+								<li>TOKOM TERAPIJE 33% GRATIS</li>
+								<li>GARANCIJA ILI VRAĆAMO NOVAC</li>
+							</ul>
 						</div>
-						<div id="izazov-slika" class="col-12 col-sm-6">
+						<div id="izazov-slika" class="col-12 col-sm-6 pb-5">
 							<img src="img/tezina.jpg" alt="tezina">
 						</div>
 					</div>
 				</div>
-				<div id="prikljuci-se">
+				<div id="prikljuci-se" class="py-3">
 					<div class="row">
-						<div id="prikljuci-se-form" class="col-12">
+						<div id="prikljuci-se-form" class="col-12 px-5">
 							<div class="form-container">
-								<p>PRIKLJUČI SE</p>
+								<h2>PRIKLJUČI SE</h2>
 								<form id="formular-prijava" class="flobian-form">
 									<div class="form-controller">
 										<input type="text" placeholder="Ime i prezime" id="ime_input" />
