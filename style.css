@@ -134,14 +134,14 @@ body {
 .mob-container {
   max-height: 100%;
   height: 100%;
-  overflow: hidden;
+  position: absolute;
 }
 
 #upitnik {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 #rezultat-wrapper {
@@ -283,8 +283,8 @@ body {
 
 
 .card-pitanje {
-  height: 3.1em;
-  margin: 1em 1em 1em 1em;
+  height: 10%;
+  margin: 0em 1em;
   text-align: center;
 }
 
@@ -296,7 +296,8 @@ body {
 }
 
 .card-wrapper {
-  position: relative;
+  /* position: relative; */
+  height: 100%;
   width: 100%;
 }
 
@@ -308,7 +309,7 @@ body {
 } */
 
 .card-slika {
-  height: 27em;
+  height: 65%;
   display: block;
   margin: 0.5em 0.5em 0 0.5em;
   border: 0px solid;
@@ -325,9 +326,9 @@ body {
 .card-odgovori {
   font-family: 'Segoe UI Bold', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
-  height: 8.1em;
+  height: 20%;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0em 1.5em;
 }
 
