@@ -148,7 +148,7 @@ body {
 }
 
 .card-wrapper {
-  height: calc(100vh - 80px);
+  height: calc(100vh - 20vw);
   width: 100vw;
 }
 
@@ -269,28 +269,29 @@ body {
 }
 
 #progress-container {
-  height: 0;
+  overflow: hidden;
+  height: 1px;
   text-align: right;
 }
 
 #progress-container span {
   position: absolute;
-  left: -4%;
-  top: 3%;
+  left: -6%;
+  top: 18%;
   color: #585858;
   font-family: Arial;
   letter-spacing: 1px;
   font-size: 1.3em;
   font-weight: 501;
   text-align: right;
-  width: 100vw;
+  width: 100%;
 
 }
 
 
 .card-pitanje {
   height: 10%;
-  margin: 0em 1em;
+  margin: 0em 1em 0.8em 1em;
   text-align: center;
 }
 

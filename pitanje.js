@@ -376,9 +376,12 @@ const kvizView = (function () {
 
 		// progress span
 		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;
-
+		
 		// popuni sliku pitanja
-		poljeSlike.innerHTML = `<img src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`
+		if (poljeSlike.children.length > 1) {
+			poljeSlike.removeChild(poljeSlike.children[1]);
+		};
+		poljeSlike.insertAdjacentHTML('beforeend',`<img src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`) ;
 
 		// popuni tekst pitanja
 		poljeTekstPitanja.innerHTML = `<p>${upitnik.getPitanje().tekst}</p>`;
