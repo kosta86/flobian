@@ -269,23 +269,19 @@ body {
 }
 
 #progress-container {
-  overflow: hidden;
-  height: 1px;
-  text-align: right;
+  height: 0;
+  text-align: center;
 }
 
 #progress-container span {
   position: absolute;
-  left: -6%;
-  top: 18%;
-  color: #585858;
-  font-family: Arial;
-  letter-spacing: 1px;
-  font-size: 1.3em;
-  font-weight: 501;
+  left: 80%!important;
+  top: 20%!important;
+  color: #707070;
+  font-size: 1.1em;
+  font-weight: bold;
   text-align: right;
-  width: 100%;
-
+  width: 50px;
 }
 
 
@@ -352,6 +348,7 @@ body {
 .card-odgovori button:hover,
 .card-odgovori button:active {
   background-color: #047235;
+  -webkit-tap-highlight-color: #047235;
 }
 
 

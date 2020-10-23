@@ -262,7 +262,7 @@ const kvizView = (function () {
 						<div id="tvoj-rezultat-polje" class="col-12 col-sm-6 py-3 px-4">
 							<h2 class="mb-3">TVOJ REZULTAT</h2>
 							<p>${rezultatTekst}</p>
-							<button id="scroll-btn" type="button" onclick="">UCESTVUJ U IZAZOVU</button>
+							<button id="scroll-btn" type="button" onclick="${$(window).scrollTo(document.getElementById('prikljuci-se-form'),0,[])}">UCESTVUJ U IZAZOVU</button>
 						</div>
 						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="220px" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
 					</div>
@@ -378,10 +378,10 @@ const kvizView = (function () {
 		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;
 		
 		// popuni sliku pitanja
-		if (poljeSlike.children.length > 1) {
+		/* if (poljeSlike.children.length > 1) {
 			poljeSlike.removeChild(poljeSlike.children[1]);
-		};
-		poljeSlike.insertAdjacentHTML('beforeend',`<img src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`) ;
+		}; */
+		poljeSlike.innerHTML = `<img src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`;
 
 		// popuni tekst pitanja
 		poljeTekstPitanja.innerHTML = `<p>${upitnik.getPitanje().tekst}</p>`;
