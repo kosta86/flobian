@@ -148,7 +148,8 @@ body {
 }
 
 .card-wrapper {
-  height: calc(100vh - 20vw);
+  position: relative;
+  height: calc(100vh - 40vw);
   width: 100vw;
 }
 
@@ -275,8 +276,8 @@ body {
 
 #progress-container span {
   position: absolute;
-  left: 80%!important;
-  top: 20%!important;
+  left: 80%;
+  top: 7%;
   color: #707070;
   font-size: 1.1em;
   font-weight: bold;
