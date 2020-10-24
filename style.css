@@ -143,13 +143,14 @@ body {
 #upitnik {
   display: flex;
   flex-direction: column;
+  align-items: center;
   /* height: 100%;
   width: 100%; */
 }
 
 .card-wrapper {
   position: relative;
-  height: calc(100vh - 40vw);
+  height: calc(100vh - 40vw); /* // za varijantu rotiranog mobilnog disablovati */
   width: 100vw;
 }
 
