@@ -264,7 +264,7 @@ const kvizView = (function () {
 							<p>${rezultatTekst}</p>
 							<button id="scroll-btn" type="button">UCESTVUJ U IZAZOVU</button>
 						</div>
-						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
+						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: auto;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
 					</div>
 				
 				<div id="saznaj-vise" class="mt-1 mt-md-0 pb-3">
@@ -300,11 +300,11 @@ const kvizView = (function () {
 						</div>
 					</div>
 				</div>
-				<div id="prikljuci-se" class="py-3">
+				<div id="prikljuci-se" class="py-5">
 					<div class="row">
 						<div id="prikljuci-se-form" class="col-12 px-5">
 							<div class="form-container">
-								<h2>PRIKLJUČI SE</h2>
+								<h2 class="mb-md-5">PRIKLJUČI SE</h2>
 								<form id="formular-prijava" class="flobian-form">
 									<div class="form-controller">
 										<input type="text" placeholder="Ime i prezime" id="ime_input" />
@@ -324,7 +324,7 @@ const kvizView = (function () {
 										<i class="fas fa-exclamation-circle"></i>
 										<small>Error message</small>
 									</div>
-									<button id="postDataButton">PRIJAVI SE</button>
+									<button id="postDataButton" class="mt-md-3">PRIJAVI SE</button>
 								</form>
 								</div>
 							</div>
