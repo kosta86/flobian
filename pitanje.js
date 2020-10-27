@@ -375,9 +375,12 @@ const kvizView = (function () {
 		let poljeTekstPitanja = document.querySelector('.card-pitanje');
 		let poljeOdgovora = document.querySelector('.card-odgovori');
 		let progressContainer = document.getElementById('progress-container');
+		let poljeUpitnika = document.getElementById('upitnik');
 
 		// progress span
 		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;
+
+		poljeUpitnika.style.backgroundImage = `url("img/desk/desk_${upitnik.RBPitanja + 1}.jpg")`;
 		
 		// popuni sliku pitanja
 		/* if (poljeSlike.children.length > 1) {
@@ -458,7 +461,7 @@ const kvizController = (function () {
 	}
 
 	// event handlers
-	poljeOdgovora.addEventListener('click', handleAnswerKlik); // hendler za klik na odogovor
+	poljeOdgovora.addEventListener('click', handleAnswerKlik); // hendler za klik na odgovor
 	/* poslednjiKorak.addEventListener('click', function() {
 		event.preventDefault();
 		submitBtnHandler.bind(this, postData, kviz.odgovori)
