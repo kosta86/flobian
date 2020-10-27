@@ -188,6 +188,7 @@ const kviz = (function () {
 
 
 const kvizView = (function () {
+	let mobContainer = document.querySelector('.mob-container')
 	let rezultatWrapper = document.getElementById('rezultat-wrapper');
 	let tekstRezultata = document.getElementById('tvoj-rezultat-polje');
 	let poljeFormulara = document.getElementById('prikljuci-se-form');
@@ -300,7 +301,7 @@ const kvizView = (function () {
 						</div>
 					</div>
 				</div>
-				<div id="prikljuci-se" class="py-5">
+				<div id="prikljuci-se" class="py-md-5">
 					<div class="row">
 						<div id="prikljuci-se-form" class="col-12 px-5">
 							<div class="form-container">
@@ -362,6 +363,7 @@ const kvizView = (function () {
 		}
 
 		poljeUpitnika.style = "display: none";
+		mobContainer.style = "display: none";
 		rezultatWrapper.style = "display: block";
 		rezultatWrapper.innerHTML = prikaziSavet(ponudjeniSaveti);
 
