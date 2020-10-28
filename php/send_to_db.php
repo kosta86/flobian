@@ -88,6 +88,9 @@ try {
     $statement->bindParam(':ime', $recived_array[11]['inputValue'], PDO::PARAM_STR);
 
     $statement->execute();
+
 } catch (PDOException $e) {
+
     echo "Error: " . $e->getMessage();
+    
 }

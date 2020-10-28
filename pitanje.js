@@ -49,6 +49,7 @@ const kviz = (function () {
 	function Upitnik(pitanja) {
 		this.pitanja = pitanja;
 		this.RBPitanja = 0;
+		this.brojDaOdgovora = 0;
 	};
 
 	Upitnik.prototype.getPitanje = function () {
@@ -65,12 +66,12 @@ const kviz = (function () {
 		this.link = link;
 	};
 
-	function postData(odgovoriZaSlanje) {
+	function postData(odgovoriZaSlanje, linkKaFajlu) {
 		var JSONAnswers = JSON.stringify(odgovoriZaSlanje);
 		/* event.preventDefault(); */
 
 		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "./php/user_input.php", true);
+		xhr.open("POST", linkKaFajlu, true);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 
 		xhr.onreadystatechange = function () {
@@ -80,7 +81,17 @@ const kviz = (function () {
 			}
 		}
 		xhr.send(JSONAnswers);
+	}
 
+	function brojPozitivnihOdogovora(userOdgovori) {
+		let pozitivniOdgovori = 0;
+		// iteracija odgovora korisnika i popunjavanje array-a pozitivnim odgovorima
+		for (const obj of userOdgovori) {
+			if (obj.odgovor === "DA") {
+				pozitivniOdgovori++;
+			}
+		}
+		return pozitivniOdgovori;
 	}
 
 	function formInputToArray(formId, array) {
@@ -91,18 +102,16 @@ const kviz = (function () {
 			this.inputValue = inputValue
 		}
 
-		let mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
-
 		for (let i = 0; i < form.elements.length; i++) {
 
 			if (form.elements[i].value !== null || form.elements[i].value !== '') {
-				console.log(form.elements['email_input'].value);
 				array.push(new Input(form.elements[i].id, form.elements[i].value));
 			}
 		}
 
-
+		array.push({brojPozitivnihOdgovora: brojPozitivnihOdogovora(kviz.odgovori)})
 	}
+
 
 	function submitBtnHandler(postData, odgovoriZaSlanje) {
 		const imeInput = document.getElementById('ime_input');
@@ -170,7 +179,8 @@ const kviz = (function () {
 
 		if (imeInput.parentElement.classList.contains('success') && emailInput.parentElement.classList.contains('success') && telefonInput.parentElement.classList.contains('success')) {
 			formInputToArray('formular-prijava', odgovoriZaSlanje);
-			postData(odgovoriZaSlanje);
+			postData(odgovoriZaSlanje, 'php/send_mail.php');
+			postData(odgovoriZaSlanje, 'php/send_to_db.php');
 		}
 	}
 
@@ -236,8 +246,6 @@ const kvizView = (function () {
 				savetiZaPrikazArr.push(obj.qId);
 			}
 		}
-
-		let uniqueSavetiZaPrikazArr = [... new Set(savetiZaPrikazArr)];
 
 		// prikazi savet za taj problem 
 		function prikaziSavet(ponudjeniSaveti) {
@@ -434,7 +442,6 @@ const kvizController = (function () {
 
 	// premestiti u view
 	function handleAnswerKlik() {
-		console.log(upitnik.getPitanje().qId)
 		const isAnswerButton = event.target.dataset.button === 'odgovor';
 		const kliknutiOdgovor = event.target.dataset.odgovor;
 
@@ -462,11 +469,8 @@ const kvizController = (function () {
 
 	// event handlers
 	poljeOdgovora.addEventListener('click', handleAnswerKlik); // hendler za klik na odgovor
-	/* poslednjiKorak.addEventListener('click', function() {
-		event.preventDefault();
-		submitBtnHandler.bind(this, postData, kviz.odgovori)
-	}); // hendler za klik na dugme za submit */
-	poslednjiKorak.addEventListener('submit', event => {
+
+	poslednjiKorak.addEventListener('submit', event => {       // hendler za klik na dugme za submit */
 		event.preventDefault();
 		submitBtnHandler(postData, kviz.odgovori);
 	})
