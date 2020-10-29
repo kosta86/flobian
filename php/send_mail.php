@@ -14,8 +14,6 @@ $requestPayload = file_get_contents("php://input");
 $recived_array = json_decode($requestPayload, true);
 
 
-echo($recived_array[11]['inputValue']);
-
 
 /* if (isset($_POST) && !empty($_POST)) {
 
@@ -68,10 +66,10 @@ $mail = setup_phpmailer();
 
 function send_subscription_mail($mail, $recived_array)
 {
-  $user_ime = $recived_array[11]['inputValue'];
-  $user_email = $recived_array[10]['inputValue'];
+  $user_email = $recived_array[11]['inputValue'];
+  $user_ime = $recived_array[10]['inputValue'];
   $user_telefon = $recived_array[12]['inputValue'];
-  $broj_pozitivnih_odgovora = $recived_array[14]['inputValue'];
+  $broj_pozitivnih_odgovora = $recived_array[14]['brojPozitivnihOdgovora'];
 
 
   function send_mail_plan_to_subscribers($user_ime, $user_email, $user_telefon, $broj_pozitivnih_odgovora, $mail)
@@ -94,7 +92,7 @@ function send_subscription_mail($mail, $recived_array)
                               </div>
                               <div>
                                 <strong><p>Telefon</p></strong>
-                                <p>".$user_telefon."</p>
+                                <p>"."$user_telefon"."</p>
                               </div>
                               <div>
                                 <strong><p>Br. 'DA' odgovora</p></strong>

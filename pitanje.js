@@ -385,11 +385,13 @@ const kvizView = (function () {
 		let progressContainer = document.getElementById('progress-container');
 		let poljeUpitnika = document.getElementById('upitnik');
 
+
+		// promeni sliku pitanja (samo desk verzije)
+		/* poljeUpitnika.style.backgroundImage = `url("img/desk/desk_${upitnik.RBPitanja + 1}.jpg")`; */
+
 		// progress span
 		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;
 
-		poljeUpitnika.style.backgroundImage = `url("img/desk/desk_${upitnik.RBPitanja + 1}.jpg")`;
-		
 		// popuni sliku pitanja
 		/* if (poljeSlike.children.length > 1) {
 			poljeSlike.removeChild(poljeSlike.children[1]);
