@@ -304,14 +304,17 @@ const kvizView = (function () {
 								<li>GARANCIJA ILI VRAĆAMO NOVAC</li>
 							</ul>
 						</div>
-						<div id="izazov-slika" class="col-12 col-sm-6 pb-5">
-							<img src="img/tezina.jpg" alt="tezina">
+						<div id="izazov-slika" class="col-12 col-sm-6 py-4 py-md-5 px-4">
+							<img src="img/flobian-kutije.png" alt="tezina">
+						</div>
+						<div id="dalje" class="col-12 pt-4 pb-2 px-4">
+							<img src="img/strelice-dole.png" alt="tezina">
 						</div>
 					</div>
 				</div>
 				<div id="prikljuci-se" class="py-md-5">
 					<div class="row">
-						<div id="prikljuci-se-form" class="col-12 px-5">
+						<div id="prikljuci-se-form" class="col-12 px-5 py-3">
 							<div class="form-container">
 								<h2 class="mb-md-5">PRIKLJUČI SE</h2>
 								<form id="formular-prijava" class="flobian-form">
