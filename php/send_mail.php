@@ -86,6 +86,7 @@ function send_subscription_mail($mail, $recived_array)
                                 <strong><p>Ime</p></strong>
                                 <p>". $user_ime."</p>
                               </div>
+                              </ br style='border: 1px solid black'>
                               <div>
                                 <strong><p>E-mail</p></strong>
                                 <p>".$user_email."</p>

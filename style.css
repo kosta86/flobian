@@ -262,7 +262,7 @@ html {
   }
 
   #izazov-tekst ul li {
-    margin-bottom: 1em;
+    margin-bottom: 0.8em;
   }
 
   #izazov .row {
@@ -826,7 +826,7 @@ html {
   .card-odgovori button {
     display: block;
     height: 2.5em;
-    width: 10em;
+    width: 80%;
     background-color: #707070;
     font-size: 1em;
     font-weight: bold;
@@ -838,7 +838,7 @@ html {
   }
 
   .card-odgovori button:first-child {
-    margin-bottom: 0.2em !important;
+    margin-bottom: 0.4em !important;
     outline: none;
   }
 
@@ -1242,7 +1242,7 @@ html {
   @media (min-width: 900px) and (orientation: landscape) {
 
     .card-pitanje {
-      height: 26vh;
+      min-height: 26vh;
       padding: 0;
     }
 
@@ -1292,8 +1292,78 @@ html {
       color: #868686;
     }
 
+    .card-pitanje p {
+      font-size: 1.75em;
+    }
 
+    .card-odgovori button {
+      font-size: 1.5em !important;
+      height: 2.5em;
+      width: 80%;
+    }
 
+    .card-odgovori button:first-child {
+      margin-bottom: 0.4em !important;
+    }
+    
+    #prikljuci-se-form {
+      padding: 3em 20em !important;
+    }
+
+    .saznaj-vise-ikonice {
+      padding: .4rem !important;
+    }
+
+    #prikljuci-se-form {
+      padding: 3em 11em !important;
+    }
+
+    .form-controller input {
+      font-size: 1.3em;
+    }
+
+    .flobian-form button {
+      font-size: 1.3em;
+      width: 50%;
+      padding: 0.8em;
+    }
+
+    .form-controller small {
+      width: 100%;
+      text-align: right;
+      padding-right: 3%;
+    }
+
+    #tvoj-rezultat-video {
+      align-self: center;
+    }
+
+    #tvoj-rezultat-polje h2 {
+      font-size: 2.4em;
+    } 
+
+    #prikljuci-se-form {
+      padding: 0em 11em !important;
+    }
+
+    .form-container h2 {
+      padding-bottom: 1em;
+    }
+
+  }
+
+  /* laptops landcape ***********************************************************************************************************/
+  /* @media (min-width: 1300px) and (orientation: landscape) {
+
+    #progress-container {
+      margin-bottom: 5em;
+    }
+
+    #progress-container span {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #868686;
+    }
 
     .card-pitanje p {
       font-size: 1.8em;
@@ -1350,8 +1420,7 @@ html {
    
     
 
-  }
-
+  } */
 
 }
 
