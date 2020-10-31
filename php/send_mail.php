@@ -7,7 +7,7 @@ include_once('send_mail.php');
 include_once('db-conn.php');
 // Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
-
+var_dump(dirname(__DIR__));
 
 
 $requestPayload = file_get_contents("php://input");
@@ -37,6 +37,8 @@ function setup_phpmailer()
 
   // Instantiation and passing `true` enables exceptions
   $mail = new PHPMailer(true);
+
+  
   
   //Server settings
   $mail->SMTPOptions = array(
@@ -66,10 +68,10 @@ $mail = setup_phpmailer();
 
 function send_subscription_mail($mail, $recived_array)
 {
-  $user_email = $recived_array[11]['inputValue'];
-  $user_ime = $recived_array[10]['inputValue'];
-  $user_telefon = $recived_array[12]['inputValue'];
-  $broj_pozitivnih_odgovora = $recived_array[14]['brojPozitivnihOdgovora'];
+  $user_email = $email = filter_var($recived_array[11]['inputValue'], FILTER_SANITIZE_EMAIL);
+  $user_ime = filter_var($recived_array[10]['inputValue'], FILTER_SANITIZE_STRING);
+  $user_telefon = filter_var($recived_array[10]['inputValue'], FILTER_SANITIZE_STRING);
+  $broj_pozitivnih_odgovora = filter_var($recived_array[14]['inputValue'], FILTER_SANITIZE_STRING);
 
 
   function send_mail_plan_to_subscribers($user_ime, $user_email, $user_telefon, $broj_pozitivnih_odgovora, $mail)
@@ -83,23 +85,26 @@ function send_subscription_mail($mail, $recived_array)
                             </head>
                             <body>
                               <div>
-                                <strong><p>Ime</p></strong>
+                              <hr>
+                                <strong><p>Ime:</p></strong>
                                 <p>". $user_ime."</p>
                               </div>
-                              </ br style='border: 1px solid black'>
+                              <hr>
                               <div>
-                                <strong><p>E-mail</p></strong>
+                                <strong><p>E-mail:</p></strong>
                                 <p>".$user_email."</p>
                               </div>
+                              <hr>
                               <div>
-                                <strong><p>Telefon</p></strong>
+                                <strong><p>Telefon:</p></strong>
                                 <p>"."$user_telefon"."</p>
                               </div>
+                              <hr>
                               <div>
-                                <strong><p>Br. 'DA' odgovora</p></strong>
+                                <strong><p>Br. 'DA' odgovora:</p></strong>
                                 <p>".$broj_pozitivnih_odgovora."/10</p>
                               </div>
-                                
+                              <hr>
                             </body>
                         </html>";
 

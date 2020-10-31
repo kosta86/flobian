@@ -7,15 +7,13 @@ const kviz = (function () {
 		this.ponudjeniOdgovori = ponudjeniOdgovori;
 		this.slika = slika;
 		this.qId = this.tekst.replace(/[^a-zA-ZšŠđĐžŽčČćĆ0-9 ]/g, "").split(' ').join('_').substring(0, 64);
-
-		/* this.tekst.split(' ').join('_').slice(0, -1); */
 	}
 
 	let pitanja = [
 		new Pitanje('Da li se osećate naduto nakon jela?', ['DA', 'NE'], '1.png'),
-		new Pitanje('Da je vaša nadutost teško podnošljiva ili izuzetno bolna?', ['DA', 'NE'], '2.png'),
+		new Pitanje('Da li je vaša nadutost teško podnošljiva ili izuzetno bolna?', ['DA', 'NE'], '2.png'),
 		new Pitanje('Imate li često osećaj „kamena“ u stomaku?', ['DA', 'NE'], '3.png'),
-		new Pitanje('Da li obavezno morati otkopčati dugme ili popustiti kaiš nakon jela?', ['DA', 'NE'], '4.png'),
+		new Pitanje('Da li obavezno morate otkopčati dugme ili popustiti kaiš nakon jela?', ['DA', 'NE'], '4.png'),
 		new Pitanje('Da li često imate gasove?', ['DA', 'NE'], '5.png'),
 		new Pitanje('Da li postoje promene u učestalosti pražnjenja stolice- dijareja i/ili opstipacija?', ['DA', 'NE'], '6.png'),
 		new Pitanje('Da li imate ponavljajući bol u stomaku, u proseku, najmanje 1 dan/nedeljno u poslednja 3 meseca?', ['DA', 'NE'], '7.png'),
@@ -66,18 +64,16 @@ const kviz = (function () {
 		this.link = link;
 	};
 
-	function postData(odgovoriZaSlanje, linkKaFajlu) {
+	function postData(odgovoriZaSlanje, linkKaSkriptu) {
 		var JSONAnswers = JSON.stringify(odgovoriZaSlanje);
-		/* event.preventDefault(); */
 
 		var xhr = new XMLHttpRequest();
-		xhr.open("POST", linkKaFajlu, true);
+		xhr.open("POST", linkKaSkriptu, true);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var response = xhr.responseText;
-				console.log(odgovoriZaSlanje);
 			}
 		}
 		xhr.send(JSONAnswers);
@@ -124,9 +120,7 @@ const kviz = (function () {
 			const emailValue = emailInput.value.trim();
 			const telefonValue = telefonInput.value.trim();
 
-			/* 			imeValue.className = '';
-						emailValue.className = '';
-			 */
+
 			if (imeValue === '') {
 				setErrorFor(imeInput, 'Polje ne može biti prazno');
 			} else if (!isName(imeValue)) {
@@ -210,32 +204,7 @@ const kvizView = (function () {
 	 let scrolldiv = function() {  
 		poljeFormulara.scrollIntoView(); 
 	} 
-
-	/* function smoothScroll(target) {
-		var scrollContainer = target;
-		
-		do { //find scroll container
-			scrollContainer = scrollContainer.parentNode;
-			if (!scrollContainer) return;
-			scrollContainer.scrollTop += 1;
-		} while (scrollContainer.scrollTop == 0);
-
-		var targetY = 0;
-		do { //find the top of target relatively to the container
-			if (target == scrollContainer) break;
-			targetY += target.offsetTop;
-		} while (target = target.offsetParent);
-
-		scroll = function (c, a, b, i) {
-			i++; if (i > 30) return;
-			c.scrollTop = a + (b - a) / 30 * i;
-			setTimeout(function () { scroll(c, a, b, i); }, 20);
-		}
-		// start scrolling
-			scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
-	} */
 	
-
 	function prikaziRezultat(userOdgovori, ponudjeniSaveti) {
 		// obrisi polje upitnika posto je zavrsen
 		poljeUpitnika.innerHTML = '';
@@ -250,17 +219,17 @@ const kvizView = (function () {
 		// prikazi savet za taj problem 
 		function prikaziSavet(ponudjeniSaveti) {
 			if (savetiZaPrikazArr.length >= 0 && savetiZaPrikazArr.length < 3) {
-				/* HTMLRezultat += "<p>" + ponudjeniSaveti['1-2'].text + "</p>" */
+
 				rezultatTekst = `${ponudjeniSaveti['1-2'].text}`;
 			}
 
 			if (savetiZaPrikazArr.length > 2 && savetiZaPrikazArr.length < 8) {
-				/* HTMLRezultat += "<p>" + ponudjeniSaveti['3-7'].text + "</p>"; */
+
 				rezultatTekst = `${ponudjeniSaveti['3-7'].text}`;
 			}
 
 			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr.length <= 10) {
-				/* HTMLRezultat += "<p>" + ponudjeniSaveti['8-10'].text + "</p>" */
+
 				rezultatTekst = `${ponudjeniSaveti['8-10'].text}`;
 			}
 
@@ -271,7 +240,7 @@ const kvizView = (function () {
 						<div id="tvoj-rezultat-polje" class="col-12 col-sm-6 py-3 px-4">
 							<h2 class="mb-3">TVOJ REZULTAT</h2>
 							<p>${rezultatTekst}</p>
-							<button id="scroll-btn" type="button">UCESTVUJ U IZAZOVU</button>
+							<button id="scroll-btn" type="button">UČESTVUJ U IZAZOVU</button>
 						</div>
 						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: auto;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
 					</div>
@@ -344,31 +313,6 @@ const kvizView = (function () {
 					</div>
 				</div>
 			</div>`;
-
-
-
-			/* HTMLFormular += `<div class="form-container">
-			<form id="formular-prijava" class="form">
-		<div class="form-control">
-			<label for="username">Username</label>
-			<input type="text" placeholder="florinpop17" id="ime_input" />
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-		<div class="form-control">
-			<label for="username">Email</label>
-			<input type="email" placeholder="a@florin-pop.com" id="email_input" />
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-		<button id="postDataButton">Submit</button>
-	</form>
-	</div>`; */
-
-
-			/* return HTMLRezultat + HTMLFormular; */
 			
 			return HTMLRezultat;
 		}
