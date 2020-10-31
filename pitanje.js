@@ -295,7 +295,7 @@ const kvizView = (function () {
 				</div>
 				<div id="izazov">
 					<div class="row">
-						<div id="izazov-tekst" class="col-12 col-sm-6 py-4 py-md-5 px-4">
+						<div id="izazov-tekst" class="col-12 col-sm-6 py-4 py-lg-5 py-md-5 px-4">
 							<h1 class="mb-3">UČESTVUJ U IZAZOVU</h1>
 							<p>Priključi se <span>FLOBIAN izazovu</span>, poruči kutiju, isprati sve instrukcije i za <span>40 DANA</span> tvoji rezultati su tu. U sklopu izazova dobijaš:</p>
 							<ul>
@@ -380,7 +380,6 @@ const kvizView = (function () {
 
 	}
 
-
 	function prikaziPitanje(upitnik) {
 		let poljeSlike = document.querySelector('.card-slika');
 		let poljeTekstPitanja = document.querySelector('.card-pitanje');
@@ -389,18 +388,19 @@ const kvizView = (function () {
 		let poljeUpitnika = document.getElementById('upitnik');
 
 
-		// promeni sliku pitanja (samo desk verzije)
-		/* poljeUpitnika.style.backgroundImage = `url("img/desk/desk_${upitnik.RBPitanja + 1}.jpg")`; */
-
 		// progress span
 		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;
 
-		// popuni sliku pitanja
-		/* if (poljeSlike.children.length > 1) {
-			poljeSlike.removeChild(poljeSlike.children[1]);
-		}; */
+		// obrisi staru pozadinu ako postoji
+		if (poljeUpitnika.firstElementChild.tagName === 'IMG') { 
+			poljeUpitnika.firstElementChild.remove()
+		} 
+
 		poljeSlike.innerHTML = `<img src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`;
 
+		// ubaci novu pozadinu
+		poljeUpitnika.insertAdjacentHTML('afterBegin', `<img id="background-image" class="" src="img/desk/desk_${upitnik.RBPitanja + 1}.jpg" alt="">`); 
+		
 		// popuni tekst pitanja
 		poljeTekstPitanja.innerHTML = `<p>${upitnik.getPitanje().tekst}</p>`;
 

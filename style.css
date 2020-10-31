@@ -96,7 +96,7 @@ html {
       width: 100%; */
   }
 
-  #upitnik>img {
+  #background-image {
     display: none;
   }
 
@@ -582,7 +582,6 @@ html {
     .form-controller small {
       width: 100%;
       text-align: center;
-      padding-right: 4%;
     }
 
     .flobian-form button {
@@ -667,13 +666,83 @@ html {
 
   }
 
+
   #upitnik img {
     object-fit: cover;
     width: 100%;
     max-width: 100%;
     height: 100%;
     overflow: hidden;
+    opacity: 0;
   }
+
+    #upitnik img {
+      -webkit-transition: opacity 1s ease-in-out;
+      -moz-transition: opacity 1s ease-in-out;
+      -o-transition: opacity 1s ease-in-out;
+      transition: opacity 1s ease-in-out;
+      opacity: 1;
+    }
+
+    .fade-in {
+      animation: fadeIn ease 1s;
+      -webkit-animation: fadeIn ease 1s;
+      -moz-animation: fadeIn ease 1s;
+      -o-animation: fadeIn ease 1s;
+      -ms-animation: fadeIn ease 1s;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @-moz-keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @-o-keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @-ms-keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+  }
+
+
 
   .card-wrapper {
     position: absolute;
@@ -789,9 +858,12 @@ html {
   #rezultat-wrapper {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto;
     width: 100%;
+  }
 
+  #rezultat-wrapper>.container {
+    max-width: 100%;
   }
 
   #tvoj-rezultat-polje h2 {
@@ -856,9 +928,20 @@ html {
   }
 
   
+  #izazov-slika {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 !important;
+    grid-area: photo;
+    text-align: center;
+  }
+
   #izazov-slika img {
+    height: 150px;
+    width: auto;
     object-fit: cover;
-    width: 100%;
     max-width: 100%;
     border: 0px solid;
     border-radius: 15px;
@@ -924,16 +1007,15 @@ html {
       sans-serif;
     font-size: 1.4em;
     color: #047235;
+    font-weight: bold;
+    padding-bottom: 2em;
   }
 
   #progress-container {
     position: relative;
     height: 1em;
     width: 50%;
-    margin: 0 1em 0.4em 1em;
-    /* top: 0;
-    left: 0; */
-    
+    margin: 0 1em 2em 1em;   
   }
 
   #progress-container span {
@@ -961,7 +1043,7 @@ html {
     max-width: 100%;
     /* padding: 2em; */
     text-align: center;
-    padding: 3em 2em;
+    padding: 0;
   }
 
   /* .form-container p {
@@ -986,6 +1068,10 @@ html {
     text-align: -moz-center;
     text-align: -o-center;
     text-align: -ms-center;
+  }
+
+  #prikljuci-se-form {
+    padding: 3em 7em !important;
   }
 
   .form-controller {
@@ -1102,8 +1188,18 @@ html {
       font-weight: normal;
     }
     
+    #dalje {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+
+    #dalje img {
+      width: 2em;
+    }
+
   }
-  /* bigger phones */
+  /* Bigger phones landcape ***********************************************************************************************************/
   @media (min-width: 640px) and (orientation: landscape) {
 
     .card-pitanje {
@@ -1127,8 +1223,22 @@ html {
       font-size: 0.7em;
     }
 
+    #prikljuci-se-form {
+      padding: 3em 10em !important;
+    }
+
+    #izazov-slika {
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+
+    #izazov-slika img {
+      height: 17em;
+    }
+
   }
-  /* Normal Tablets landcape ***********************************************************************************************************/
+  /* Normal tablets landcape ***********************************************************************************************************/
   @media (min-width: 900px) and (orientation: landscape) {
 
     .card-pitanje {
@@ -1148,7 +1258,101 @@ html {
       font-size: 1.3em!important;
     }
 
+    #rezultat-wrapper > container {
+      padding: 5em;
+    }
+
+    #prikljuci-se-form {
+      padding: 3em 15em !important;
+    }
+
+    #rezultat-wrapper>.container {
+      max-width: 992px;
+    }
+    
+    #saznaj-vise > row{
+      padding: 0!important;
+    }
+    
+    #progress-container span {
+      font-size: 1em;
+    }
   }
+
+  /* Bigger tablets landcape ***********************************************************************************************************/
+  @media (min-width: 1200px) and (orientation: landscape) {
+
+    #progress-container {
+      margin-bottom: 5em;
+    }
+
+    #progress-container span {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #868686;
+    }
+
+
+
+
+    .card-pitanje p {
+      font-size: 1.8em;
+    }
+
+    .card-odgovori button {
+      font-size: 1.8em !important;
+    }
+    
+    #prikljuci-se-form {
+      padding: 3em 20em !important;
+    }
+
+    .saznaj-vise-ikonice {
+      padding: .4rem !important;
+    }
+
+    #prikljuci-se-form {
+      padding: 3em 11em !important;
+    }
+
+    .form-controller input {
+      font-size: 1.3em;
+    }
+
+    .flobian-form button {
+      font-size: 1.3em;
+      width: 50%;
+      padding: 0.8em;
+    }
+
+    .form-controller small {
+      width: 100%;
+      text-align: right;
+      padding-right: 3%;
+    }
+
+    #tvoj-rezultat-video {
+      align-self: center;
+    }
+
+    #tvoj-rezultat-polje h2 {
+      font-size: 2.4em;
+    } 
+
+    #prikljuci-se-form {
+      padding: 0em 11em !important;
+    }
+
+    .form-container h2 {
+      padding-bottom: 1em;
+    }
+
+   
+    
+
+  }
+
+
 }
 
 
