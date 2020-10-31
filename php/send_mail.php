@@ -7,7 +7,7 @@ include_once('send_mail.php');
 include_once('db-conn.php');
 // Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
-var_dump(dirname(__DIR__));
+
 
 
 $requestPayload = file_get_contents("php://input");
@@ -25,7 +25,7 @@ $recived_array = json_decode($requestPayload, true);
 
 } */
 
-
+var_dump(dirname(__DIR__));
 function setup_phpmailer()
 {
   require '/home/kostajov/vendor/phpmailer/phpmailer/src/PHPMailer.php';

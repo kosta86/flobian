@@ -1,8 +1,7 @@
 const kviz = (function () {
 	let odgovori = [];
-	let rezultatiUpitnika = {};
 
-	function Pitanje(tekst, ponudjeniOdgovori, slika) {
+	function Pitanje(tekst, ponudjeniOdgovori, slika) {  // konstruktor za unos pitanja i pratecih podataka o pitanjima
 		this.tekst = tekst;
 		this.ponudjeniOdgovori = ponudjeniOdgovori;
 		this.slika = slika;
@@ -44,27 +43,27 @@ const kviz = (function () {
 		otklanjanje uzroka nervoze creva, promeniti životne navike i kloniti se stresnih situacija. Srećno!`, 'gasovi.png', 'flobian3'),
 	};
 
-	function Upitnik(pitanja) {
+	function Upitnik(pitanja) {  // konstruktor koji cuva pitanja i state aplikacije
 		this.pitanja = pitanja;
 		this.RBPitanja = 0;
 		this.brojDaOdgovora = 0;
 	};
 
-	Upitnik.prototype.getPitanje = function () {
+	Upitnik.prototype.getPitanje = function () {  // vraca trenutno pitanje
 		return this.pitanja[this.RBPitanja];
 	};
 	Upitnik.prototype.isEnded = function () {
 		return this.RBPitanja === this.pitanja.length;
 	};
 
-	function RezultatUpitnika(text, slika, video, link) {
+	function RezultatUpitnika(text, slika, video, link) {  // konstruktor za prikaz rezultata
 		this.text = text;
 		this.slika = slika;
 		this.video = video;
 		this.link = link;
 	};
 
-	function postData(odgovoriZaSlanje, linkKaSkriptu) {
+	function postData(odgovoriZaSlanje, linkKaSkriptu) {  // funkcija slanje podataka u php skriptove 
 		var JSONAnswers = JSON.stringify(odgovoriZaSlanje);
 
 		var xhr = new XMLHttpRequest();
@@ -81,8 +80,8 @@ const kviz = (function () {
 
 	function brojPozitivnihOdogovora(userOdgovori) {
 		let pozitivniOdgovori = 0;
-		// iteracija odgovora korisnika i popunjavanje array-a pozitivnim odgovorima
-		for (const obj of userOdgovori) {
+		
+		for (const obj of userOdgovori) {  // iteracija odgovora korisnika i popunjavanje array-a pozitivnim odgovorima
 			if (obj.odgovor === "DA") {
 				pozitivniOdgovori++;
 			}
@@ -105,7 +104,7 @@ const kviz = (function () {
 			}
 		}
 
-		array.push({brojPozitivnihOdgovora: brojPozitivnihOdogovora(kviz.odgovori)})
+		array.push({ brojPozitivnihOdgovora: brojPozitivnihOdogovora(kviz.odgovori) })
 	}
 
 
@@ -113,14 +112,12 @@ const kviz = (function () {
 		const imeInput = document.getElementById('ime_input');
 		const emailInput = document.getElementById('email_input');
 		const telefonInput = document.getElementById('telefon_input');
+		const imeValue = imeInput.value;
+		const emailValue = emailInput.value.trim();
+		const telefonValue = telefonInput.value.trim();
 
 
 		function checkInputs() {
-			const imeValue = imeInput.value;
-			const emailValue = emailInput.value.trim();
-			const telefonValue = telefonInput.value.trim();
-
-
 			if (imeValue === '') {
 				setErrorFor(imeInput, 'Polje ne može biti prazno');
 			} else if (!isName(imeValue)) {
@@ -199,12 +196,11 @@ const kvizView = (function () {
 	let poljeUpitnika = document.getElementById('upitnik');
 	let savetiZaPrikazArr = [];
 	let rezultatTekst = '';
-	let rezultatVideo;
 
-	 let scrolldiv = function() {  
-		poljeFormulara.scrollIntoView(); 
-	} 
-	
+	let scrolldiv = function () {
+		poljeFormulara.scrollIntoView();
+	}
+
 	function prikaziRezultat(userOdgovori, ponudjeniSaveti) {
 		// obrisi polje upitnika posto je zavrsen
 		poljeUpitnika.innerHTML = '';
@@ -313,7 +309,7 @@ const kvizView = (function () {
 					</div>
 				</div>
 			</div>`;
-			
+
 			return HTMLRezultat;
 		}
 
@@ -336,15 +332,15 @@ const kvizView = (function () {
 		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;
 
 		// obrisi staru pozadinu ako postoji
-		if (poljeUpitnika.firstElementChild.tagName === 'IMG') { 
+		if (poljeUpitnika.firstElementChild.tagName === 'IMG') {
 			poljeUpitnika.firstElementChild.remove()
-		} 
+		}
 
 		poljeSlike.innerHTML = `<img src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`;
 
 		// ubaci novu pozadinu
-		poljeUpitnika.insertAdjacentHTML('afterBegin', `<img id="background-image" class="" src="img/desk/desk_${upitnik.RBPitanja + 1}.jpg" alt="">`); 
-		
+		poljeUpitnika.insertAdjacentHTML('afterBegin', `<img id="background-image" class="" src="img/desk/desk_${upitnik.RBPitanja + 1}.jpg" alt="">`);
+
 		// popuni tekst pitanja
 		poljeTekstPitanja.innerHTML = `<p>${upitnik.getPitanje().tekst}</p>`;
 
@@ -362,40 +358,12 @@ const kvizView = (function () {
 		});
 	}
 
-	
-
-	return {
-		prikaziPitanje,
-		prikaziRezultat,
-		poljeFormulara,
-		scrolldiv
-	}
-})();
-
-
-
-const kvizController = (function () {
-	let poljeOdgovora = document.querySelector('.card-odgovori');
-	let poljeProgresa = document.querySelector('.progress-container');
-	let upitnik = new kviz.Upitnik(kviz.pitanja);
-	let postData = kviz.postData;
-	let submitBtnHandler = kviz.submitBtnHandler;
-	let poslednjiKorak = document.getElementById('rezultat-wrapper');
-	let form = document.getElementById('formular-prijava');
-
-
-
-
-	// on page load
-	kvizView.prikaziPitanje(upitnik);
-
-	// premestiti u view
-	function handleAnswerKlik() {
+	function handleAnswerKlik(upitnik) {
 		const isAnswerButton = event.target.dataset.button === 'odgovor';
 		const kliknutiOdgovor = event.target.dataset.odgovor;
 
-		function pushAnswers() {
-			// on click dopuni odgovori array sa pitanjem i odogovorom
+		function pushAnswers() { // on click dopuni odgovori array sa pitanjem i odogovorom
+			
 			kviz.odgovori.push({
 				pitanje: upitnik.getPitanje().tekst,
 				odgovor: kliknutiOdgovor,
@@ -416,17 +384,39 @@ const kvizController = (function () {
 		}
 	}
 
-	// event handlers
-	poljeOdgovora.addEventListener('click', handleAnswerKlik); // hendler za klik na odgovor
 
-	poslednjiKorak.addEventListener('submit', event => {       // hendler za klik na dugme za submit */
+
+	return {
+		prikaziPitanje,
+		prikaziRezultat,
+		poljeFormulara,
+		scrolldiv,
+		handleAnswerKlik
+	}
+})();
+
+
+
+const kvizController = (function () {
+	let poljeOdgovora = document.querySelector('.card-odgovori');
+	let upitnik = new kviz.Upitnik(kviz.pitanja);
+	let postData = kviz.postData;
+	let submitBtnHandler = kviz.submitBtnHandler;
+	let poslednjiKorak = document.getElementById('rezultat-wrapper');
+
+	// on page load
+	kvizView.prikaziPitanje(upitnik);  // prikaz kartice sa pitanjima
+
+	// event handlers
+	poljeOdgovora.addEventListener('click', () => {  // hendler za klik na dugme za odgovor
+		kvizView.handleAnswerKlik(upitnik);
+	}); 
+
+	poslednjiKorak.addEventListener('submit', event => {  // hendler za klik na dugme za submit */
 		event.preventDefault();
 		submitBtnHandler(postData, kviz.odgovori);
 	})
 
-	return {
-		upitnik
-	}
 })(kviz, kvizView);
 
 
