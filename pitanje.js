@@ -175,6 +175,8 @@ const kviz = (function () {
 		}
 	}
 
+	
+
 
 	return {
 		odgovori,
@@ -284,19 +286,19 @@ const kvizView = (function () {
 								<h2 class="mb-md-5">PRIKLJUČI SE</h2>
 								<form id="formular-prijava" class="flobian-form">
 									<div class="form-controller">
-										<input type="text" placeholder="Ime i prezime" id="ime_input" />
+										<input type="text" placeholder="Ime i prezime" id="ime_input" onclick="this.scrollIntoView()" />
 										<i class="fas fa-check-circle"></i>
 										<i class="fas fa-exclamation-circle"></i>
 										<small>Error message</small>
 									</div>
 									<div class="form-controller">
-										<input type="text" placeholder="E-mail" id="email_input" />
+										<input type="text" placeholder="E-mail" id="email_input"onclick="this.scrollIntoView()" />
 										<i class="fas fa-check-circle"></i>
 										<i class="fas fa-exclamation-circle"></i>
 										<small>Error message</small>
 									</div>
 									<div class="form-controller">
-										<input type="text" placeholder="Broj telefona" id="telefon_input" />
+										<input type="text" placeholder="Broj telefona" id="telefon_input" onclick="this.scrollIntoView()" />
 										<i class="fas fa-check-circle"></i>
 										<i class="fas fa-exclamation-circle"></i>
 										<small>Error message</small>
@@ -384,14 +386,17 @@ const kvizView = (function () {
 		}
 	}
 
-
+	function scrollTo(element) {
+		element.scrollIntoView();
+	}
 
 	return {
 		prikaziPitanje,
 		prikaziRezultat,
 		poljeFormulara,
 		scrolldiv,
-		handleAnswerKlik
+		handleAnswerKlik,
+		scrollTo
 	}
 })();
 
