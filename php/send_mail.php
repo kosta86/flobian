@@ -12,7 +12,7 @@ include_once('db-conn.php');
 
 $requestPayload = file_get_contents("php://input");
 $recived_array = json_decode($requestPayload, true);
-
+var_dump($recived_array);
 
 
 /* if (isset($_POST) && !empty($_POST)) {
@@ -70,8 +70,9 @@ function send_subscription_mail($mail, $recived_array)
 {
   $user_email = $email = filter_var($recived_array[11]['inputValue'], FILTER_SANITIZE_EMAIL);
   $user_ime = filter_var($recived_array[10]['inputValue'], FILTER_SANITIZE_STRING);
-  $user_telefon = filter_var($recived_array[10]['inputValue'], FILTER_SANITIZE_STRING);
-  $broj_pozitivnih_odgovora = filter_var($recived_array[14]['inputValue'], FILTER_SANITIZE_STRING);
+  $user_telefon = filter_var($recived_array[12]['inputValue'], FILTER_SANITIZE_STRING);
+  $broj_pozitivnih_odgovora = filter_var($recived_array[14]['brojPozitivnihOdgovora'], FILTER_SANITIZE_STRING);
+
 
 
   function send_mail_plan_to_subscribers($user_ime, $user_email, $user_telefon, $broj_pozitivnih_odgovora, $mail)
@@ -102,7 +103,7 @@ function send_subscription_mail($mail, $recived_array)
                               <hr>
                               <div>
                                 <strong><p>Br. 'DA' odgovora:</p></strong>
-                                <p>".$broj_pozitivnih_odgovora."/10</p>
+                                <p>"."$broj_pozitivnih_odgovora"."/10</p>
                               </div>
                               <hr>
                             </body>

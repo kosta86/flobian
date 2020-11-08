@@ -46,6 +46,8 @@ try {
     $query = "INSERT INTO user_input(
                     ime_input,
                     email_input,
+                    telefon_input,
+                    Lokacija,
                     Da_li_se_osećate_naduto_nakon_jela, 
                     Da_je_vaša_nadutost_teško_podnošljiva_ili_izuzetno_bolna, 
                     Imate_li_često_osećaj_kamena_u_stomaku,
@@ -59,7 +61,9 @@ try {
                 ) 
                 VALUES(
                     :ime, 
-                    :email, 
+                    :email,
+                    :telefon,
+                    :lokacija,
                     :odgovor3, 
                     :odgovor4, 
                     :odgovor5, 
@@ -86,11 +90,13 @@ try {
     $statement->bindParam(':odgovor12', $recived_array[9]['odgovor'], PDO::PARAM_STR);
     $statement->bindParam(':email', $recived_array[10]['inputValue'], PDO::PARAM_STR);
     $statement->bindParam(':ime', $recived_array[11]['inputValue'], PDO::PARAM_STR);
+    $statement->bindParam(':telefon', $recived_array[12]['inputValue'], PDO::PARAM_STR);
+    $statement->bindParam(':lokacija', $lokacija, PDO::PARAM_STR);
 
     $statement->execute();
 
+    echo "Data sent to DB!";
 } catch (PDOException $e) {
 
     echo "Error: " . $e->getMessage();
-    
 }
