@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2020 at 01:06 PM
+-- Generation Time: Nov 08, 2020 at 04:03 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `flobiandb`
+-- Database: `flobian_db`
 --
 
 -- --------------------------------------------------------
@@ -32,6 +32,8 @@ CREATE TABLE `user_input` (
   `id` int(11) NOT NULL,
   `ime_input` varchar(99) NOT NULL,
   `email_input` varchar(99) NOT NULL,
+  `telefon_input` text NOT NULL,
+  `vreme_unosa` text NOT NULL,
   `Lokacija` varchar(99) NOT NULL,
   `Da_li_se_osećate_naduto_nakon_jela` text NOT NULL,
   `Da_je_vaša_nadutost_teško_podnošljiva_ili_izuzetno_bolna` text NOT NULL,
@@ -63,7 +65,7 @@ ALTER TABLE `user_input`
 -- AUTO_INCREMENT for table `user_input`
 --
 ALTER TABLE `user_input`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
