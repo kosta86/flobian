@@ -3,6 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 include_once('send_mail.php');
 include_once('db-conn.php');
 // Import PHPMailer classes into the global namespace
@@ -31,15 +32,15 @@ function setup_phpmailer()
   require '/home/kostajov/vendor/phpmailer/phpmailer/src/PHPMailer.php';
   require '/home/kostajov/vendor/phpmailer/phpmailer/src/SMTP.php';
   require '/home/kostajov/vendor/phpmailer/phpmailer/src/Exception.php';
- /*  require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+  /*  require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
   require '../vendor/phpmailer/phpmailer/src/SMTP.php';
   require '../vendor/phpmailer/phpmailer/src/Exception.php'; */
 
   // Instantiation and passing `true` enables exceptions
   $mail = new PHPMailer(true);
 
-  
-  
+
+
   //Server settings
   $mail->SMTPOptions = array(
     'ssl' => array(
@@ -58,7 +59,7 @@ function setup_phpmailer()
   $mail->Password   = 'Keto12345678*';                                      // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
   $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-  
+
   return $mail;
 }
 $mail = setup_phpmailer();
@@ -66,17 +67,19 @@ $mail = setup_phpmailer();
 
 
 
-function send_subscription_mail($mail, $recived_array)
+
+$user_email = $email = filter_var($recived_array[11]['inputValue'], FILTER_SANITIZE_EMAIL);
+$user_ime = filter_var($recived_array[10]['inputValue'], FILTER_SANITIZE_STRING);
+$user_telefon = filter_var($recived_array[12]['inputValue'], FILTER_SANITIZE_STRING);
+$broj_pozitivnih_odgovora = filter_var($recived_array[14]['brojPozitivnihOdgovora'], FILTER_SANITIZE_STRING);
+date_default_timezone_set("Europe/Belgrade");
+$vreme_unosa = date("d/m/Y H:i");
+
+
+
+function send_mail_plan_to_subscribers($user_ime, $user_email, $user_telefon, $broj_pozitivnih_odgovora, $vreme_unosa, $mail)
 {
-  $user_email = $email = filter_var($recived_array[11]['inputValue'], FILTER_SANITIZE_EMAIL);
-  $user_ime = filter_var($recived_array[10]['inputValue'], FILTER_SANITIZE_STRING);
-  $user_telefon = filter_var($recived_array[10]['inputValue'], FILTER_SANITIZE_STRING);
-  $broj_pozitivnih_odgovora = filter_var($recived_array[14]['inputValue'], FILTER_SANITIZE_STRING);
-
-
-  function send_mail_plan_to_subscribers($user_ime, $user_email, $user_telefon, $broj_pozitivnih_odgovora, $mail)
-  {
-      $html = "<!DOCTYPE html>
+  $html = "<!DOCTYPE html>
                         <html lang='en'>
                             <head>
                                 <meta charset='UTF-8'>
@@ -87,22 +90,26 @@ function send_subscription_mail($mail, $recived_array)
                               <div>
                               <hr>
                                 <strong><p>Ime:</p></strong>
-                                <p>". $user_ime."</p>
+                                <p>" . $user_ime . "</p>
                               </div>
                               <hr>
                               <div>
                                 <strong><p>E-mail:</p></strong>
-                                <p>".$user_email."</p>
+                                <p>" . $user_email . "</p>
                               </div>
                               <hr>
                               <div>
                                 <strong><p>Telefon:</p></strong>
-                                <p>"."$user_telefon"."</p>
+                                <p>" . "$user_telefon" . "</p>
                               </div>
                               <hr>
                               <div>
                                 <strong><p>Br. 'DA' odgovora:</p></strong>
-                                <p>".$broj_pozitivnih_odgovora."/10</p>
+                                <p>" . "$broj_pozitivnih_odgovora" . "/10</p>
+                              </div>
+                              <div>
+                                <strong><p>Vreme unosa:</p></strong>
+                                <p>" . "$vreme_unosa" . "/10</p>
                               </div>
                               <hr>
                             </body>
@@ -110,24 +117,20 @@ function send_subscription_mail($mail, $recived_array)
 
 
 
-      //Recipients
-      $mail->setFrom('flobian@kostajovanovic.a2hosted.com');
-      $mail->addAddress('kosta.jovanovic86@gmail.com', $user_ime);     // Add a recipient
+  //Recipients
+  $mail->setFrom('flobian@kostajovanovic.a2hosted.com');
+  $mail->addAddress('kosta.jovanovic86@gmail.com', $user_ime);     // Add a recipient
 
-      // Content
-      $mail->isHTML(true);                                  // Set email format to HTML
-      $mail->Subject = 'UČESTVUJ U IZAZOVU - prijava';
-      $mail->Body    = $html;
-      $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+  // Content
+  $mail->isHTML(true);                                  // Set email format to HTML
+  $mail->Subject = 'UČESTVUJ U IZAZOVU - prijava';
+  $mail->Body    = $html;
+  $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-      
 
-      $mail->send();
-      echo 'Message has been sent';
-  }
-  send_mail_plan_to_subscribers($user_ime, $user_email, $user_telefon, $broj_pozitivnih_odgovora, $mail);
+
+  $mail->send();
+  echo 'Message has been sent';
 }
 
-
-// send mail with link to customized meal plan
-send_subscription_mail($mail, $recived_array);
+send_mail_plan_to_subscribers($user_ime, $user_email, $user_telefon, $broj_pozitivnih_odgovora, $vreme_unosa, $mail);

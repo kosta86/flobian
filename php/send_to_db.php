@@ -5,18 +5,6 @@ $requestPayload = file_get_contents("php://input");
 $recived_array = json_decode($requestPayload, true);
 
 
-/* $pol = $recived_array[0];
-$godine = $recived_array[1];
-$fizicka_aktivnost = $recived_array[2];
-$san = $recived_array[3];
-$pritisak = $recived_array[4];
-$checked_answers = $recived_array["checkedValuesStr"]; */
-
-/* date_default_timezone_set("Europe/Belgrade");
-$vreme_unosa = date("d/m/Y H:i"); */
-
-
-
 // Function to get the client ip address // server
 function getRealIpAddr()
 {
@@ -32,10 +20,16 @@ function getRealIpAddr()
     return $ip;
 }
 
-
+// Lokacija preko ip adrese
 $data = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . getRealIpAddr()));
 
 $lokacija = $data['geoplugin_city'] . ',' . $data['geoplugin_countryName'];
+
+
+// Vreme unosa
+date_default_timezone_set("Europe/Belgrade");
+
+$vreme_unosa = date("d/m/Y H:i");
 
 
 //PDO prepared statement to send to database
@@ -46,6 +40,9 @@ try {
     $query = "INSERT INTO user_input(
                     ime_input,
                     email_input,
+                    telefon_input,
+                    Vreme_unosa,
+                    Lokacija,
                     Da_li_se_osećate_naduto_nakon_jela, 
                     Da_je_vaša_nadutost_teško_podnošljiva_ili_izuzetno_bolna, 
                     Imate_li_često_osećaj_kamena_u_stomaku,
@@ -59,7 +56,10 @@ try {
                 ) 
                 VALUES(
                     :ime, 
-                    :email, 
+                    :email,
+                    :telefon,
+                    :vreme_unosa,
+                    :lokacija,
                     :odgovor3, 
                     :odgovor4, 
                     :odgovor5, 
@@ -84,13 +84,16 @@ try {
     $statement->bindParam(':odgovor10', $recived_array[7]['odgovor'], PDO::PARAM_STR);
     $statement->bindParam(':odgovor11', $recived_array[8]['odgovor'], PDO::PARAM_STR);
     $statement->bindParam(':odgovor12', $recived_array[9]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':email', $recived_array[10]['inputValue'], PDO::PARAM_STR);
-    $statement->bindParam(':ime', $recived_array[11]['inputValue'], PDO::PARAM_STR);
+    $statement->bindParam(':email', $recived_array[11]['inputValue'], PDO::PARAM_STR);
+    $statement->bindParam(':ime', $recived_array[10]['inputValue'], PDO::PARAM_STR);
+    $statement->bindParam(':telefon', $recived_array[12]['inputValue'], PDO::PARAM_STR);
+    $statement->bindParam(':lokacija', $lokacija, PDO::PARAM_STR);
+    $statement->bindParam(':vreme_unosa', $vreme_unosa, PDO::PARAM_STR);
 
     $statement->execute();
 
+    echo "Data sent to DB!";
 } catch (PDOException $e) {
 
     echo "Error: " . $e->getMessage();
-    
 }
