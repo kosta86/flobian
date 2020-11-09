@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
 
-@viewport {
+/* @viewport {
   width: device-width;
   zoom: 1.0;
-}
+} */
 
 @font-face {
   font-family: 'Segoe UI Local';
@@ -62,6 +62,64 @@
   font-style: normal;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .card-odgovori button:hover {
+    background-color: #047235;
+    -webkit-tap-highlight-color: #047235;
+    outline: none;
+  }
+
+  .card-odgovori button:active {
+    background-color: #035327;
+    -webkit-tap-highlight-color: #047235;
+    outline: none;
+  }
+
+  #tvoj-rezultat-polje button:active {
+    background-color: #035327;
+    -webkit-tap-highlight-color: #047235;
+    outline: none;
+  }
+
+  .flobian-form button:active {
+    background-color: #035327;
+    -webkit-tap-highlight-color: #047235;
+    outline: none;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+
+  
+
+  @keyframes touchActive {
+    0% {
+      background-color: #2ecc71;
+    }
+
+    25% {
+      background-color: #035327;
+    }
+
+    50% {
+      background-color: #035327;
+    }
+
+    100% {
+      background-color: #035327;
+    }
+  }
+
+  .card-odgovori button:active {
+    background-color: #035327;
+    -webkit-tap-highlight-color: #035327;
+    outline: none;
+    animation-name: touchActive;
+    animation-duration: 1000ms;
+  }
+}
+
+input, textarea {font-size:16px;}
 
 body,
 html {
@@ -73,16 +131,19 @@ html {
   -moz-box-sizing: content-box !important;
   -ms-box-sizing: content-box !important;
   box-sizing: content-box !important;
+  -webkit-text-size-adjust:none;
   line-height: 1;
   width: 100%;
   height: 100%;
 }
 
+
 /* Portrait orientation */
 @media only screen and (orientation: portrait) {
   .container {
-    max-width: 1024px!important;
+    max-width: 1024px !important;
   }
+
   /* MOB VERZIJA */
   .mob-container {
     width: 100%;
@@ -150,11 +211,7 @@ html {
     outline: none;
   }
 
-  #tvoj-rezultat-polje button:active {
-    background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
+
 
   #tvoj-rezultat-video {
     height: 18em;
@@ -191,7 +248,7 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0!important;
+    padding: 0 !important;
     grid-area: photo;
     text-align: center;
   }
@@ -230,7 +287,7 @@ html {
   }
 
   #izazov-tekst {
-    padding-bottom: 1em!important;
+    padding-bottom: 1em !important;
   }
 
   #izazov-tekst h1 {
@@ -269,7 +326,7 @@ html {
     background-color: #D1F0DE;
   }
 
-  
+
 
   .form-container h2 {
     font-family: 'Segoe UI',
@@ -375,20 +432,6 @@ html {
     outline: none;
   }
 
-  .card-odgovori button:hover {
-    background-color: #047235;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
-
-  .card-odgovori button:active {
-    background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
-
-
-
 
 
 
@@ -448,12 +491,13 @@ html {
     font-size: 0.8em;
     padding: 1em;
     width: 100%;
+    min-width: 224px;
     background-color: #E2DEDD;
     font-weight: 500;
     color: #777;
     letter-spacing: 0.5px;
     margin-bottom: 1px;
-        
+
   }
 
   .form-controller input:focus {
@@ -514,17 +558,17 @@ html {
     outline: none;
   }
 
-  .flobian-form button:active {
-    background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
+
+
+
 
 
 
 
   /* Tablets (portrait) ******************************************************************************************************/
-  @media (min-width: 768px) {     /* Normal tablets portrait */
+  @media (min-width: 768px) {
+
+    /* Normal tablets portrait */
     .card-wrapper {
       width: 60vw;
     }
@@ -548,7 +592,7 @@ html {
     }
 
     #saznaj-vise>.row {
-      width: inherit!important;
+      width: inherit !important;
       overflow: hidden;
     }
 
@@ -567,7 +611,7 @@ html {
     }
 
     #prikljuci-se-form {
-      padding: 7em!important;
+      padding: 7em !important;
     }
 
     .form-controller input {
@@ -590,12 +634,14 @@ html {
       width: 55%;
     }
 
-      
 
-    
+
+
   }
 
-  @media (min-width: 1000px) {    /* Big tablets portrait */
+  @media (min-width: 1000px) {
+
+    /* Big tablets portrait */
     .card-wrapper {
       width: 60vw;
     }
@@ -676,72 +722,129 @@ html {
     opacity: 0;
   }
 
-    #upitnik img {
-      -webkit-transition: opacity 1s ease-in-out;
-      -moz-transition: opacity 1s ease-in-out;
-      -o-transition: opacity 1s ease-in-out;
-      transition: opacity 1s ease-in-out;
+  #upitnik img {
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+  }
+
+  .fade-in {
+    animation: fadeIn ease 1s;
+    -webkit-animation: fadeIn ease 1s;
+    -moz-animation: fadeIn ease 1s;
+    -o-animation: fadeIn ease 1s;
+    -ms-animation: fadeIn ease 1s;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-moz-keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-o-keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-ms-keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .fade-out {
+    animation: fadeOut ease 1s;
+    -webkit-animation: fadeOut ease 1s;
+    -moz-animation: fadeOut ease 1s;
+    -o-animation: fadeOut ease 1s;
+    -ms-animation: fadeOut ease 1s;
+  }
+
+  @keyframes fadeOut {
+    0% {
       opacity: 1;
     }
 
-    .fade-in {
-      animation: fadeIn ease 1s;
-      -webkit-animation: fadeIn ease 1s;
-      -moz-animation: fadeIn ease 1s;
-      -o-animation: fadeIn ease 1s;
-      -ms-animation: fadeIn ease 1s;
+    100% {
+      opacity: 0;
     }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @-moz-keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @-webkit-keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @-o-keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @-ms-keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
   }
 
+  @-moz-keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @-webkit-keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @-o-keyframes fadeOut {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-ms-keyframes fadeOut {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 
 
   .card-wrapper {
@@ -842,17 +945,7 @@ html {
     outline: none;
   }
 
-  .card-odgovori button:hover {
-    background-color: #047235;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
 
-  .card-odgovori button:active {
-    background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
 
 
   #rezultat-wrapper {
@@ -901,11 +994,7 @@ html {
     outline: none;
   }
 
-  #tvoj-rezultat-polje button:active {
-    background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
+
 
   #tvoj-rezultat-video {
     height: 20em;
@@ -927,7 +1016,7 @@ html {
     padding: .1rem !important;
   }
 
-  
+
   #izazov-slika {
     display: flex;
     flex-direction: column;
@@ -1015,7 +1104,7 @@ html {
     position: relative;
     height: 1em;
     width: 50%;
-    margin: 0 1em 2em 1em;   
+    margin: 0 1em 2em 1em;
   }
 
   #progress-container span {
@@ -1157,11 +1246,8 @@ html {
     outline: none;
   }
 
-  .flobian-form button:active {
-    background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
+
+
 
 
   /* Small phones landcape ***********************************************************************************************************/
@@ -1171,6 +1257,7 @@ html {
       height: 26vh;
       padding: 0;
     }
+
     .card-pitanje p {
       font-size: 0.74em;
     }
@@ -1187,7 +1274,7 @@ html {
       font-size: 0.6em;
       font-weight: normal;
     }
-    
+
     #dalje {
       align-items: center;
       justify-content: center;
@@ -1197,8 +1284,8 @@ html {
     #dalje img {
       width: 2em;
     }
-
   }
+
   /* Bigger phones landcape ***********************************************************************************************************/
   @media (min-width: 640px) and (orientation: landscape) {
 
@@ -1238,6 +1325,7 @@ html {
     }
 
   }
+
   /* Normal tablets landcape ***********************************************************************************************************/
   @media (min-width: 900px) and (orientation: landscape) {
 
@@ -1255,10 +1343,10 @@ html {
     }
 
     .card-odgovori button {
-      font-size: 1.3em!important;
+      font-size: 1.3em !important;
     }
 
-    #rezultat-wrapper > container {
+    #rezultat-wrapper>container {
       padding: 5em;
     }
 
@@ -1269,11 +1357,11 @@ html {
     #rezultat-wrapper>.container {
       max-width: 992px;
     }
-    
-    #saznaj-vise > row{
-      padding: 0!important;
+
+    #saznaj-vise>row {
+      padding: 0 !important;
     }
-    
+
     #progress-container span {
       font-size: 1em;
     }
@@ -1305,7 +1393,7 @@ html {
     .card-odgovori button:first-child {
       margin-bottom: 0.4em !important;
     }
-    
+
     #prikljuci-se-form {
       padding: 3em 20em !important;
     }
@@ -1340,7 +1428,7 @@ html {
 
     #tvoj-rezultat-polje h2 {
       font-size: 2.4em;
-    } 
+    }
 
     #prikljuci-se-form {
       padding: 0em 11em !important;
@@ -1352,80 +1440,17 @@ html {
 
   }
 
-  /* laptops landcape ***********************************************************************************************************/
-  /* @media (min-width: 1300px) and (orientation: landscape) {
-
-    #progress-container {
-      margin-bottom: 5em;
-    }
-
-    #progress-container span {
-      font-size: 1.1em;
-      font-weight: bold;
-      color: #868686;
-    }
-
-    .card-pitanje p {
-      font-size: 1.8em;
-    }
-
-    .card-odgovori button {
-      font-size: 1.8em !important;
-    }
-    
-    #prikljuci-se-form {
-      padding: 3em 20em !important;
-    }
-
-    .saznaj-vise-ikonice {
-      padding: .4rem !important;
-    }
-
-    #prikljuci-se-form {
-      padding: 3em 11em !important;
-    }
-
-    .form-controller input {
-      font-size: 1.3em;
-    }
-
-    .flobian-form button {
-      font-size: 1.3em;
-      width: 50%;
-      padding: 0.8em;
-    }
-
-    .form-controller small {
-      width: 100%;
-      text-align: right;
-      padding-right: 3%;
-    }
-
-    #tvoj-rezultat-video {
-      align-self: center;
-    }
-
-    #tvoj-rezultat-polje h2 {
-      font-size: 2.4em;
-    } 
-
-    #prikljuci-se-form {
-      padding: 0em 11em !important;
-    }
-
-    .form-container h2 {
-      padding-bottom: 1em;
-    }
-
-   
-    
-
-  } */
-
+  
 }
-
-
-
+@media (hover:none) {
+/* start mobile styles */
+select, textarea, input[type=”text”], input[type=”password”],
+input[type=”datetime”], input[type=”datetime-local”],
+input[type=”date”], input[type=”month”], input[type=”time”],
+input[type=”week”], input[type=”number”], input[type=”email”],
+input[type=”url”]{ font-size: 16px!important; }
+/* end mobile styles */
+}
 
 
 

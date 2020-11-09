@@ -80,7 +80,7 @@ const kviz = (function () {
 
 	function brojPozitivnihOdogovora(userOdgovori) {
 		let pozitivniOdgovori = 0;
-		
+
 		for (const obj of userOdgovori) {  // iteracija odgovora korisnika i popunjavanje array-a pozitivnim odgovorima
 			if (obj.odgovor === "DA") {
 				pozitivniOdgovori++;
@@ -197,6 +197,16 @@ const kvizView = (function () {
 	let savetiZaPrikazArr = [];
 	let rezultatTekst = '';
 
+	$("input[type=text], textarea").mouseover(zoomDisable).mousedown(zoomEnable);
+function zoomDisable(){
+  $('head meta[name=viewport]').remove();
+  $('head').prepend('<meta name="viewport" content="user-scalable=0" />');
+}
+function zoomEnable(){
+  $('head meta[name=viewport]').remove();
+  $('head').prepend('<meta name="viewport" content="user-scalable=1" />');
+}
+
 	let scrolldiv = function () {
 		poljeFormulara.scrollIntoView();
 	}
@@ -236,7 +246,7 @@ const kvizView = (function () {
 						<div id="tvoj-rezultat-polje" class="col-12 col-sm-6 py-3 px-4">
 							<h2 class="mb-3">TVOJ REZULTAT</h2>
 							<p>${rezultatTekst}</p>
-							<button id="scroll-btn" type="button">UČESTVUJ U IZAZOVU</button>
+							<button id="scroll-btn" class="delayed" type="button">UČESTVUJ U IZAZOVU</button>
 						</div>
 						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: auto;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
 					</div>
@@ -301,7 +311,7 @@ const kvizView = (function () {
 										<i class="fas fa-exclamation-circle"></i>
 										<small>Error message</small>
 									</div>
-									<button id="postDataButton" class="mt-md-3">PRIJAVI SE</button>
+									<button id="postDataButton" class="mt-md-3 delayed">PRIJAVI SE</button>
 								</form>
 								</div>
 							</div>
@@ -327,16 +337,14 @@ const kvizView = (function () {
 		let progressContainer = document.getElementById('progress-container');
 		let poljeUpitnika = document.getElementById('upitnik');
 
+		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;  // progress span
 
-		// progress span
-		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;
-
-		// obrisi staru pozadinu ako postoji
-		if (poljeUpitnika.firstElementChild.tagName === 'IMG') {
+		if (poljeUpitnika.firstElementChild.tagName === 'IMG') { // obrisi staru pozadinu ako postoji
+			poljeUpitnika.firstElementChild.classList.add('fade-out');
 			poljeUpitnika.firstElementChild.remove()
 		}
 
-		poljeSlike.innerHTML = `<img src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`;
+		poljeSlike.innerHTML = `<img class="fade-in" src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`;
 
 		// ubaci novu pozadinu
 		poljeUpitnika.insertAdjacentHTML('afterBegin', `<img id="background-image" class="" src="img/desk/desk_${upitnik.RBPitanja + 1}.jpg" alt="">`);
@@ -363,7 +371,7 @@ const kvizView = (function () {
 		const kliknutiOdgovor = event.target.dataset.odgovor;
 
 		function pushAnswers() { // on click dopuni odgovori array sa pitanjem i odogovorom
-			
+
 			kviz.odgovori.push({
 				pitanje: upitnik.getPitanje().tekst,
 				odgovor: kliknutiOdgovor,
@@ -405,17 +413,22 @@ const kvizController = (function () {
 	let poslednjiKorak = document.getElementById('rezultat-wrapper');
 
 	// on page load
+	window.addEventListener('load', function () { // fix delay on touch devices
+		new FastClick(document.body);
+	}, false); 
 	kvizView.prikaziPitanje(upitnik);  // prikaz kartice sa pitanjima
 
 	// event handlers
 	poljeOdgovora.addEventListener('click', () => {  // hendler za klik na dugme za odgovor
 		kvizView.handleAnswerKlik(upitnik);
-	}); 
+	});
 
 	poslednjiKorak.addEventListener('submit', event => {  // hendler za klik na dugme za submit */
 		event.preventDefault();
 		submitBtnHandler(postData, kviz.odgovori);
 	})
+
+
 
 })(kviz, kvizView);
 
