@@ -6,7 +6,7 @@
   zoom: 1.0;
 }
 
-@font-face {
+/* @font-face {
   font-family: 'Segoe UI Local';
   src: local('Segoe UI Light');
   font-weight: 100;
@@ -60,12 +60,13 @@
   src: url('https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semibold.woff2') format('woff2'), url('https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semibold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
-}
+} */
 
 
 body,
 html {
   background-color: #fafafa;
+  font-size: 16px;
   font-family: 'Segoe UI', 'Segoe UI Local', sans-serif;
   margin: 0px;
   padding: 0px;
@@ -78,11 +79,20 @@ html {
   height: 100%;
 }
 
+@-moz-document url-prefix() {
+  body {
+    font-size: 16px;
+  }
+}
+
+
+
 /* Portrait orientation */
 @media only screen and (orientation: portrait) {
   .container {
-    max-width: 1024px!important;
+    max-width: 1024px !important;
   }
+
   /* MOB VERZIJA */
   .mob-container {
     width: 100%;
@@ -102,7 +112,7 @@ html {
 
   .card-wrapper {
     position: relative;
-    height: calc(100vh - 30vw);
+    height: auto;
     /* // za varijantu rotiranog mobilnog disablovati */
     width: 100vw;
   }
@@ -115,7 +125,6 @@ html {
   }
 
   #tvoj-rezultat-polje h2 {
-    /*  */
     font-family: 'Segoe UI', 'Segoe UI Local', sans-serif;
     color: #047235;
     font-size: 1.2em;
@@ -126,11 +135,11 @@ html {
     font-family: 'Segoe UI',
       'Segoe UI Local',
       sans-serif;
-    line-height: 1.5;
+    line-height: 1.4;
     color: #282828;
-    font-size: 0.9em;
-    font-weight: lighter;
-    letter-spacing: 1px;
+    font-size: 14px;
+    /* font-weight: lighter; */
+    letter-spacing: 0.06em;
   }
 
   #tvoj-rezultat-polje button {
@@ -148,11 +157,11 @@ html {
     overflow: hidden;
     width: 14.5em;
     outline: none;
+    
   }
 
   #tvoj-rezultat-polje button:active {
-    background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
+    background-color:#047235;
     outline: none;
   }
 
@@ -191,7 +200,7 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0!important;
+    padding: 0 !important;
     grid-area: photo;
     text-align: center;
   }
@@ -230,7 +239,7 @@ html {
   }
 
   #izazov-tekst {
-    padding-bottom: 1em!important;
+    padding-bottom: 1em !important;
   }
 
   #izazov-tekst h1 {
@@ -269,17 +278,6 @@ html {
     background-color: #D1F0DE;
   }
 
-  
-
-  .form-container h2 {
-    font-family: 'Segoe UI',
-      'Segoe UI Local',
-      sans-serif;
-    font-size: 1.4em;
-    color: #047235;
-    font-weight: bold;
-  }
-
   #progress-container {
     /* height: 0;
     text-align: center; */
@@ -303,10 +301,12 @@ html {
   }
 
   .card-pitanje {
-    height: 16%;
+    height: 10.6vh;
+    min-height: min-content;
     margin: 0em 1em 0.4em 1em;
     text-align: center;
     padding: 0 0.8em;
+    padding-top: 0.2em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -315,13 +315,13 @@ html {
   }
 
   .card-pitanje p {
-    font-family: 'Segoe UI',
-      'Segoe UI Local',
-      sans-serif;
-    font-size: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.1em;
     color: #047235;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 0;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
 
 
@@ -334,7 +334,7 @@ html {
     } */
 
   .card-slika {
-    height: 65%;
+    height: 52vh;
     display: block;
     margin: 0.5em 0.5em 0 0.5em;
     border: 0px solid;
@@ -353,39 +353,37 @@ html {
       'Segoe UI Local',
       sans-serif;
     display: flex;
-    height: 20%;
+    height: 17vh;
     flex-direction: column;
     justify-content: space-around;
     margin: 0em 1.5em;
   }
 
   .card-odgovori button {
-    height: 2.9em;
+    /* height: 2.9em; */
+    height: 7.4vh;
     background-color: #707070;
     font-size: 1.3em;
     font-weight: bold;
     color: #fafafa;
     border-radius: 18px;
-    border: rgba(1, 1, 1, 0) solid;
+    border: transparent solid 1px;
     outline: none;
+    
   }
 
-  .card-odgovori button:first-child {
+  /* .card-odgovori button:active {
+    background-color: #035327;
+    -webkit-tap-highlight-color: #035327;
+    outline: none;
+    animation-name: touchActive;
+    animation-duration: 300ms;
+  } */
+
+  /* .card-odgovori button:first-child {
     margin-bottom: 0.2em !important;
     outline: none;
-  }
-
-  .card-odgovori button:hover {
-    background-color: #047235;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
-
-  .card-odgovori button:active {
-    background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
+  } */
 
 
 
@@ -401,6 +399,15 @@ html {
     max-width: 100%;
     /* padding: 2em; */
     text-align: center;
+  }
+
+  .form-container h2 {
+    font-family: 'Segoe UI',
+      'Segoe UI Local',
+      sans-serif;
+    font-size: 1.4em;
+    color: #047235;
+    font-weight: bold;
   }
 
   .form-container p {
@@ -453,7 +460,7 @@ html {
     color: #777;
     letter-spacing: 0.5px;
     margin-bottom: 1px;
-        
+
   }
 
   .form-controller input:focus {
@@ -489,7 +496,7 @@ html {
   .form-controller small {
     color: #e74c3c;
     position: absolute;
-    bottom: 0.5em;
+    /* bottom: 0.5em; */
     visibility: hidden;
     transform: translateX(-50%);
     width: 100%;
@@ -512,11 +519,11 @@ html {
     margin-top: 0.2em;
     width: 70%;
     outline: none;
+    
   }
 
   .flobian-form button:active {
     background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
     outline: none;
   }
 
@@ -524,7 +531,9 @@ html {
 
 
   /* Tablets (portrait) ******************************************************************************************************/
-  @media (min-width: 768px) {     /* Normal tablets portrait */
+  @media (min-width: 768px) {
+
+    /* Normal tablets portrait */
     .card-wrapper {
       width: 60vw;
     }
@@ -548,7 +557,7 @@ html {
     }
 
     #saznaj-vise>.row {
-      width: inherit!important;
+      width: inherit !important;
       overflow: hidden;
     }
 
@@ -567,7 +576,7 @@ html {
     }
 
     #prikljuci-se-form {
-      padding: 7em!important;
+      padding: 7em !important;
     }
 
     .form-controller input {
@@ -590,12 +599,14 @@ html {
       width: 55%;
     }
 
-      
 
-    
+
+
   }
 
-  @media (min-width: 1000px) {    /* Big tablets portrait */
+  @media (min-width: 1000px) {
+
+    /* Big tablets portrait */
     .card-wrapper {
       width: 60vw;
     }
@@ -676,70 +687,70 @@ html {
     opacity: 0;
   }
 
-    #upitnik img {
-      -webkit-transition: opacity 1s ease-in-out;
-      -moz-transition: opacity 1s ease-in-out;
-      -o-transition: opacity 1s ease-in-out;
-      transition: opacity 1s ease-in-out;
+  #upitnik img {
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+  }
+
+  .fade-in {
+    animation: fadeIn ease 1s;
+    -webkit-animation: fadeIn ease 1s;
+    -moz-animation: fadeIn ease 1s;
+    -o-animation: fadeIn ease 1s;
+    -ms-animation: fadeIn ease 1s;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
       opacity: 1;
     }
+  }
 
-    .fade-in {
-      animation: fadeIn ease 1s;
-      -webkit-animation: fadeIn ease 1s;
-      -moz-animation: fadeIn ease 1s;
-      -o-animation: fadeIn ease 1s;
-      -ms-animation: fadeIn ease 1s;
+  @-moz-keyframes fadeIn {
+    0% {
+      opacity: 0;
     }
 
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
+    100% {
+      opacity: 1;
+    }
+  }
 
-      100% {
-        opacity: 1;
-      }
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity: 0;
     }
 
-    @-moz-keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
+    100% {
+      opacity: 1;
+    }
+  }
 
-      100% {
-        opacity: 1;
-      }
+  @-o-keyframes fadeIn {
+    0% {
+      opacity: 0;
     }
 
-    @-webkit-keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
+    100% {
+      opacity: 1;
+    }
+  }
 
-      100% {
-        opacity: 1;
-      }
+  @-ms-keyframes fadeIn {
+    0% {
+      opacity: 0;
     }
 
-    @-o-keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
+    100% {
+      opacity: 1;
     }
-
-    @-ms-keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
   }
 
 
@@ -834,23 +845,10 @@ html {
     border-radius: 0.8em;
     border: rgba(1, 1, 1, 0) 0px solid;
     outline: none;
-
   }
 
   .card-odgovori button:first-child {
     margin-bottom: 0.2em !important;
-    outline: none;
-  }
-
-  .card-odgovori button:hover {
-    background-color: #047235;
-    -webkit-tap-highlight-color: #047235;
-    outline: none;
-  }
-
-  .card-odgovori button:active {
-    background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
     outline: none;
   }
 
@@ -880,7 +878,7 @@ html {
     line-height: 1.5;
     color: #282828;
     font-size: 1.1em;
-    font-weight: lighter;
+    /* font-weight: lighter; */
     letter-spacing: 1px;
   }
 
@@ -927,7 +925,7 @@ html {
     padding: .1rem !important;
   }
 
-  
+
   #izazov-slika {
     display: flex;
     flex-direction: column;
@@ -1015,7 +1013,7 @@ html {
     position: relative;
     height: 1em;
     width: 50%;
-    margin: 0 1em 2em 1em;   
+    margin: 0 1em 2em 1em;
   }
 
   #progress-container span {
@@ -1161,7 +1159,6 @@ html {
 
   .flobian-form button:active {
     background-color: #035327;
-    -webkit-tap-highlight-color: #047235;
     outline: none;
   }
 
@@ -1184,6 +1181,7 @@ html {
       height: 26vh;
       padding: 0;
     }
+
     .card-pitanje p {
       font-size: 0.74em;
     }
@@ -1206,6 +1204,7 @@ html {
     }
 
   }
+
   /* Bigger phones landcape ***********************************************************************************************************/
   @media (min-width: 640px) and (orientation: landscape) {
 
@@ -1245,6 +1244,7 @@ html {
     }
 
   }
+
   /* Normal tablets landcape ***********************************************************************************************************/
   @media (min-width: 900px) and (orientation: landscape) {
 
@@ -1262,10 +1262,10 @@ html {
     }
 
     .card-odgovori button {
-      font-size: 1.3em!important;
+      font-size: 1.3em !important;
     }
 
-    #rezultat-wrapper > container {
+    #rezultat-wrapper>container {
       padding: 5em;
     }
 
@@ -1276,11 +1276,11 @@ html {
     #rezultat-wrapper>.container {
       max-width: 992px;
     }
-    
-    #saznaj-vise > row{
-      padding: 0!important;
+
+    #saznaj-vise>row {
+      padding: 0 !important;
     }
-    
+
     #progress-container span {
       font-size: 1em;
     }
@@ -1309,7 +1309,7 @@ html {
     .card-odgovori button {
       font-size: 1.8em !important;
     }
-    
+
     #prikljuci-se-form {
       padding: 3em 20em !important;
     }
@@ -1344,7 +1344,7 @@ html {
 
     #tvoj-rezultat-polje h2 {
       font-size: 2.4em;
-    } 
+    }
 
     #prikljuci-se-form {
       padding: 0em 11em !important;
@@ -1354,21 +1354,136 @@ html {
       padding-bottom: 1em;
     }
 
-   
-    
+
+
 
   }
 
 
 }
 
+/* @media (hover: hover) and (pointer: fine) {
+  .card-odgovori button:hover {
+    background-color: #047235;
+    -webkit-tap-highlight-color: #047235;
+    outline: none;
+  }
+
+  .card-odgovori button:active {
+    background-color: #035327;
+    -webkit-tap-highlight-color: #047235;
+    outline: none;
+  }
+
+  #tvoj-rezultat-polje button:active {
+    background-color: #035327;
+    -webkit-tap-highlight-color: #047235;
+    outline: none;
+  }
+
+  .flobian-form button:active {
+    background-color: #035327;
+    -webkit-tap-highlight-color: #047235;
+    outline: none;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+
+  @-moz-document url-prefix() {
+    body {
+      font-size: 14px;
+    }
+
+    #tvoj-rezultat-polje p {
+      line-height: 1.4;
+      color: #282828;
+      font-size: 14px;
+      
+      letter-spacing: 0.06em;
+    }
+  }
 
 
 
+  @keyframes touchActive {
+    0% {
+      background-color: #035327;
+    }
+
+    100% {
+      background-color: #035327;
+    }
+  }
+
+  .card-odgovori button:active {
+    background-color: #035327;
+    outline: none;
+    animation-name: touchActive;
+    animation-duration: 2000ms;
+  }
+} */
+
+@media (pointer: coarse) {
+
+  @-moz-document url-prefix() {
+    body {
+      font-size: 14px;
+    }
+
+    #tvoj-rezultat-polje p {
+      line-height: 1.4;
+      color: #282828;
+      font-size: 14px;
+
+      letter-spacing: 0.06em;
+    }
+  }
 
 
+    /* @keyframes touchActive {
+      0% {
+        background-color: #035327;
+      }
+
+      100% {
+        background-color: #035327;
+      }
+    } */
+
+    
+
+    .card-odgovori button:active {
+      background-color: #035327;
+      outline: none;
+      transform: translateY(1px);
+      /* animation-name: touchActive;
+      animation-duration: 1000ms; */
+    }
+
+    
+
+    
+
+}
 
 
+@media (hover: hover) and (pointer: fine) {
+  
+
+  .card-odgovori button:hover {
+    background-color: #047235;
+  }
+
+  .card-odgovori button:active {
+    background-color: #035327;
+    -webkit-tap-highlight-color: #035327;
+  }
+}
+
+.safariBtn {
+  -webkit-tap-highlight-color: #035327;
+}
 
 
 
