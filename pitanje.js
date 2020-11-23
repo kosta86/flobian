@@ -121,7 +121,7 @@ const kviz = (function () {
 			if (imeValue === '') {
 				setErrorFor(imeInput, 'Polje ne može biti prazno');
 			} else if (!isName(imeValue)) {
-				setErrorFor(imeInput, 'Ime moze sadrzati samo slova');
+				setErrorFor(imeInput, 'Ime može sadržati samo slova');
 			} else {
 				setSuccessFor(imeInput);
 			}
@@ -198,7 +198,7 @@ const kvizView = (function () {
 	let poljeUpitnika = document.getElementById('upitnik');
 	let savetiZaPrikazArr = [];
 	let rezultatTekst = '';
-	let video_link = '';
+	let videoLinkId = '';
 
 
 	$("input[type=text], textarea").mouseover(zoomDisable).mousedown(zoomEnable);
@@ -231,22 +231,20 @@ function zoomEnable(){
 			if (savetiZaPrikazArr.length >= 0 && savetiZaPrikazArr.length < 3) {
 
 				rezultatTekst = `${ponudjeniSaveti['1-2'].text}`;
-				video_link = `${ponudjeniSaveti['1-2'].video}`;
+				videoLinkId = `${ponudjeniSaveti['1-2'].video}`;
 			}
 
 			if (savetiZaPrikazArr.length > 2 && savetiZaPrikazArr.length < 8) {
 
 				rezultatTekst = `${ponudjeniSaveti['3-7'].text}`;
-				video_link = `${ponudjeniSaveti['3-7'].video}`;
+				videoLinkId = `${ponudjeniSaveti['3-7'].video}`;
 			}
 
 			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr.length <= 10) {
 
 				rezultatTekst = `${ponudjeniSaveti['8-10'].text}`;
-				video_link = `${ponudjeniSaveti['8-10'].video}`;
+				videoLinkId = `${ponudjeniSaveti['8-10'].video}`;
 			}
-
-			{/* <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="788.54" height="443" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"><div><small><a href="https://youtubeembedcode.com/pl/">youtubeembedcode.com/pl/</a></small></div><div><small><a href="https://www.smartmenus.org/">buy fast web traffic</a></small></div><div><small><a href="https://youtubeembedcode.com/pl/">youtubeembedcode pl</a></small></div><div><small><a href="https://www.hostsearch.com/">ultimate Web traffic</a></small></div><div><small><a href="https://youtubeembedcode.com/de/">youtubeembedcode de</a></small></div><div><small><a href="https://www.jubler.org/">ultimate Web Traffic</a></small></div><div><small><a href="https://youtubeembedcode.com/es/">youtubeembedcode es</a></small></div><div><small><a href="https://www.smartmenus.org/">Ultimate Web traffic</a></small></div><div><small><a href="https://youtubeembedcode.com/en">youtubeembedcode en</a></small></div><div><small><a href="http://tr3ndygirl.com/">Ultimate web Traffic</a></small></div></iframe> */}
 
 			let HTMLRezultat = `
 			<div class="container">
@@ -258,7 +256,7 @@ function zoomEnable(){
 							<button id="scroll-btn" class="delayed" type="button">UČESTVUJ U IZAZOVU</button>
 						</div>
 						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe allow="fullscreen
-						" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/${video_link}?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: auto;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
+						" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/${videoLinkId}?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: auto;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
 					</div>
 				
 				<div id="saznaj-vise" class="mt-1 mt-md-0 pb-3">
@@ -349,15 +347,32 @@ function zoomEnable(){
 
 		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;  // progress span
 
+		console.log(poljeUpitnika.children)
+
 		if (poljeUpitnika.firstElementChild.tagName === 'IMG') { // obrisi staru pozadinu ako postoji
+			
+			poljeUpitnika.children[upitnik.RBPitanja]
+			poljeUpitnika.classList.add('fade-out');
 			poljeUpitnika.firstElementChild.classList.add('fade-out');
-			poljeUpitnika.firstElementChild.remove()
+			poljeUpitnika.classList.add('fade-in');
+			poljeUpitnika.firstElementChild.classList.add('fade-in');
+			poljeUpitnika.classList.remove('fade-out');
+			poljeUpitnika.firstElementChild.classList.remove('fade-out');
+
+			setTimeout(() => {
+				poljeUpitnika.classList.remove('fade-in');
+				poljeUpitnika.firstElementChild.classList.remove('fade-in');
+			}, 1000);
+		
+			/* poljeUpitnika.firstElementChild.remove();
+			poljeUpitnika.classList.add('fade-in'); */
+			
 		}
 
 		poljeSlike.innerHTML = `<img class="fade-in" src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`;
 
-		// ubaci novu pozadinu
-		poljeUpitnika.insertAdjacentHTML('afterBegin', `<img id="background-image" class="" src="img/desk/desk_${upitnik.RBPitanja + 1}.jpg" alt="">`);
+		/* // ubaci novu pozadinu
+		poljeUpitnika.insertAdjacentHTML('afterBegin', `<img id="background-image" class="" src="img/desk/desk_${upitnik.RBPitanja + 1}.jpg" alt="">`); */
 
 		// popuni tekst pitanja
 		poljeTekstPitanja.innerHTML = `<p>${upitnik.getPitanje().tekst}</p>`;
@@ -405,6 +420,7 @@ function zoomEnable(){
 	function scrollTo(element) {
 		element.scrollIntoView();
 	}
+
 
 	return {
 		prikaziPitanje,
