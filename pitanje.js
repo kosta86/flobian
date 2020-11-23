@@ -26,7 +26,7 @@ const kviz = (function () {
 		izgledaju,nadutost i gasovi jesu pojava koju treba lečiti. Povremeno ispoljavanje simptoma koje
 		se vezuje sa određenom hranom itd. može dovesti do maskiranja pravog uzorka. Ako budete
 		strpljivi i tretirate uzrok minimalno mesec dana, na putu ste ka dugoročno mirnom stomaku.
-		Najčešće stomačne tegobe su upravo nadutost, gasovi, abodominalan bol i loše varenje.`, 'flobian3.png', 'ts7wn31imp4', 'flobian1'),
+		Najčešće stomačne tegobe su upravo nadutost, gasovi, abodominalan bol i loše varenje.`, 'flobian1.png', 'ts7wn31imp4', 'flobian1'),
 
 		'3-7': new RezultatUpitnika(`Krajnje je vreme da se pozabavite svojim stomakom. Vaše stanje je ozbiljno ali ne i nerešivo.
 		Vaši odgovori ukazuju na veliku razdražljivost creva a tegobe koje osećate kazuju da se vaš
@@ -34,7 +34,7 @@ const kviz = (function () {
 		frekvencija javljanja istih sa tendencijom dugotrajnosti tegoba. Naoružajte se strpljenjem, i uz
 		higijensko dijetetski režim uvedite dodatni izvor energije ćelijama Vaših creva. Najčešći simptomi
 		nervoznog creva jesu nadutost, pojačana produkcija gasova i osećaj „težine“ u stomaku.
-		Pogldeajte koji su okidači koji pogoršavaju simptome`, 'flobian3.png', 'yoe7dNOFM1g', 'flobian2'),
+		Pogldeajte koji su okidači koji pogoršavaju simptome`, 'flobian2.png', 'yoe7dNOFM1g', 'flobian2'),
 
 		'8-10': new RezultatUpitnika(`Ako bismo stadijume nervoze creva opisivali bojama, Vi biste bili u crvenoj zoni. Vaši odgovori
 		ukazuju na ozbiljan stepen zapuštenosti creva. Važno je da znate da za osobe sa veoma
@@ -43,7 +43,7 @@ const kviz = (function () {
 		otklanjanje uzroka nervoze creva, promeniti životne navike i kloniti se stresnih situacija. Srećno!`, 'flobian3.png', 'K5B4QlQLxho', 'flobian3'),
 	};
 
-	function Upitnik(pitanja) {  // konstruktor koji cuva pitanja i state aplikacije
+	function Upitnik(pitanja) {  // konstruktor koji cuva pitanja i 'state' aplikacije
 		this.pitanja = pitanja;
 		this.RBPitanja = 0;
 		this.brojDaOdgovora = 0;
@@ -284,7 +284,6 @@ function zoomEnable(){
 							<ul>
 								<li>KONSULTACIJE SA STRUČNJAKOM</li>
 								<li>TOKOM TERAPIJE 33% GRATIS</li>
-								<li>GARANCIJA ILI VRAĆAMO NOVAC</li>
 							</ul>
 						</div>
 						<div id="izazov-slika" class="col-12 col-sm-6 py-4 py-md-5 px-4">
@@ -349,30 +348,14 @@ function zoomEnable(){
 
 		console.log(poljeUpitnika.children)
 
-		if (poljeUpitnika.firstElementChild.tagName === 'IMG') { // obrisi staru pozadinu ako postoji
-			
-			poljeUpitnika.children[upitnik.RBPitanja]
-			poljeUpitnika.classList.add('fade-out');
-			poljeUpitnika.firstElementChild.classList.add('fade-out');
-			poljeUpitnika.classList.add('fade-in');
-			poljeUpitnika.firstElementChild.classList.add('fade-in');
-			poljeUpitnika.classList.remove('fade-out');
-			poljeUpitnika.firstElementChild.classList.remove('fade-out');
-
-			setTimeout(() => {
-				poljeUpitnika.classList.remove('fade-in');
-				poljeUpitnika.firstElementChild.classList.remove('fade-in');
-			}, 1000);
-		
-			/* poljeUpitnika.firstElementChild.remove();
-			poljeUpitnika.classList.add('fade-in'); */
-			
+		// menjanje pozadine za desk
+		if (poljeUpitnika.firstElementChild.tagName === 'IMG' && poljeUpitnika.children[upitnik.RBPitanja].style.display === 'none') { 
+			poljeUpitnika.children[upitnik.RBPitanja - 1].style.display = 'none';
+			poljeUpitnika.children[upitnik.RBPitanja].style.display = 'block';
 		}
 
+		//menjanje slike pitanja za mob
 		poljeSlike.innerHTML = `<img class="fade-in" src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`;
-
-		/* // ubaci novu pozadinu
-		poljeUpitnika.insertAdjacentHTML('afterBegin', `<img id="background-image" class="" src="img/desk/desk_${upitnik.RBPitanja + 1}.jpg" alt="">`); */
 
 		// popuni tekst pitanja
 		poljeTekstPitanja.innerHTML = `<p>${upitnik.getPitanje().tekst}</p>`;

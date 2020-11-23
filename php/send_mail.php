@@ -26,7 +26,7 @@ $recived_array = json_decode($requestPayload, true);
 
 } */
 
-var_dump(dirname(__DIR__));
+/* var_dump(dirname(__DIR__)); */
 function setup_phpmailer()
 {
   require '/home/kostajov/vendor/phpmailer/phpmailer/src/PHPMailer.php';
@@ -49,14 +49,14 @@ function setup_phpmailer()
       'allow_self_signed' => true
     )
   );
-  $mail->SMTPDebug = 2;                     // Enable verbose debug output
+  $mail->SMTPDebug = 2;                                       // Enable verbose debug output
   $mail->Debugoutput = 'error_log';
   $mail->SMTPSecure = 'ssl';
   $mail->isSMTP();                                            // Send using SMTP
-  $mail->Host       = 'kostajovanovic.a2hosted.com';                    // Set the SMTP server to send through
+  $mail->Host       = 'kostajovanovic.a2hosted.com';          // Set the SMTP server to send through
   $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-  $mail->Username   = 'keto@kostajovanovic.a2hosted.com';                     // SMTP username
-  $mail->Password   = 'Keto12345678*';                                      // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+  $mail->Username   = 'keto@kostajovanovic.a2hosted.com';     // SMTP username
+  $mail->Password   = 'Keto12345678*';                        // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
   $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
 
@@ -118,8 +118,8 @@ function send_mail_plan_to_subscribers($user_ime, $user_email, $user_telefon, $b
 
 
   //Recipients
-  $mail->setFrom('flobian@kostajovanovic.a2hosted.com');
-  $mail->addAddress('kosta.jovanovic86@gmail.com', $user_ime);     // Add a recipient
+  $mail->setFrom('flobian-kviz@flobian.com');
+  $mail->addAddress('poruci@proton.rs', 'flobian-kviz');     // Add a recipient
 
   // Content
   $mail->isHTML(true);                                  // Set email format to HTML

@@ -762,11 +762,11 @@ html {
   @keyframes fadeIn {
     0% {
       opacity: 0;
-    }
+    };
 
     100% {
       opacity: 1;
-    }
+    };
   }
 
   @-moz-keyframes fadeIn {
@@ -1049,7 +1049,7 @@ html {
     font-family: 'Arial', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     padding: 1em;
-    line-height: 1.4;
+    line-height: 1.8;
     color: #047235;
     font-size: 1.1em;
     list-style-position: outside;
