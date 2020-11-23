@@ -144,6 +144,7 @@ html {
 
 /* Portrait orientation */
 @media only screen and (orientation: portrait) {
+
   .container {
     max-width: 1024px !important;
   }
@@ -162,7 +163,7 @@ html {
   }
 
   #background-image {
-    display: none;
+    display: none !important;
   }
 
   .card-wrapper {
@@ -759,54 +760,60 @@ html {
     -ms-animation: fadeIn ease 1s;
   }
 
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    };
-
-    100% {
-      opacity: 1;
-    };
-  }
+  
 
   @-moz-keyframes fadeIn {
     0% {
       opacity: 0;
-    }
+    };
 
     100% {
       opacity: 1;
-    }
+    };
   }
 
   @-webkit-keyframes fadeIn {
     0% {
       opacity: 0;
-    }
+    };
 
     100% {
       opacity: 1;
-    }
+    };
   }
 
   @-o-keyframes fadeIn {
     0% {
       opacity: 0;
-    }
+    };
 
     100% {
       opacity: 1;
-    }
+    };
   }
 
   @-ms-keyframes fadeIn {
     0% {
       opacity: 0;
+    };
+
+    100% {
+      opacity: 1;
+    };
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
     }
+
+    ;
 
     100% {
       opacity: 1;
     }
+
+    ;
   }
 
   .fade-out {
