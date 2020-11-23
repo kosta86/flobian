@@ -755,9 +755,9 @@ html {
   .fade-in {
     animation: fadeIn ease-in 0.6s;
     -webkit-animation: fadeIn ease-in 0.6s;
-    -moz-animation: fadeIn ease-in 0.6;
-    -o-animation: fadeIn ease-in 0.6;
-    -ms-animation: fadeIn ease-in 0.6;
+    -moz-animation: fadeIn ease-in 0.6s;
+    -o-animation: fadeIn ease-in 0.6s;
+    -ms-animation: fadeIn ease-in 0.6s;
   }
 
   
