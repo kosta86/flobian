@@ -26,7 +26,7 @@ const kviz = (function () {
 		izgledaju,nadutost i gasovi jesu pojava koju treba lečiti. Povremeno ispoljavanje simptoma koje
 		se vezuje sa određenom hranom itd. može dovesti do maskiranja pravog uzorka. Ako budete
 		strpljivi i tretirate uzrok minimalno mesec dana, na putu ste ka dugoročno mirnom stomaku.
-		Najčešće stomačne tegobe su upravo nadutost, gasovi, abodominalan bol i loše varenje.`, 'bolovi.png', 'flobian1'),
+		Najčešće stomačne tegobe su upravo nadutost, gasovi, abodominalan bol i loše varenje.`, 'flobian3.png', 'ts7wn31imp4', 'flobian1'),
 
 		'3-7': new RezultatUpitnika(`Krajnje je vreme da se pozabavite svojim stomakom. Vaše stanje je ozbiljno ali ne i nerešivo.
 		Vaši odgovori ukazuju na veliku razdražljivost creva a tegobe koje osećate kazuju da se vaš
@@ -34,13 +34,13 @@ const kviz = (function () {
 		frekvencija javljanja istih sa tendencijom dugotrajnosti tegoba. Naoružajte se strpljenjem, i uz
 		higijensko dijetetski režim uvedite dodatni izvor energije ćelijama Vaših creva. Najčešći simptomi
 		nervoznog creva jesu nadutost, pojačana produkcija gasova i osećaj „težine“ u stomaku.
-		Pogldeajte koji su okidači koji pogoršavaju simptome`, 'grcevi.png', 'flobian2'),
+		Pogldeajte koji su okidači koji pogoršavaju simptome`, 'flobian3.png', 'yoe7dNOFM1g', 'flobian2'),
 
 		'8-10': new RezultatUpitnika(`Ako bismo stadijume nervoze creva opisivali bojama, Vi biste bili u crvenoj zoni. Vaši odgovori
 		ukazuju na ozbiljan stepen zapuštenosti creva. Važno je da znate da za osobe sa veoma
 		izraženim i upornim dugotrajnim tegobama nema opuštanja. Pred Vama je proces koji zahteva
 		strpljenje, smirenost i istrajnost. Neophodno je uvesti upotrebu preparata namenjenih za
-		otklanjanje uzroka nervoze creva, promeniti životne navike i kloniti se stresnih situacija. Srećno!`, 'gasovi.png', 'flobian3'),
+		otklanjanje uzroka nervoze creva, promeniti životne navike i kloniti se stresnih situacija. Srećno!`, 'flobian3.png', 'K5B4QlQLxho', 'flobian3'),
 	};
 
 	function Upitnik(pitanja) {  // konstruktor koji cuva pitanja i state aplikacije
@@ -198,6 +198,8 @@ const kvizView = (function () {
 	let poljeUpitnika = document.getElementById('upitnik');
 	let savetiZaPrikazArr = [];
 	let rezultatTekst = '';
+	let video_link = '';
+
 
 	$("input[type=text], textarea").mouseover(zoomDisable).mousedown(zoomEnable);
 function zoomDisable(){
@@ -229,17 +231,22 @@ function zoomEnable(){
 			if (savetiZaPrikazArr.length >= 0 && savetiZaPrikazArr.length < 3) {
 
 				rezultatTekst = `${ponudjeniSaveti['1-2'].text}`;
+				video_link = `${ponudjeniSaveti['1-2'].video}`;
 			}
 
 			if (savetiZaPrikazArr.length > 2 && savetiZaPrikazArr.length < 8) {
 
 				rezultatTekst = `${ponudjeniSaveti['3-7'].text}`;
+				video_link = `${ponudjeniSaveti['3-7'].video}`;
 			}
 
 			if (savetiZaPrikazArr.length > 7 && savetiZaPrikazArr.length <= 10) {
 
 				rezultatTekst = `${ponudjeniSaveti['8-10'].text}`;
+				video_link = `${ponudjeniSaveti['8-10'].video}`;
 			}
+
+			{/* <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="788.54" height="443" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"><div><small><a href="https://youtubeembedcode.com/pl/">youtubeembedcode.com/pl/</a></small></div><div><small><a href="https://www.smartmenus.org/">buy fast web traffic</a></small></div><div><small><a href="https://youtubeembedcode.com/pl/">youtubeembedcode pl</a></small></div><div><small><a href="https://www.hostsearch.com/">ultimate Web traffic</a></small></div><div><small><a href="https://youtubeembedcode.com/de/">youtubeembedcode de</a></small></div><div><small><a href="https://www.jubler.org/">ultimate Web Traffic</a></small></div><div><small><a href="https://youtubeembedcode.com/es/">youtubeembedcode es</a></small></div><div><small><a href="https://www.smartmenus.org/">Ultimate Web traffic</a></small></div><div><small><a href="https://youtubeembedcode.com/en">youtubeembedcode en</a></small></div><div><small><a href="http://tr3ndygirl.com/">Ultimate web Traffic</a></small></div></iframe> */}
 
 			let HTMLRezultat = `
 			<div class="container">
@@ -250,7 +257,8 @@ function zoomEnable(){
 							<p>${rezultatTekst}</p>
 							<button id="scroll-btn" class="delayed" type="button">UČESTVUJ U IZAZOVU</button>
 						</div>
-						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/DBXH9jJRaDk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: auto;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
+						<div id="tvoj-rezultat-video" class="col-12 col-sm-6" style="overflow:hidden;position: relative;"><iframe allow="fullscreen
+						" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/${video_link}?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe><div style="position: absolute;bottom: auto;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 0px;background: #fff;"> <a href="https://egymp3.com/" rel="nofollow">Egymp3</a> </small></div><style>.newst{position:relative;text-align:right;height:420px;width:520px;} #gmap_canvas img{max-width:none!important;background:none!important}</style></div><br /></div>
 					</div>
 				
 				<div id="saznaj-vise" class="mt-1 mt-md-0 pb-3">
