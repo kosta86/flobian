@@ -265,16 +265,16 @@ function zoomEnable(){
 					<h3 class="my-3">Saznaj više</h3>
 					<div class="row px-2">
 						<div class="col-3 saznaj-vise-ikonice">
-							<img id="saznaj-vise-1" src="img/gasovi.jpg" alt="ikonica gasovi" onclick="window.open('https://flobian.com/blog/muce-vas-gasovi-u-stomaku/')">
+							<img id="saznaj-vise-1" src="https://flobian.com/wp-content/uploads/2020/11/gasovi.jpg" alt="ikonica gasovi" onclick="window.open('https://flobian.com/blog/muce-vas-gasovi-u-stomaku/')">
 						</div>
 						<div class="col-3 saznaj-vise-ikonice">
-							<img id="saznaj-vise-2" src="img/grcevi.jpg" alt="ikonica grcevi" onclick="window.open('https://flobian.com/blog/grcevi-i-bol-u-stomaku/')">
+							<img id="saznaj-vise-2" src="https://flobian.com/wp-content/uploads/2020/11/grcevi.jpg" alt="ikonica grcevi" onclick="window.open('https://flobian.com/blog/grcevi-i-bol-u-stomaku/')">
 						</div>
 						<div class="col-3 saznaj-vise-ikonice">
-							<img id="saznaj-vise-3" src="img/nadutost.jpg" alt="ikonica nadutost" onclick="window.open('https://flobian.com/blog/muci-vas-nadutost/')">
+							<img id="saznaj-vise-3" src="https://flobian.com/wp-content/uploads/2020/11/nadutost.jpg" alt="ikonica nadutost" onclick="window.open('https://flobian.com/blog/muci-vas-nadutost/')">
 						</div>
 						<div class="col-3 saznaj-vise-ikonice">
-							<img id="saznaj-vise-4" src="img/tezina.jpg" alt="ikonica tezina" onclick="window.open('https://flobian.com/blog/muci-te-osecaj-tezine-u-stomaku/')">
+							<img id="saznaj-vise-4" src="https://flobian.com/wp-content/uploads/2020/11/tezina.jpg" alt="ikonica tezina" onclick="window.open('https://flobian.com/blog/muci-te-osecaj-tezine-u-stomaku/')">
 						</div>
 					</div>
 				</div>
@@ -289,10 +289,10 @@ function zoomEnable(){
 							</ul>
 						</div>
 						<div id="izazov-slika" class="col-12 col-sm-6 py-4 py-md-5 px-4">
-							<img src="img/flobian-kutije.png" alt="tezina">
+							<img src="https://flobian.com/wp-content/uploads/2020/11/flobian-kutije.png" alt="tezina">
 						</div>
 						<div id="dalje" class="col-12 pt-4 pb-2 px-4">
-							<img src="img/strelice-dole.png" alt="tezina">
+							<img src="https://flobian.com/wp-content/uploads/2020/11/strelice-dole.png" alt="tezina">
 						</div>
 					</div>
 				</div>
@@ -348,7 +348,6 @@ function zoomEnable(){
 
 		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;  // progress span
 
-		console.log(poljeUpitnika.children)
 
 		// menjanje pozadine za desk
 		if (poljeUpitnika.firstElementChild.tagName === 'IMG' && poljeUpitnika.children[upitnik.RBPitanja].style.display === 'none') { 
@@ -357,7 +356,7 @@ function zoomEnable(){
 		}
 
 		//menjanje slike pitanja za mob
-		poljeSlike.innerHTML = `<img class="fade-in" src="./img/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`;
+		poljeSlike.innerHTML = `<img class="fade-in" src="https://flobian.com/wp-content/uploads/2020/11/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`;
 
 		// popuni tekst pitanja
 		poljeTekstPitanja.innerHTML = `<p>${upitnik.getPitanje().tekst}</p>`;
