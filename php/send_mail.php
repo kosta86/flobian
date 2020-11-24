@@ -26,12 +26,12 @@ $recived_array = json_decode($requestPayload, true);
 
 } */
 
-/* var_dump(dirname(__DIR__)); */
+var_dump(dirname(__DIR__));
 function setup_phpmailer()
 {
-  require '/home/kostajov/vendor/phpmailer/phpmailer/src/PHPMailer.php';
-  require '/home/kostajov/vendor/phpmailer/phpmailer/src/SMTP.php';
-  require '/home/kostajov/vendor/phpmailer/phpmailer/src/Exception.php';
+  require '/public_html/wp-includes/PHPMailer/PHPMailer.php';
+  require '/public_html/wp-includes/PHPMailer/SMTP.php';
+  require '/public_html/wp-includes/PHPMailer/Exception.php';
   /*  require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
   require '../vendor/phpmailer/phpmailer/src/SMTP.php';
   require '../vendor/phpmailer/phpmailer/src/Exception.php'; */
@@ -53,10 +53,10 @@ function setup_phpmailer()
   $mail->Debugoutput = 'error_log';
   $mail->SMTPSecure = 'ssl';
   $mail->isSMTP();                                            // Send using SMTP
-  $mail->Host       = 'kostajovanovic.a2hosted.com';          // Set the SMTP server to send through
+  $mail->Host       = 'mail.flobian.com';          // Set the SMTP server to send through
   $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-  $mail->Username   = 'keto@kostajovanovic.a2hosted.com';     // SMTP username
-  $mail->Password   = 'Keto12345678*';                        // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+  $mail->Username   = 'kontakt@flobian.com';     // SMTP username
+  $mail->Password   = 'sk8ordiehard!';                        // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
   $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
 

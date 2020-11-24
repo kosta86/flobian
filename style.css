@@ -162,7 +162,7 @@ html {
       width: 100%; */
   }
 
-  #background-image {
+  .background-image {
     display: none !important;
   }
 
@@ -1000,6 +1000,46 @@ html {
   .saznaj-vise-ikonice {
     grid-area: photo;
     padding: .1rem !important;
+  }
+
+  .saznaj-vise-ikonice img{
+    cursor: pointer;
+  }
+
+  .saznaj-vise-ikonice img:hover {
+    /* transform: scale(1.02); */
+    animation: imgZoom ease-in 0.1s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyFrames imgZoom{
+    0% {
+      transform: scale(1.00);
+    }
+
+    10% {
+      transform: scale(1.002);
+    }
+
+    20% {
+      transform: scale(1.004);
+    }
+
+    30% {
+      transform: scale(1.006);
+    }
+
+    40% {
+      transform: scale(1.008);
+    }
+
+    50% {
+      transform: scale(1.01);
+    }
+
+    100% {
+      transform: scale(1.02);
+    }
   }
 
 

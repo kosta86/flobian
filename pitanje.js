@@ -172,6 +172,8 @@ const kviz = (function () {
 			formInputToArray('formular-prijava', odgovoriZaSlanje);
 			postData(odgovoriZaSlanje, 'php/send_mail.php');
 			postData(odgovoriZaSlanje, 'php/send_to_db.php');
+
+			window.location.replace("https://flobian.com/uspesna-prijava/"); // go to success page
 		}
 	}
 
@@ -263,16 +265,16 @@ function zoomEnable(){
 					<h3 class="my-3">Saznaj više</h3>
 					<div class="row px-2">
 						<div class="col-3 saznaj-vise-ikonice">
-							<img id="saznaj-vise-1" src="img/gasovi.jpg" alt="ikonica gasovi">
+							<img id="saznaj-vise-1" src="img/gasovi.jpg" alt="ikonica gasovi" onclick="window.open('https://flobian.com/blog/muce-vas-gasovi-u-stomaku/')">
 						</div>
 						<div class="col-3 saznaj-vise-ikonice">
-							<img id="saznaj-vise-2" src="img/grcevi.jpg" alt="ikonica grcevi">
+							<img id="saznaj-vise-2" src="img/grcevi.jpg" alt="ikonica grcevi" onclick="window.open('https://flobian.com/blog/grcevi-i-bol-u-stomaku/')">
 						</div>
 						<div class="col-3 saznaj-vise-ikonice">
-							<img id="saznaj-vise-3" src="img/nadutost.jpg" alt="ikonica nadutost">
+							<img id="saznaj-vise-3" src="img/nadutost.jpg" alt="ikonica nadutost" onclick="window.open('https://flobian.com/blog/muci-vas-nadutost/')">
 						</div>
 						<div class="col-3 saznaj-vise-ikonice">
-							<img id="saznaj-vise-4" src="img/tezina.jpg" alt="ikonica tezina">
+							<img id="saznaj-vise-4" src="img/tezina.jpg" alt="ikonica tezina" onclick="window.open('https://flobian.com/blog/muci-te-osecaj-tezine-u-stomaku/')">
 						</div>
 					</div>
 				</div>

@@ -1,11 +1,11 @@
 <?php
 
-$host = 'localhost';
-$dbname = 'flobian_db';
+$host = 'https://flobian.com/';
+$dbname = 'flobianc_kviz';
 $charset = 'utf8mb4';
 
-$username = 'kosta86';
-$password = 'kosta1986';
+$username = 'flobianc_kvizuser';
+$password = '_W?aQ(lLiLj$';
 $options = [
 			PDO::ATTR_ERRMODE 			 => PDO::ERRMODE_EXCEPTION,
 			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
