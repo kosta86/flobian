@@ -170,10 +170,10 @@ const kviz = (function () {
 
 		if (imeInput.parentElement.classList.contains('success') && emailInput.parentElement.classList.contains('success') && telefonInput.parentElement.classList.contains('success')) {
 			formInputToArray('formular-prijava', odgovoriZaSlanje);
-			postData(odgovoriZaSlanje, 'php/send_mail.php');
-			postData(odgovoriZaSlanje, 'php/send_to_db.php');
+			postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_mail.php');
+			postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_to_db.php');
 
-			window.location.replace("https://flobian.com/uspesna-prijava/"); // go to success page
+			/* window.location.replace("https://flobian.com/uspesna-prijava/"); // go to success page */
 		}
 	}
 
@@ -213,9 +213,9 @@ function zoomEnable(){
   $('head').prepend('<meta name="viewport" content="user-scalable=1" />');
 }
 
-	let scrolldiv = function () {
+	/* let scrolldiv = function () {
 		poljeFormulara.scrollIntoView();
-	}
+	} */
 
 	function prikaziRezultat(userOdgovori, ponudjeniSaveti) {
 		// obrisi polje upitnika posto je zavrsen
@@ -303,19 +303,19 @@ function zoomEnable(){
 								<h2 class="mb-md-5">PRIKLJUČI SE</h2>
 								<form id="formular-prijava" class="flobian-form">
 									<div class="form-controller">
-										<input type="text" placeholder="Ime i prezime" id="ime_input" onclick="this.scrollIntoView()" />
+										<input type="text" placeholder="Ime i prezime" id="ime_input" />
 										<i class="fas fa-check-circle"></i>
 										<i class="fas fa-exclamation-circle"></i>
 										<small>Error message</small>
 									</div>
 									<div class="form-controller">
-										<input type="text" placeholder="E-mail" id="email_input"onclick="this.scrollIntoView()" />
+										<input type="text" placeholder="E-mail" id="email_input" />
 										<i class="fas fa-check-circle"></i>
 										<i class="fas fa-exclamation-circle"></i>
 										<small>Error message</small>
 									</div>
 									<div class="form-controller">
-										<input type="text" placeholder="Broj telefona" id="telefon_input" onclick="this.scrollIntoView()" />
+										<input type="text" placeholder="Broj telefona" id="telefon_input" />
 										<i class="fas fa-check-circle"></i>
 										<i class="fas fa-exclamation-circle"></i>
 										<small>Error message</small>
@@ -356,7 +356,11 @@ function zoomEnable(){
 		}
 
 		//menjanje slike pitanja za mob
-		poljeSlike.innerHTML = `<img class="fade-in" src="https://flobian.com/wp-content/uploads/2020/11/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`;
+		if (poljeSlike.firstElementChild.tagName === 'IMG' && poljeSlike.children[upitnik.RBPitanja].style.display === 'none') {
+			poljeSlike.children[upitnik.RBPitanja - 1].style.display = 'none';
+			poljeSlike.children[upitnik.RBPitanja].style.display = 'block';
+		}
+		/* poljeSlike.innerHTML = `<img class="fade-in" src="https://flobian.com/wp-content/uploads/2020/11/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`; */
 
 		// popuni tekst pitanja
 		poljeTekstPitanja.innerHTML = `<p>${upitnik.getPitanje().tekst}</p>`;
@@ -410,7 +414,7 @@ function zoomEnable(){
 		prikaziPitanje,
 		prikaziRezultat,
 		poljeFormulara,
-		scrolldiv,
+		/* scrolldiv, */
 		handleAnswerKlik,
 		scrollTo
 	}

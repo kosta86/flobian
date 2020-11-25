@@ -1,6 +1,6 @@
 <?php
 
-$host = 'https://flobian.com/';
+$host = 'flobian.com';
 $dbname = 'flobianc_kviz';
 $charset = 'utf8mb4';
 

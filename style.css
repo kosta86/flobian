@@ -1,121 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
 
-/* @viewport {
-  width: device-width;
-  zoom: 1.0;
-} */
 
-/* @font-face {
-  font-family: 'Segoe UI Local';
-  src: local('Segoe UI Light');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Segoe UI Local';
-  src: local('Segoe UI Semilight');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Segoe UI Local';
-  src: local('Segoe UI');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Segoe UI Local';
-  src: local('Segoe UI Semibold');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Segoe UI Web (West European)';
-  src: url('https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-light.woff2') format('woff2'), url('https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-light.woff') format('woff');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Segoe UI Web (West European)';
-  src: url('https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semilight.woff2') format('woff2'), url('https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semilight.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Segoe UI Web (West European)';
-  src: url('https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-regular.woff2') format('woff2'), url('https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Segoe UI Web (West European)';
-  src: url('https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semibold.woff2') format('woff2'), url('https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semibold.woff') format('woff');
-  font-weight: 600;
-  font-style: normal;
-} */
-
-/* @media (hover: hover) and (pointer: fine) {
-  .card-odgovori button:hover {
-    background-color: #047235;
-    outline: none;
-  }
-
-  .card-odgovori button:active {
-    background-color: #035327;
-    outline: none;
-  }
-
-  #tvoj-rezultat-polje button:active {
-    background-color: #035327;
-    outline: none;
-  }
-
-  .flobian-form button:active {
-    background-color: #035327;
-    outline: none;
-  }
-}
-
-@media (hover: none) and (pointer: coarse) {
-
-  
-
-  @keyframes touchActive {
-    0% {
-      background-color: #035327;
-    }
-
-    25% {
-      background-color: #035327;
-    }
-
-    50% {
-      background-color: #035327;
-    }
-
-    100% {
-      background-color: #035327;
-    }
-  }
-
-  .card-odgovori button:active {
-    background-color: #035327;
-    -webkit-tap-highlight-color: #035327;
-    outline: none;
-    animation-name: touchActive;
-    animation-duration: 1000ms;
-  }
-} */
-
-/* input, textarea {font-size:16px;} */
 
 body,
 html {
@@ -134,11 +20,83 @@ html {
   height: 100%;
 }
 
-/* @-moz-document url-prefix() {
-  body {
-    font-size: 16px;
+.fade-in {
+  animation: fadeIn ease-in 0.6s;
+  -webkit-animation: fadeIn ease-in 0.6s;
+  -moz-animation: fadeIn ease-in 0.6s;
+  -o-animation: fadeIn ease-in 0.6s;
+  -ms-animation: fadeIn ease-in 0.6s;
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-} */
+
+  ;
+
+  100% {
+    opacity: 1;
+  }
+
+  ;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  ;
+
+  100% {
+    opacity: 1;
+  }
+
+  ;
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  ;
+
+  100% {
+    opacity: 1;
+  }
+
+  ;
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  ;
+
+  100% {
+    opacity: 1;
+  }
+
+  ;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  ;
+
+  100% {
+    opacity: 1;
+  }
+
+  ;
+}
 
 
 
@@ -158,8 +116,8 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* height: 100%;
-      width: 100%; */
+    /* height: 100%; */
+      width: 100%;
   }
 
   .background-image {
@@ -170,7 +128,7 @@ html {
     position: relative;
     height: auto;
     /* // za varijantu rotiranog mobilnog disablovati */
-    width: 100vw;
+    width: 100%;
   }
 
   #rezultat-wrapper {
@@ -342,6 +300,7 @@ html {
     left: 0;
     height: 1em;
     width: 100%;
+    opacity: 1 !important;
   }
 
   #progress-container span {
@@ -354,6 +313,7 @@ html {
     font-weight: bold;
     text-align: right;
     width: 50px;
+    opacity: 1 !important;
   }
 
   .card-pitanje {
@@ -449,7 +409,7 @@ html {
 
   /* form control */
   .form-container {
-    background-color: #fafafa;
+    /* background-color: #fafafa; */
     overflow: hidden;
     width: 100vw;
     max-width: 100%;
@@ -709,7 +669,7 @@ html {
   }
 
   .mob-container {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -720,7 +680,7 @@ html {
 
   #upitnik {
     display: block;
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -739,7 +699,7 @@ html {
     object-fit: cover;
     width: 100%;
     max-width: 100%;
-    /* height: 100%; */
+    height: 100%;
     overflow: hidden;
     opacity: 0;
   }
@@ -752,69 +712,7 @@ html {
     opacity: 1;
   }
 
-  .fade-in {
-    animation: fadeIn ease-in 0.6s;
-    -webkit-animation: fadeIn ease-in 0.6s;
-    -moz-animation: fadeIn ease-in 0.6s;
-    -o-animation: fadeIn ease-in 0.6s;
-    -ms-animation: fadeIn ease-in 0.6s;
-  }
-
   
-
-  @-moz-keyframes fadeIn {
-    0% {
-      opacity: 0;
-    };
-
-    100% {
-      opacity: 1;
-    };
-  }
-
-  @-webkit-keyframes fadeIn {
-    0% {
-      opacity: 0;
-    };
-
-    100% {
-      opacity: 1;
-    };
-  }
-
-  @-o-keyframes fadeIn {
-    0% {
-      opacity: 0;
-    };
-
-    100% {
-      opacity: 1;
-    };
-  }
-
-  @-ms-keyframes fadeIn {
-    0% {
-      opacity: 0;
-    };
-
-    100% {
-      opacity: 1;
-    };
-  }
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-
-    ;
-
-    100% {
-      opacity: 1;
-    }
-
-    ;
-  }
 
   .fade-out {
     animation: fadeOut ease 1s;
@@ -844,7 +742,7 @@ html {
     justify-content: flex-end;
     top: 0;
     top: 50%;
-    transform: translateY(+30%);
+    transform: translateY(-50%);
     left: 0;
     max-width: 50%;
     width: 50%;
@@ -1152,7 +1050,7 @@ html {
 
   /* form control */
   .form-container {
-    background-color: #fafafa;
+    /* background-color: #fafafa; */
     overflow: hidden;
     width: 100%;
     max-width: 100%;
