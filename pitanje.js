@@ -173,7 +173,7 @@ const kviz = (function () {
 			postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_mail.php');
 			postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_to_db.php');
 
-			/* window.location.replace("https://flobian.com/uspesna-prijava/"); // go to success page */
+			window.location.replace("https://flobian.com/uspesna-prijava/"); // go to success page
 		}
 	}
 
