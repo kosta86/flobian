@@ -171,7 +171,6 @@ const kviz = (function () {
 		if (imeInput.parentElement.classList.contains('success') && emailInput.parentElement.classList.contains('success') && telefonInput.parentElement.classList.contains('success')) {
 			formInputToArray('formular-prijava', odgovoriZaSlanje);
 			postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_mail.php');
-			postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_to_db.php');
 
 			window.location.replace("https://flobian.com/uspesna-prijava/"); // go to success page
 		}
@@ -379,7 +378,7 @@ function zoomEnable(){
 		});
 	}
 
-	function handleAnswerKlik(upitnik) {
+	function handleAnswerKlik(postData, odgovoriZaSlanje, upitnik) {
 		const isAnswerButton = event.target.dataset.button === 'odgovor';
 		const kliknutiOdgovor = event.target.dataset.odgovor;
 
@@ -403,10 +402,10 @@ function zoomEnable(){
 				kvizView.prikaziPitanje(upitnik);
 			}
 
+			// ako je kliknuto na poslednji odgovor u upitniku posalji odgovore u bazu
 			if (upitnik.RBPitanja === 10) {
-
+				postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_to_db.php');
 			}
-
 		}
 	}
 
@@ -441,9 +440,8 @@ const kvizController = (function () {
 	kvizView.prikaziPitanje(upitnik);  // prikaz kartice sa pitanjima
 
 	// event handlers
-	poljeOdgovora.addEventListener('click', (event) => {  // hendler za klik na dugme za odgovor
-		kvizView.handleAnswerKlik(upitnik);
-		postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_to_db.php');
+	poljeOdgovora.addEventListener('click', event => {  // hendler za klik na dugme za odgovor
+		kvizView.handleAnswerKlik(postData, kviz.odgovori, upitnik);
 	});
 
 	poslednjiKorak.addEventListener('submit', event => {  // hendler za klik na dugme za submit */
