@@ -402,6 +402,11 @@ function zoomEnable(){
 			} else {
 				kvizView.prikaziPitanje(upitnik);
 			}
+
+			if (upitnik.RBPitanja === 10) {
+
+			}
+
 		}
 	}
 
@@ -436,8 +441,9 @@ const kvizController = (function () {
 	kvizView.prikaziPitanje(upitnik);  // prikaz kartice sa pitanjima
 
 	// event handlers
-	poljeOdgovora.addEventListener('click', () => {  // hendler za klik na dugme za odgovor
+	poljeOdgovora.addEventListener('click', (event) => {  // hendler za klik na dugme za odgovor
 		kvizView.handleAnswerKlik(upitnik);
+		postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_to_db.php');
 	});
 
 	poslednjiKorak.addEventListener('submit', event => {  // hendler za klik na dugme za submit */
@@ -448,9 +454,3 @@ const kvizController = (function () {
 
 
 })(kviz, kvizView);
-
-
-
-
-
-
