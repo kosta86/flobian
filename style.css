@@ -373,6 +373,7 @@ html {
     flex-direction: column;
     justify-content: space-around;
     margin: 0em 1.5em;
+    max-height: inherit;
   }
 
   .card-odgovori button {
@@ -385,7 +386,7 @@ html {
     border-radius: 18px;
     border: transparent solid 1px;
     outline: none;
-    
+    margin-bottom: 0.3em!important;
   }
 
   /* .card-odgovori button:active {
@@ -396,10 +397,11 @@ html {
     animation-duration: 300ms;
   } */
 
-  /* .card-odgovori button:first-child {
-    margin-bottom: 0.2em !important;
+  /* .card-odgovori button {
+    margin-bottom: 1em !important;
     outline: none;
   } */
+
 
 
 
@@ -826,7 +828,7 @@ html {
     outline: none;
   }
 
-  .card-odgovori button:first-child {
+  .card-odgovori button:nth-child(n) {
     margin-bottom: 0.2em !important;
     outline: none;
   }

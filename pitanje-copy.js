@@ -9,26 +9,38 @@ const kviz = (function () {
 	}
 
 	let pitanja = [
-		new Pitanje('Pol:', ['Muško', 'Žensko'], 'v2-1.jpg'),
-		new Pitanje('Godine:', ['16-34', '35-49', '50+'], 'v2-2.jpg'),
-		new Pitanje('Da li se osećate naduto nakon jela?', ['DA', 'NE'], 'v2-3.png'),
-		new Pitanje('Da li je vaša nadutost teško podnošljiva ili izuzetno bolna?', ['DA', 'NE'], 'v2-4.png'),
-		new Pitanje('Imate li često osećaj „kamena“ u stomaku?', ['DA', 'NE'], 'v2-5.png'),
-		new Pitanje('Da li obavezno morate otkopčati dugme ili popustiti kaiš nakon jela?', ['DA', 'NE'], 'v2-6.png'),
-		new Pitanje('Da li često imate gasove?', ['DA', 'NE'], 'v2-7.png'),
-		new Pitanje('Da li postoje promene u učestalosti pražnjenja stolice- dijareja i/ili opstipacija?', ['DA', 'NE'], 'v2-8.png'),
-		new Pitanje('Da li imate ponavljajući bol u stomaku, u proseku, najmanje 1 dan/nedeljno u poslednja 3 meseca?', ['DA', 'NE'], 'v2-9.png'),
-		new Pitanje('Da li je bol povezan sa pražnjenjem?', ['DA', 'NE'], 'v2-10.png'),
-		new Pitanje('Da li Vas neprijatnost u stomaku obavezuje da prestanete sa svojim normalnim aktivnostima?', ['DA', 'NE'], 'v2-11.png'),
-		new Pitanje('Da li inače u toku dana osećate nervozu i to utiče i na Vaš stomak?', ['DA', 'NE'], 'v2-12.png')
+		new Pitanje('Da li se osećate naduto nakon jela?', ['DA', 'NE'], '1.png'),
+		new Pitanje('Da li je vaša nadutost teško podnošljiva ili izuzetno bolna?', ['DA', 'NE'], '2.png'),
+		new Pitanje('Imate li često osećaj „kamena“ u stomaku?', ['DA', 'NE'], '3.png'),
+		new Pitanje('Da li obavezno morate otkopčati dugme ili popustiti kaiš nakon jela?', ['DA', 'NE'], '4.png'),
+		new Pitanje('Da li često imate gasove?', ['DA', 'NE'], '5.png'),
+		new Pitanje('Da li postoje promene u učestalosti pražnjenja stolice- dijareja i/ili opstipacija?', ['DA', 'NE'], '6.png'),
+		new Pitanje('Da li imate ponavljajući bol u stomaku, u proseku, najmanje 1 dan/nedeljno u poslednja 3 meseca?', ['DA', 'NE'], '7.png'),
+		new Pitanje('Da li je bol povezan sa pražnjenjem?', ['DA', 'NE'], '8.png'),
+		new Pitanje('Da li Vas neprijatnost u stomaku obavezuje da prestanete sa svojim normalnim aktivnostima?', ['DA', 'NE'], '9.png'),
+		new Pitanje('Da li inače u toku dana osećate nervozu i to utiče i na Vaš stomak?', ['DA', 'NE'], '10.png')
 	];
 
 	ponudjeniSaveti = {
-		'1-2': new RezultatUpitnika(`Stanje vaših creva nije alarmantno, što ne znači da treba da trpite tegobe. Ma koliko bezazleno izgledaju,nadutost i gasovi jesu pojava koju treba lečiti. Povremeno ispoljavanje simptoma koje se vezuje sa određenom hranom itd. može dovesti do maskiranja pravog uzorka. Ako budete strpljivi i tretirate uzrok minimalno mesec dana, na putu ste ka dugoročno mirnom stomaku. Najčešće stomačne tegobe su upravo nadutost, gasovi, bol u stomaku i loše varenje.`, 'flobian1.png', 'ts7wn31imp4', 'flobian1'),
+		'1-2': new RezultatUpitnika(`Stanje vaših creva nije alarmantno, što ne znači da treba da trpite tegobe. Ma koliko bezazleno
+		izgledaju,nadutost i gasovi jesu pojava koju treba lečiti. Povremeno ispoljavanje simptoma koje
+		se vezuje sa određenom hranom itd. može dovesti do maskiranja pravog uzorka. Ako budete
+		strpljivi i tretirate uzrok minimalno mesec dana, na putu ste ka dugoročno mirnom stomaku.
+		Najčešće stomačne tegobe su upravo nadutost, gasovi, bol u stomaku i loše varenje.`, 'flobian1.png', 'ts7wn31imp4', 'flobian1'),
 
-		'3-7': new RezultatUpitnika(`Krajnje je vreme da se pozabavite svojim stomakom. Vaše stanje je ozbiljno ali ne i nerešivo. Vaši odgovori ukazuju na veliku razdražljivost creva a tegobe koje osećate kazuju da se vaš stomak uporno žali. Ovde je sem prisutnosti simptoma nervoznog creva primećena intezivna frekvencija javljanja istih sa tendencijom dugotrajnosti tegoba. Naoružajte se strpljenjem, i uz higijensko dijetetski režim uvedite dodatni izvor energije ćelijama Vaših creva. Najčešći simptomi nervoznog creva jesu nadutost, pojačana produkcija gasova i osećaj „težine“ u stomaku. Pogledajte koji su okidači koji pogoršavaju simptome`, 'flobian2.png', 'yoe7dNOFM1g', 'flobian2'),
+		'3-7': new RezultatUpitnika(`Krajnje je vreme da se pozabavite svojim stomakom. Vaše stanje je ozbiljno ali ne i nerešivo.
+		Vaši odgovori ukazuju na veliku razdražljivost creva a tegobe koje osećate kazuju da se vaš
+		stomak uporno žali. Ovde je sem prisutnosti simptoma nervoznog creva primećena intezivna
+		frekvencija javljanja istih sa tendencijom dugotrajnosti tegoba. Naoružajte se strpljenjem, i uz
+		higijensko dijetetski režim uvedite dodatni izvor energije ćelijama Vaših creva. Najčešći simptomi
+		nervoznog creva jesu nadutost, pojačana produkcija gasova i osećaj „težine“ u stomaku.
+		Pogledajte koji su okidači koji pogoršavaju simptome`, 'flobian2.png', 'yoe7dNOFM1g', 'flobian2'),
 
-		'8-10': new RezultatUpitnika(`Ako bismo stadijume nervoze creva opisivali bojama, Vi biste bili u crvenoj zoni. Vaši odgovori ukazuju na ozbiljan stepen zapuštenosti creva. Važno je da znate da za osobe sa veoma izraženim i upornim dugotrajnim tegobama nema opuštanja. Pred Vama je proces koji zahteva strpljenje, smirenost i istrajnost. Neophodno je uvesti upotrebu preparata namenjenih za otklanjanje uzroka nervoze creva, promeniti životne navike i kloniti se stresnih situacija. Srećno!`, 'flobian3.png', 'K5B4QlQLxho', 'flobian3'),
+		'8-10': new RezultatUpitnika(`Ako bismo stadijume nervoze creva opisivali bojama, Vi biste bili u crvenoj zoni. Vaši odgovori
+		ukazuju na ozbiljan stepen zapuštenosti creva. Važno je da znate da za osobe sa veoma
+		izraženim i upornim dugotrajnim tegobama nema opuštanja. Pred Vama je proces koji zahteva
+		strpljenje, smirenost i istrajnost. Neophodno je uvesti upotrebu preparata namenjenih za
+		otklanjanje uzroka nervoze creva, promeniti životne navike i kloniti se stresnih situacija. Srećno!`, 'flobian3.png', 'K5B4QlQLxho', 'flobian3'),
 	};
 
 	function Upitnik(pitanja) {  // konstruktor koji cuva pitanja i 'state' aplikacije
@@ -79,7 +91,7 @@ const kviz = (function () {
 
 	function formInputToArray(formId, array) {
 		let form = document.getElementById(`${formId}`);
-		
+
 		function Input(polje, inputValue) {
 			this.polje = polje;
 			this.inputValue = inputValue
@@ -93,7 +105,6 @@ const kviz = (function () {
 		}
 
 		array.push({ brojPozitivnihOdgovora: brojPozitivnihOdogovora(kviz.odgovori) })
-		console.log(array);
 	}
 
 
@@ -159,15 +170,13 @@ const kviz = (function () {
 
 		if (imeInput.parentElement.classList.contains('success') && emailInput.parentElement.classList.contains('success') && telefonInput.parentElement.classList.contains('success')) {
 			formInputToArray('formular-prijava', odgovoriZaSlanje);
-			postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_to_db_contact.php');
 			postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_mail.php');
-			
 
 			window.location.replace("https://flobian.com/uspesna-prijava/"); // go to success page
 		}
 	}
 
-
+	
 
 
 	return {
@@ -194,14 +203,14 @@ const kvizView = (function () {
 
 
 	$("input[type=text], textarea").mouseover(zoomDisable).mousedown(zoomEnable);
-	function zoomDisable() {
-		$('head meta[name=viewport]').remove();
-		$('head').prepend('<meta name="viewport" content="user-scalable=0" />');
-	}
-	function zoomEnable() {
-		$('head meta[name=viewport]').remove();
-		$('head').prepend('<meta name="viewport" content="user-scalable=1" />');
-	}
+function zoomDisable(){
+  $('head meta[name=viewport]').remove();
+  $('head').prepend('<meta name="viewport" content="user-scalable=0" />');
+}
+function zoomEnable(){
+  $('head meta[name=viewport]').remove();
+  $('head').prepend('<meta name="viewport" content="user-scalable=1" />');
+}
 
 	/* let scrolldiv = function () {
 		poljeFormulara.scrollIntoView();
@@ -336,11 +345,11 @@ const kvizView = (function () {
 		let progressContainer = document.getElementById('progress-container');
 		let poljeUpitnika = document.getElementById('upitnik');
 
-		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/12</span>`;  // progress span
+		progressContainer.innerHTML = `<span>${upitnik.RBPitanja + 1}/10</span>`;  // progress span
 
 
 		// menjanje pozadine za desk
-		if (poljeUpitnika.firstElementChild.tagName === 'IMG' && poljeUpitnika.children[upitnik.RBPitanja].style.display === 'none') {
+		if (poljeUpitnika.firstElementChild.tagName === 'IMG' && poljeUpitnika.children[upitnik.RBPitanja].style.display === 'none') { 
 			poljeUpitnika.children[upitnik.RBPitanja - 1].style.display = 'none';
 			poljeUpitnika.children[upitnik.RBPitanja].style.display = 'block';
 		}
@@ -350,10 +359,10 @@ const kvizView = (function () {
 			poljeSlike.children[upitnik.RBPitanja - 1].style.display = 'none';
 			poljeSlike.children[upitnik.RBPitanja].style.display = 'block';
 		}
+		/* poljeSlike.innerHTML = `<img class="fade-in" src="https://flobian.com/wp-content/uploads/2020/11/${upitnik.pitanja[upitnik.RBPitanja].slika}" alt="">`; */
 
 		// popuni tekst pitanja
 		poljeTekstPitanja.innerHTML = `<p>${upitnik.getPitanje().tekst}</p>`;
-
 
 		//prvo obrisi vec prikazane ponudjene odgovore
 		poljeOdgovora.innerHTML = "";
@@ -394,7 +403,7 @@ const kvizView = (function () {
 			}
 
 			// ako je kliknuto na poslednji odgovor u upitniku posalji odgovore u bazu
-			if (upitnik.RBPitanja === 12) {
+			if (upitnik.RBPitanja === 10) {
 				postData(odgovoriZaSlanje, 'https://flobian.com/k/php/send_to_db.php');
 			}
 		}
@@ -424,11 +433,10 @@ const kvizController = (function () {
 	let submitBtnHandler = kviz.submitBtnHandler;
 	let poslednjiKorak = document.getElementById('rezultat-wrapper');
 
-	
 	// on page load
 	window.addEventListener('load', function () { // fix delay on touch devices
 		new FastClick(document.body);
-	}, false);
+	}, false); 
 	kvizView.prikaziPitanje(upitnik);  // prikaz kartice sa pitanjima
 
 	// event handlers
@@ -439,7 +447,6 @@ const kvizController = (function () {
 	poslednjiKorak.addEventListener('submit', event => {  // hendler za klik na dugme za submit */
 		event.preventDefault();
 		submitBtnHandler(postData, kviz.odgovori);
-		console.log(postData)
 	})
 
 

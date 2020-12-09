@@ -4,7 +4,6 @@ $requestPayload = file_get_contents("php://input");
 
 $recived_array = json_decode($requestPayload, true);
 
-
 // Function to get the client ip address // server
 function getRealIpAddr()
 {
@@ -38,9 +37,9 @@ try {
     $pdo = new PDO($dsn, $username, $password, $options);
 
     $query = "INSERT INTO user_input(
-                    ime_input,
-                    email_input,
-                    telefon_input,
+                    pol,
+                    godine,
+                    /* telefon_input, */
                     Vreme_unosa,
                     Lokacija,
                     Da_li_se_osećate_naduto_nakon_jela, 
@@ -55,9 +54,9 @@ try {
                     Da_li_inače_u_toku_dana_osećate_nervozu_i_to_utiče_i_na_Vaš_stom
                 ) 
                 VALUES(
-                    :ime, 
-                    :email,
-                    :telefon,
+                    :pol, 
+                    :godine,
+                    /* :telefon, */
                     :vreme_unosa,
                     :lokacija,
                     :odgovor3, 
@@ -74,20 +73,20 @@ try {
 
     $statement = $pdo->prepare($query);
 
-    $statement->bindParam(':odgovor3', $recived_array[0]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor4', $recived_array[1]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor5', $recived_array[2]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor6', $recived_array[3]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor7', $recived_array[4]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor8', $recived_array[5]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor9', $recived_array[6]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor10', $recived_array[7]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor11', $recived_array[8]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':odgovor12', $recived_array[9]['odgovor'], PDO::PARAM_STR);
-    $statement->bindParam(':email', $recived_array[11]['inputValue'], PDO::PARAM_STR);
-    $statement->bindParam(':ime', $recived_array[10]['inputValue'], PDO::PARAM_STR);
-    $statement->bindParam(':telefon', $recived_array[12]['inputValue'], PDO::PARAM_STR);
-    $statement->bindParam(':lokacija', $lokacija, PDO::PARAM_STR);
+    $statement->bindParam(':odgovor3', $recived_array[2]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor4', $recived_array[3]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor5', $recived_array[4]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor6', $recived_array[5]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor7', $recived_array[6]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor8', $recived_array[7]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor9', $recived_array[8]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor10', $recived_array[9]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor11', $recived_array[10]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':odgovor12', $recived_array[11]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':godine', $recived_array[1]['odgovor'], PDO::PARAM_STR);
+    $statement->bindParam(':pol', $recived_array[0]['odgovor'], PDO::PARAM_STR);
+    /* $statement->bindParam(':telefon', $recived_array[1]['inputValue'], PDO::PARAM_STR); */
+    $statement->bindParam(':lokacija',$lokacija, PDO::PARAM_STR);
     $statement->bindParam(':vreme_unosa', $vreme_unosa, PDO::PARAM_STR);
 
     $statement->execute();

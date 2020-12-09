@@ -17,6 +17,7 @@ function setup_phpmailer()
   require '../../wp-includes/PHPMailer/SMTP.php';
   require '../../wp-includes/PHPMailer/Exception.php';
 
+
   // Instantiation and passing `true` enables exceptions
   $mail = new PHPMailer(true);
 
@@ -46,11 +47,10 @@ $mail = setup_phpmailer();
 
 
 
-
-$user_email = $email = filter_var($recived_array[11]['inputValue'], FILTER_SANITIZE_EMAIL);
-$user_ime = filter_var($recived_array[10]['inputValue'], FILTER_SANITIZE_STRING);
-$user_telefon = filter_var($recived_array[12]['inputValue'], FILTER_SANITIZE_STRING);
-$broj_pozitivnih_odgovora = filter_var($recived_array[14]['brojPozitivnihOdgovora'], FILTER_SANITIZE_STRING);
+$user_email = filter_var($recived_array[13]['inputValue'], FILTER_SANITIZE_EMAIL);
+$user_ime = filter_var($recived_array[12]['inputValue'], FILTER_SANITIZE_STRING);
+$user_telefon = filter_var($recived_array[14]['inputValue'], FILTER_SANITIZE_STRING);
+$broj_pozitivnih_odgovora = filter_var($recived_array[16]['brojPozitivnihOdgovora'], FILTER_SANITIZE_STRING);
 date_default_timezone_set("Europe/Belgrade");
 $vreme_unosa = date("d/m/Y H:i");
 

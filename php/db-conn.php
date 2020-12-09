@@ -12,4 +12,5 @@ $options = [
 			PDO::ATTR_EMULATE_PREPARES   => false,
 		   ];
 $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset;";
+
 ?>
